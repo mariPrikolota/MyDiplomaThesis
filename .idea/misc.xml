@@ -5,9 +5,10 @@
       <map>
         <entry key="..\:/MyApplication/app/src/main/res/drawable/icon_color.xml" value="0.2890625" />
         <entry key="..\:/MyApplication/app/src/main/res/layout/activity_main.xml" value="0.12864583333333332" />
+        <entry key="..\:/MyApplication/app/src/main/res/layout/game_fragment.xml" value="0.27291666666666664" />
         <entry key="..\:/MyApplication/app/src/main/res/layout/game_layout.xml" value="0.27291666666666664" />
         <entry key="..\:/MyApplication/app/src/main/res/layout/home_layout.xml" value="0.27291666666666664" />
-        <entry key="..\:/MyApplication/app/src/main/res/layout/navigation_layout.xml" value="0.27291666666666664" />
+        <entry key="..\:/MyApplication/app/src/main/res/layout/navigation_layout.xml" value="0.16" />
         <entry key="..\:/MyApplication/app/src/main/res/layout/shablon_game_layout.xml" value="0.25" />
         <entry key="..\:/MyApplication/app/src/main/res/menu/navigation.xml" value="0.27291666666666664" />
       </map>

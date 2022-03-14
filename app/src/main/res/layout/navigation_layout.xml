@@ -8,37 +8,4 @@
     android:fadeScrollbars="false"
     tools:context=".NavigationActivity">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-<!--    <View-->
-<!--        android:id="@+id/tabBarShadowView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="91dp"-->
-<!--        android:layout_gravity="bottom" />-->
-
-    <com.google.android.material.bottomappbar.BottomAppBar
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:layout_gravity="bottom">
-<!--        app:elevation="0dp"-->
-<!--        app:fabCradleMargin="12dp"-->
-<!--        app:fabCradleRoundedCornerRadius="15dp">-->
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/navigationView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="16dp"
-            android:background="@android:color/transparent"
-            app:elevation="0dp"
-            app:itemIconSize="26dp"
-            app:itemIconTint="@drawable/icon_color"
-            app:itemTextColor="@drawable/icon_color"
-            app:menu="@menu/navigation" />
-
-    </com.google.android.material.bottomappbar.BottomAppBar>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
