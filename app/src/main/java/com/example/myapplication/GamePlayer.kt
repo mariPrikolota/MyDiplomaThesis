@@ -7,17 +7,27 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.Direction.*
+import com.example.myapplication.Level.GridDrawer
 import kotlinx.android.synthetic.main.game_layout.*
 
+const val CELL_SIZE = 60
+const val HORIZONTAL_CELL_AMOUNT = 24
+const val VERTICAL_CELL_AMOUNT = 25
+const val MAX_VERTICAL = VERTICAL_CELL_AMOUNT * CELL_SIZE
+const val MAX_HORIZONTAL = HORIZONTAL_CELL_AMOUNT * CELL_SIZE
 
 class GamePlayer: AppCompatActivity(), View.OnClickListener {
     private lateinit var myPanda: ImageView
+    private val gridDrawer by lazy {
+        GridDrawer(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.game_layout)
         onKeyButton()
         myPanda = findViewById(R.id.myPanda)
+        container.layoutParams = FrameLayout.LayoutParams(MAX_VERTICAL, MAX_HORIZONTAL)
     }
 
     private fun onKeyButton(){
@@ -25,6 +35,7 @@ class GamePlayer: AppCompatActivity(), View.OnClickListener {
         leftView.setOnClickListener(this)
         rightView.setOnClickListener(this)
         eatView.setOnClickListener(this)
+        functionView.setOnClickListener(this)
     }
 
     override fun onClick(p0: View?) {
@@ -33,7 +44,9 @@ class GamePlayer: AppCompatActivity(), View.OnClickListener {
             R.id.leftView -> move(LEFT)
             R.id.rightView -> move(RIGHT)
             R.id.eatView -> move(EAT)
-            R.id.functionView -> {}
+            R.id.functionView -> {
+                gridDrawer.drawGrid()
+            }
         }
     }
 
