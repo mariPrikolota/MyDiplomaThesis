@@ -1,14 +1,11 @@
-package com.example.myapplication.Level
+package com.example.myapplication.level
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import com.example.myapplication.GamePlayer
 import com.example.myapplication.R
-import kotlinx.android.synthetic.main.game_layout.*
 import kotlinx.android.synthetic.main.level_layout.*
 
 class LevelGame:  Activity(), View.OnClickListener{

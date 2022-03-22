@@ -6,8 +6,12 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication.Direction.*
-import com.example.myapplication.Level.GridDrawer
+import com.example.myapplication.drawers.ElementsDrawer
+import com.example.myapplication.enums.Direction.*
+import com.example.myapplication.drawers.GridDrawer
+import com.example.myapplication.enums.Direction
+import com.example.myapplication.enums.Material
+import com.example.myapplication.models.Coordinate
 import kotlinx.android.synthetic.main.game_layout.*
 
 const val CELL_SIZE = 60
@@ -21,7 +25,11 @@ class GamePlayer: AppCompatActivity(), View.OnClickListener {
     private var editMode = false
 
     private val gridDrawer by lazy {
-        GridDrawer(this)
+        GridDrawer(container)
+    }
+
+    private val elementDrawer by lazy {
+        ElementsDrawer(container)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +38,14 @@ class GamePlayer: AppCompatActivity(), View.OnClickListener {
         onKeyButton()
         myPanda = findViewById(R.id.myPanda)
         container.layoutParams = FrameLayout.LayoutParams(MAX_VERTICAL, MAX_HORIZONTAL)
+        stoneView.setOnClickListener { elementDrawer.currentMaterial = Material.STONE }
+        treeView.setOnClickListener { elementDrawer.currentMaterial = Material.TREE }
+        bambooView.setOnClickListener { elementDrawer.currentMaterial = Material.BAMBOO }
+        container.setOnTouchListener { _, motionEvent ->
+            elementDrawer.onTouchContainer(motionEvent.x, motionEvent.y)
+            return@setOnTouchListener true
+        }
+
     }
 
     private fun onKeyButton(){
@@ -74,19 +90,19 @@ class GamePlayer: AppCompatActivity(), View.OnClickListener {
         when(direction){
             UP -> {
                 myPanda.rotation = 0f
-                (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += -50
+                (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += -120
             }
             DOWN -> {
                 myPanda.rotation = 180f
-                (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += 50
+                (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += 120
             }
             LEFT -> {
                 myPanda.rotation = 270f
-                (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin -= 50
+                (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin -= 120
             }
             RIGHT -> {
                 myPanda.rotation = 90f
-                (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin += 50
+                (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin += 120
             }
             EAT -> {
 

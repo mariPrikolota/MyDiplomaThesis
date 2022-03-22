@@ -25,7 +25,6 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:background="@drawable/play_color"
-            android:src="@drawable/west"
             android:layout_marginTop="40dp"
             android:layout_marginLeft="40dp"/>
 

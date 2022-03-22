@@ -3,8 +3,7 @@ package com.example.myapplication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import com.example.myapplication.Level.LevelGame
+import com.example.myapplication.level.LevelGame
 import kotlinx.android.synthetic.main.home_layout.*
 
 
