@@ -38,6 +38,7 @@ class GamePlayer: AppCompatActivity(), View.OnClickListener {
         onKeyButton()
         myPanda = findViewById(R.id.myPanda)
         container.layoutParams = FrameLayout.LayoutParams(MAX_VERTICAL, MAX_HORIZONTAL)
+        emptyView.setOnClickListener { elementDrawer.currentMaterial = Material.EMPTY }
         stoneView.setOnClickListener { elementDrawer.currentMaterial = Material.STONE }
         treeView.setOnClickListener { elementDrawer.currentMaterial = Material.TREE }
         bambooView.setOnClickListener { elementDrawer.currentMaterial = Material.BAMBOO }
