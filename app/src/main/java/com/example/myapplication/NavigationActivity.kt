@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.example.myapplication.Level.LevelGame
 import kotlinx.android.synthetic.main.home_layout.*
 
 
@@ -17,9 +18,8 @@ class NavigationActivity : AppCompatActivity(){
     }
 
     private fun configureClickPlay(){
-
         playGame.setOnClickListener {
-            val intent = Intent(this,GamePlayer::class.java)
+            val intent = Intent(this,LevelGame::class.java)
             startActivity(intent)
         }
     }

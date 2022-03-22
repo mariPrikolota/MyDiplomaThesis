@@ -18,6 +18,8 @@ const val MAX_HORIZONTAL = HORIZONTAL_CELL_AMOUNT * CELL_SIZE
 
 class GamePlayer: AppCompatActivity(), View.OnClickListener {
     private lateinit var myPanda: ImageView
+    private var editMode = false
+
     private val gridDrawer by lazy {
         GridDrawer(this)
     }
@@ -31,7 +33,8 @@ class GamePlayer: AppCompatActivity(), View.OnClickListener {
     }
 
     private fun onKeyButton(){
-        forwardView.setOnClickListener(this)
+        upView.setOnClickListener(this)
+        downView.setOnClickListener(this)
         leftView.setOnClickListener(this)
         rightView.setOnClickListener(this)
         eatView.setOnClickListener(this)
@@ -40,20 +43,40 @@ class GamePlayer: AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(p0: View?) {
         when (p0?.id){
-            R.id.forwardView -> move(UP)
+            R.id.upView -> move(UP)
+            R.id.downView -> move(DOWN)
             R.id.leftView -> move(LEFT)
             R.id.rightView -> move(RIGHT)
-            R.id.eatView -> move(EAT)
+            R.id.eatView -> {
+                switchEditMode()
+            }
             R.id.functionView -> {
-                gridDrawer.drawGrid()
+                switchEditMode()
             }
         }
+    }
+
+    private fun switchEditMode(){
+        if (editMode){
+            gridDrawer.removeGrid()
+            materialContainer.visibility = View.GONE
+            stepContainer.visibility = View.VISIBLE
+        }else{
+            gridDrawer.drawGrid()
+            materialContainer.visibility = View.VISIBLE
+            stepContainer.visibility = View.GONE
+        }
+        editMode = !editMode
     }
 
     private fun move(direction: Direction){
         myPanda.setBackgroundResource(R.drawable.panda_top)
         when(direction){
             UP -> {
+                myPanda.rotation = 0f
+                (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += -50
+            }
+            DOWN -> {
                 myPanda.rotation = 180f
                 (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += 50
             }
@@ -66,13 +89,10 @@ class GamePlayer: AppCompatActivity(), View.OnClickListener {
                 (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin += 50
             }
             EAT -> {
-                myPanda.rotation = 0f
-                (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += -50
+
             }
         }
         container.removeView(myPanda)
         container.addView(myPanda)
     }
-
-
 }

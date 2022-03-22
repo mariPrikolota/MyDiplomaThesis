@@ -8,6 +8,16 @@ import com.example.myapplication.R
 
 class GridDrawer(private val context: Context) {
 
+    private val allLines = mutableListOf<View>()
+
+    fun removeGrid(){
+        val container = (context as Activity).findViewById<FrameLayout>(R.id.container)
+        allLines.forEach {
+            container.removeView(it)
+        }
+
+    }
+
     fun drawGrid(){
         val container = (context as Activity).findViewById<FrameLayout>(R.id.container)
         drawHorizontalLines(container)
@@ -24,6 +34,7 @@ class GridDrawer(private val context: Context) {
                 layoutParams.leftMargin = leftMargin
                 verticalLine.layoutParams = layoutParams
                 verticalLine.setBackgroundColor(container.context.resources.getColor(R.color.black))
+                allLines.add(verticalLine)
                 container.addView(verticalLine)
             }
         }
@@ -40,6 +51,7 @@ class GridDrawer(private val context: Context) {
                 horizontalLine.layoutParams = layoutParams
                 horizontalLine.setBackgroundColor(container.context.resources.getColor(R.color.black))
                 layoutParams.topMargin = topMargin
+                allLines.add(horizontalLine)
                 container.addView(horizontalLine)
             }
         }

@@ -20,13 +20,13 @@
     </FrameLayout>
 
     <LinearLayout
-        android:id="@+id/material_container"
+        android:id="@+id/materialContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:orientation="horizontal"
         android:visibility="gone"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <ImageView
             android:id="@+id/stoneView"
@@ -56,7 +56,15 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_margin="10dp"
-            android:src="@drawable/panda" />
+            android:src="@drawable/panda_stop" />
+
+        <ImageView
+            android:id="@+id/functionView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/play_color"
+            android:src="@drawable/step_function" />
 
     </LinearLayout>
 
@@ -68,15 +76,23 @@
         android:layout_marginBottom="10dp"
         android:orientation="horizontal"
         android:visibility="visible"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <ImageView
-            android:id="@+id/forwardView"
+            android:id="@+id/upView"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_margin="10dp"
             android:background="@drawable/play_color"
-            android:src="@drawable/step_forward" />
+            android:src="@drawable/icon_up" />
+
+        <ImageView
+            android:id="@+id/downView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/play_color"
+            android:src="@drawable/icon_down" />
 
         <ImageView
             android:id="@+id/leftView"
@@ -84,7 +100,7 @@
             android:layout_height="60dp"
             android:layout_margin="10dp"
             android:background="@drawable/play_color"
-            android:src="@drawable/step_left" />
+            android:src="@drawable/icon_left" />
 
         <ImageView
             android:id="@+id/rightView"
@@ -92,7 +108,7 @@
             android:layout_height="60dp"
             android:layout_margin="10dp"
             android:background="@drawable/play_color"
-            android:src="@drawable/step_right" />
+            android:src="@drawable/icon_right" />
 
         <ImageView
             android:id="@+id/eatView"
@@ -102,13 +118,13 @@
             android:background="@drawable/play_color"
             android:src="@drawable/step_eat" />
 
-        <ImageView
-            android:id="@+id/functionView"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/play_color"
-            android:src="@drawable/step_function" />
+<!--        <ImageView-->
+<!--            android:id="@+id/functionView"-->
+<!--            android:layout_width="60dp"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:layout_margin="10dp"-->
+<!--            android:background="@drawable/play_color"-->
+<!--            android:src="@drawable/step_function" />-->
 
     </LinearLayout>
 
