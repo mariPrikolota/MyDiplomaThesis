@@ -3,14 +3,16 @@ package com.example.myapplication.drawers
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
-import com.example.myapplication.R
+import com.example.myapplication.*
+import com.example.myapplication.enums.Direction
 import com.example.myapplication.enums.Material
 import com.example.myapplication.models.Coordinate
 import com.example.myapplication.models.Element
+import kotlinx.android.synthetic.main.game_layout.*
 
 class ElementsDrawer(val container: FrameLayout) {
     var currentMaterial = Material.EMPTY
-    private val elementsOnContainer = mutableListOf<Element>()
+    val elementsOnContainer = mutableListOf<Element>()
 
     fun onTouchContainer(x:Float, y:Float){
         val topMargin = y.toInt() - (y.toInt()% 120)
@@ -48,7 +50,6 @@ class ElementsDrawer(val container: FrameLayout) {
             container.removeView(erasingView)
             elementsOnContainer.remove(elementOnCoordinate)
         }
-
     }
 
     private fun drawView(coordinate: Coordinate){
@@ -68,4 +69,5 @@ class ElementsDrawer(val container: FrameLayout) {
         container.addView(view)
         elementsOnContainer.add(Element(viewId, currentMaterial, coordinate))
     }
+
 }

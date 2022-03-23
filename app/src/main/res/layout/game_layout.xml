@@ -127,13 +127,13 @@
             android:background="@drawable/play_color"
             android:src="@drawable/step_eat" />
 
-<!--        <ImageView-->
-<!--            android:id="@+id/functionView"-->
-<!--            android:layout_width="60dp"-->
-<!--            android:layout_height="60dp"-->
-<!--            android:layout_margin="10dp"-->
-<!--            android:background="@drawable/play_color"-->
-<!--            android:src="@drawable/step_function" />-->
+        <ImageView
+            android:id="@+id/functionMaterialView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/play_color"
+            android:src="@drawable/step_function" />
 
     </LinearLayout>
 

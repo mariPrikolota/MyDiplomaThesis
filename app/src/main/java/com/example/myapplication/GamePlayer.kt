@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.drawers.ElementsDrawer
 import com.example.myapplication.enums.Direction.*
 import com.example.myapplication.drawers.GridDrawer
+import com.example.myapplication.drawers.PandaDrawer
 import com.example.myapplication.enums.Direction
 import com.example.myapplication.enums.Material
 import com.example.myapplication.models.Coordinate
@@ -30,6 +31,10 @@ class GamePlayer: AppCompatActivity(), View.OnClickListener {
 
     private val elementDrawer by lazy {
         ElementsDrawer(container)
+    }
+
+    private  val pandaDrawer by lazy {
+        PandaDrawer(container)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,21 +60,24 @@ class GamePlayer: AppCompatActivity(), View.OnClickListener {
         leftView.setOnClickListener(this)
         rightView.setOnClickListener(this)
         eatView.setOnClickListener(this)
+        functionMaterialView.setOnClickListener(this)
         functionView.setOnClickListener(this)
     }
 
     override fun onClick(p0: View?) {
         when (p0?.id){
-            R.id.upView -> move(UP)
-            R.id.downView -> move(DOWN)
-            R.id.leftView -> move(LEFT)
-            R.id.rightView -> move(RIGHT)
-            R.id.eatView -> {
+            R.id.upView -> pandaDrawer.move(myPanda, UP, elementDrawer.elementsOnContainer)
+            R.id.downView -> pandaDrawer.move(myPanda, DOWN, elementDrawer.elementsOnContainer)
+            R.id.leftView -> pandaDrawer.move(myPanda, LEFT, elementDrawer.elementsOnContainer)
+            R.id.rightView -> pandaDrawer.move(myPanda, RIGHT, elementDrawer.elementsOnContainer)
+            R.id.eatView ->  pandaDrawer.move(myPanda, EAT, elementDrawer.elementsOnContainer)
+            R.id.functionMaterialView -> {
                 switchEditMode()
             }
             R.id.functionView -> {
                 switchEditMode()
             }
+
         }
     }
 
@@ -84,32 +92,5 @@ class GamePlayer: AppCompatActivity(), View.OnClickListener {
             stepContainer.visibility = View.GONE
         }
         editMode = !editMode
-    }
-
-    private fun move(direction: Direction){
-        myPanda.setBackgroundResource(R.drawable.panda_top)
-        when(direction){
-            UP -> {
-                myPanda.rotation = 0f
-                (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += -120
-            }
-            DOWN -> {
-                myPanda.rotation = 180f
-                (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += 120
-            }
-            LEFT -> {
-                myPanda.rotation = 270f
-                (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin -= 120
-            }
-            RIGHT -> {
-                myPanda.rotation = 90f
-                (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin += 120
-            }
-            EAT -> {
-
-            }
-        }
-        container.removeView(myPanda)
-        container.addView(myPanda)
     }
 }
