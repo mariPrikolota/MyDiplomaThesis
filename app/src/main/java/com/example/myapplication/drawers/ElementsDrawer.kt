@@ -1,5 +1,6 @@
 package com.example.myapplication.drawers
 
+import android.app.Activity
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -43,7 +44,7 @@ class ElementsDrawer(val container: FrameLayout) {
         drawView(coordinate)
     }
 
-    private fun eraseView(coordinate: Coordinate){
+      private fun eraseView(coordinate: Coordinate){
         val elementOnCoordinate = getElementByCoordinate(coordinate)
         if (elementOnCoordinate != null){
             val erasingView = container.findViewById<View>(elementOnCoordinate.viewId)
@@ -52,7 +53,7 @@ class ElementsDrawer(val container: FrameLayout) {
         }
     }
 
-    private fun drawView(coordinate: Coordinate){
+     fun drawView(coordinate: Coordinate){
         val view = ImageView(container.context)
         val layoutParams = FrameLayout.LayoutParams(120, 120)
         when(currentMaterial){

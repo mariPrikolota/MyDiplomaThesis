@@ -1,45 +1,61 @@
 package com.example.myapplication.drawers
 
+import android.annotation.SuppressLint
+import android.app.Activity
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.ImageView
 import com.example.myapplication.CELL_SIZE
 import com.example.myapplication.MAX_HORIZONTAL
 import com.example.myapplication.MAX_VERTICAL
 import com.example.myapplication.R
 import com.example.myapplication.enums.Direction
+import com.example.myapplication.enums.Direction.*
+import com.example.myapplication.enums.Material
 import com.example.myapplication.models.Coordinate
 import com.example.myapplication.models.Element
+import kotlinx.android.synthetic.main.game_layout.*
 
-class PandaDrawer(val container: FrameLayout) {
+class PandaDrawer(private val container: FrameLayout){
+
+    private val activity = container.context as Activity
+
+    private val elementDrawer by lazy {
+        ElementsDrawer(container)
+    }
 
     private fun  getElementByCoordinate(coordinate: Coordinate, elementsOnContainer: List<Element>) =
         elementsOnContainer.firstOrNull { it.coordinate == coordinate }
 
-    fun move(myPanda: View, direction: Direction, elementsOnContainer: List<Element>){
+    fun move(myPanda: View, direction: Direction, elementsOnContainer: List<Element>, elementsContainer: MutableList<Element>){
         val layoutParams = myPanda.layoutParams as FrameLayout.LayoutParams
+
         myPanda.setBackgroundResource(R.drawable.panda_top)
         val currentCoordinate = Coordinate(layoutParams.topMargin, layoutParams.leftMargin)
         when(direction){
-            Direction.UP -> {
+            UP -> {
                 myPanda.rotation = 0f
                 (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += -120
             }
-            Direction.DOWN -> {
+            DOWN -> {
                 myPanda.rotation = 180f
                 (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += 120
             }
-            Direction.LEFT -> {
+            LEFT -> {
                 myPanda.rotation = 270f
                 (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin -= 120
             }
-            Direction.RIGHT -> {
+            RIGHT -> {
                 myPanda.rotation = 90f
                 (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin += 120
             }
-            Direction.EAT -> {
+            EAT -> {
                 myPanda.rotation = 0f
                 myPanda.setBackgroundResource(R.drawable.panda_eat)
-
+                checkPandaEat(elementsContainer, Coordinate(
+                    (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin,
+                    (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin
+                ))
             }
         }
         val nextCoordinate =  Coordinate(layoutParams.topMargin, layoutParams.leftMargin)
@@ -51,6 +67,35 @@ class PandaDrawer(val container: FrameLayout) {
             (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin = currentCoordinate.left
         }
     }
+// удаление бамбука
+    private fun checkPandaEat(elementsOnContainer: MutableList<Element>, pandaCoordinate: Coordinate){
+        compareCollection(elementsOnContainer, getPandaCoordinates(pandaCoordinate))
+    }
+
+    private fun compareCollection(elementsOnContainer: MutableList<Element>, coordinateList: List<Coordinate>){
+        val viewId = View.generateViewId()
+        coordinateList.forEach {
+            val element = getElementByCoordinate(it, elementsOnContainer)
+            removeBamboo(element, elementsOnContainer)
+            elementsOnContainer.add(Element(viewId, Material.EMPTY, it))
+        }
+    }
+
+    private fun removeBamboo(element: Element?, elementsOnContainer: MutableList<Element>) {
+        if (element != null){
+            if (element.material == Material.BAMBOO){
+                removeElement(element)
+                elementsOnContainer.remove(element)
+            }
+        }
+    }
+
+    private fun removeElement(element: Element) {
+        activity.runOnUiThread {
+            container.removeView(activity.findViewById(element.viewId))
+        }
+    }
+///
 
     private fun checkPandaCanMoveThroughMaterial(coordinate: Coordinate, elementsOnContainer: List<Element>):Boolean{
         getPandaCoordinates(coordinate).forEach {
@@ -80,3 +125,4 @@ class PandaDrawer(val container: FrameLayout) {
         return coordinateList
     }
 }
+
