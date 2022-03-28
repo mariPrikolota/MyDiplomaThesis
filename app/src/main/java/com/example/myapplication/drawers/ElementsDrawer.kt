@@ -1,6 +1,5 @@
 package com.example.myapplication.drawers
 
-import android.app.Activity
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -53,7 +52,7 @@ class ElementsDrawer(val container: FrameLayout) {
         }
     }
 
-     fun drawView(coordinate: Coordinate){
+    private fun drawView(coordinate: Coordinate){
         val view = ImageView(container.context)
         val layoutParams = FrameLayout.LayoutParams(120, 120)
         when(currentMaterial){

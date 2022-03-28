@@ -1,10 +1,8 @@
 package com.example.myapplication.drawers
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.ImageView
 import com.example.myapplication.CELL_SIZE
 import com.example.myapplication.MAX_HORIZONTAL
 import com.example.myapplication.MAX_VERTICAL
@@ -14,15 +12,10 @@ import com.example.myapplication.enums.Direction.*
 import com.example.myapplication.enums.Material
 import com.example.myapplication.models.Coordinate
 import com.example.myapplication.models.Element
-import kotlinx.android.synthetic.main.game_layout.*
 
 class PandaDrawer(private val container: FrameLayout){
 
     private val activity = container.context as Activity
-
-    private val elementDrawer by lazy {
-        ElementsDrawer(container)
-    }
 
     private fun  getElementByCoordinate(coordinate: Coordinate, elementsOnContainer: List<Element>) =
         elementsOnContainer.firstOrNull { it.coordinate == coordinate }
@@ -73,11 +66,9 @@ class PandaDrawer(private val container: FrameLayout){
     }
 
     private fun compareCollection(elementsOnContainer: MutableList<Element>, coordinateList: List<Coordinate>){
-        val viewId = View.generateViewId()
         coordinateList.forEach {
             val element = getElementByCoordinate(it, elementsOnContainer)
             removeBamboo(element, elementsOnContainer)
-            elementsOnContainer.add(Element(viewId, Material.EMPTY, it))
         }
     }
 
