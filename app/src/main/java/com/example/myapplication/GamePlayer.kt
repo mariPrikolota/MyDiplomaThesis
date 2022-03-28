@@ -84,6 +84,7 @@ class GamePlayer: AppCompatActivity(), View.OnClickListener {
     private fun switchEditMode(){
         if (editMode){
             gridDrawer.removeGrid()
+            elementDrawer.currentMaterial = Material.NULL
             materialContainer.visibility = View.GONE
             stepContainer.visibility = View.VISIBLE
         }else{

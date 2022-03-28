@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:orientation="horizontal"
-        android:visibility="visible"
+        android:visibility="gone"
         tools:visibility="gone">
 
         <ImageView
@@ -84,7 +84,7 @@
         android:layout_gravity="bottom"
         android:layout_marginBottom="10dp"
         android:orientation="horizontal"
-        android:visibility="gone"
+        android:visibility="visible"
         tools:visibility="visible">
 
         <ImageView

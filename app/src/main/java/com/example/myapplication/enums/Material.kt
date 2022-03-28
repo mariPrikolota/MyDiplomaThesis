@@ -5,5 +5,6 @@ enum class Material {
     STONE,
     TREE,
     BAMBOO,
-    PANDA
+    PANDA,
+    NULL
 }
