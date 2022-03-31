@@ -20,20 +20,11 @@
         android:layout_marginTop="40dp"
         android:layout_marginLeft="40dp"/>
 
-        <ImageView
-            android:id="@+id/buttonPrimer"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:background="@drawable/play_color"
-            android:layout_marginTop="40dp"
-            android:layout_marginLeft="40dp"/>
-
-
         <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewLevel"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="500dp"
+        android:layout_marginTop="70dp"
         android:layout_marginLeft="200dp"
         android:layout_marginRight="200dp"/>
 
