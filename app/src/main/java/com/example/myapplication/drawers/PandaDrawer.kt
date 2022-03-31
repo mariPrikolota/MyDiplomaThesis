@@ -45,10 +45,11 @@ class PandaDrawer(private val container: FrameLayout){
             EAT -> {
                 myPanda.rotation = 0f
                 myPanda.setBackgroundResource(R.drawable.panda_eat)
-                checkPandaEat(elementsContainer, Coordinate(
-                    (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin,
-                    (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin
-                ))
+                compareCollection(elementsContainer, getPandaCoordinates(
+                    Coordinate(
+                        (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin,
+                        (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin
+                )))
             }
         }
         val nextCoordinate =  Coordinate(layoutParams.topMargin, layoutParams.leftMargin)
@@ -61,18 +62,14 @@ class PandaDrawer(private val container: FrameLayout){
         }
     }
 // удаление бамбука
-    private fun checkPandaEat(elementsOnContainer: MutableList<Element>, pandaCoordinate: Coordinate){
-        compareCollection(elementsOnContainer, getPandaCoordinates(pandaCoordinate))
-    }
-
     private fun compareCollection(elementsOnContainer: MutableList<Element>, coordinateList: List<Coordinate>){
         coordinateList.forEach {
             val element = getElementByCoordinate(it, elementsOnContainer)
-            removeBamboo(element, elementsOnContainer)
+            removeBambooContainer(element, elementsOnContainer)
         }
     }
 
-    private fun removeBamboo(element: Element?, elementsOnContainer: MutableList<Element>) {
+    private fun removeBambooContainer(element: Element?, elementsOnContainer: MutableList<Element>) {
         if (element != null){
             if (element.material == Material.BAMBOO){
                 removeElement(element)
