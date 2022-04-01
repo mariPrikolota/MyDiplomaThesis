@@ -14,7 +14,6 @@ class GridDrawer(private val container: FrameLayout) {
         allLines.forEach {
             container.removeView(it)
         }
-
     }
 
     fun drawGrid(){

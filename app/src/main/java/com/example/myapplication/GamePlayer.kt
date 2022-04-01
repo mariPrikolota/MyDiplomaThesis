@@ -10,9 +10,7 @@ import com.example.myapplication.drawers.ElementsDrawer
 import com.example.myapplication.enums.Direction.*
 import com.example.myapplication.drawers.GridDrawer
 import com.example.myapplication.drawers.PandaDrawer
-import com.example.myapplication.enums.Direction
 import com.example.myapplication.enums.Material
-import com.example.myapplication.models.Coordinate
 import kotlinx.android.synthetic.main.game_layout.*
 
 const val CELL_SIZE = 60
@@ -21,7 +19,7 @@ const val VERTICAL_CELL_AMOUNT = 25
 const val MAX_VERTICAL = VERTICAL_CELL_AMOUNT * CELL_SIZE
 const val MAX_HORIZONTAL = HORIZONTAL_CELL_AMOUNT * CELL_SIZE
 
-class GamePlayer: AppCompatActivity(), View.OnClickListener {
+class GamePlayer: AppCompatActivity(), View.OnClickListener{
     private lateinit var myPanda: ImageView
     private var editMode = false
 
@@ -40,19 +38,23 @@ class GamePlayer: AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.game_layout)
+ //       gridLines()
         onKeyButton()
-        myPanda = findViewById(R.id.myPanda)
+        editMode = intent.getBooleanExtra("editMode", false)
+        switchEditMode()
+            myPanda = findViewById(R.id.myPanda)
         container.layoutParams = FrameLayout.LayoutParams(MAX_VERTICAL, MAX_HORIZONTAL)
-        emptyView.setOnClickListener { elementDrawer.currentMaterial = Material.EMPTY }
-        stoneView.setOnClickListener { elementDrawer.currentMaterial = Material.STONE }
-        treeView.setOnClickListener { elementDrawer.currentMaterial = Material.TREE }
-        bambooView.setOnClickListener { elementDrawer.currentMaterial = Material.BAMBOO }
         container.setOnTouchListener { _, motionEvent ->
             elementDrawer.onTouchContainer(motionEvent.x, motionEvent.y)
             return@setOnTouchListener true
         }
-
     }
+
+//     fun gridLines(){
+//        gridDrawer.drawGrid()
+//        materialContainer.visibility = View.VISIBLE
+//        stepContainer.visibility = View.GONE
+//    }
 
     private fun onKeyButton(){
         upView.setOnClickListener(this)
@@ -62,6 +64,10 @@ class GamePlayer: AppCompatActivity(), View.OnClickListener {
         eatView.setOnClickListener(this)
         functionMaterialView.setOnClickListener(this)
         functionView.setOnClickListener(this)
+        emptyView.setOnClickListener { elementDrawer.currentMaterial = Material.EMPTY }
+        stoneView.setOnClickListener { elementDrawer.currentMaterial = Material.STONE }
+        treeView.setOnClickListener { elementDrawer.currentMaterial = Material.TREE }
+        bambooView.setOnClickListener { elementDrawer.currentMaterial = Material.BAMBOO }
     }
 
     override fun onClick(p0: View?) {
@@ -77,20 +83,19 @@ class GamePlayer: AppCompatActivity(), View.OnClickListener {
             R.id.functionView -> {
                 switchEditMode()
             }
-
         }
     }
 
     private fun switchEditMode(){
         if (editMode){
+            gridDrawer.drawGrid()
+            materialContainer.visibility = View.VISIBLE
+            stepContainer.visibility = View.GONE
+        }else{
             gridDrawer.removeGrid()
             elementDrawer.currentMaterial = Material.NULL
             materialContainer.visibility = View.GONE
             stepContainer.visibility = View.VISIBLE
-        }else{
-            gridDrawer.drawGrid()
-            materialContainer.visibility = View.VISIBLE
-            stepContainer.visibility = View.GONE
         }
         editMode = !editMode
     }
