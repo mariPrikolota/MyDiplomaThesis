@@ -22,7 +22,7 @@
 
     <LinearLayout
         android:id="@+id/materialContainer"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:orientation="horizontal"
@@ -63,18 +63,27 @@
 
         <ImageView
             android:id="@+id/pandaView"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_margin="10dp"
             android:src="@drawable/panda_stop" />
 
         <ImageView
             android:id="@+id/functionView"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_margin="10dp"
             android:background="@drawable/play_color"
             android:src="@drawable/step_function" />
+
+        <ImageView
+            android:id="@+id/saveView"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="140dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:src="@drawable/ic_save" />
 
     </LinearLayout>
 

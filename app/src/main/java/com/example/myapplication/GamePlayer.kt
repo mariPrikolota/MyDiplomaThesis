@@ -68,6 +68,7 @@ class GamePlayer: AppCompatActivity(), View.OnClickListener{
         stoneView.setOnClickListener { elementDrawer.currentMaterial = Material.STONE }
         treeView.setOnClickListener { elementDrawer.currentMaterial = Material.TREE }
         bambooView.setOnClickListener { elementDrawer.currentMaterial = Material.BAMBOO }
+        saveView.setOnClickListener {  }
     }
 
     override fun onClick(p0: View?) {
