@@ -70,4 +70,14 @@ class ElementsDrawer(val container: FrameLayout) {
         elementsOnContainer.add(Element(viewId, currentMaterial, coordinate))
     }
 
+    fun drawElementsList(elements: List<Element>?){
+        if (elements == null){
+            return
+        }
+        for (element in elements){
+            currentMaterial = element.material
+            drawView(element.coordinate)
+        }
+    }
+
 }

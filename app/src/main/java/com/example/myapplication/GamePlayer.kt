@@ -11,6 +11,7 @@ import com.example.myapplication.enums.Direction.*
 import com.example.myapplication.drawers.GridDrawer
 import com.example.myapplication.drawers.PandaDrawer
 import com.example.myapplication.enums.Material
+import com.example.myapplication.level.LevelSave
 import kotlinx.android.synthetic.main.game_layout.*
 
 const val CELL_SIZE = 60
@@ -34,11 +35,14 @@ class GamePlayer: AppCompatActivity(), View.OnClickListener{
     private  val pandaDrawer by lazy {
         PandaDrawer(container)
     }
+    private val levelSave by lazy {
+        LevelSave(this)
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.game_layout)
- //       gridLines()
         onKeyButton()
         editMode = intent.getBooleanExtra("editMode", false)
         switchEditMode()
@@ -48,13 +52,8 @@ class GamePlayer: AppCompatActivity(), View.OnClickListener{
             elementDrawer.onTouchContainer(motionEvent.x, motionEvent.y)
             return@setOnTouchListener true
         }
+        elementDrawer.drawElementsList(levelSave.loadLevel())
     }
-
-//     fun gridLines(){
-//        gridDrawer.drawGrid()
-//        materialContainer.visibility = View.VISIBLE
-//        stepContainer.visibility = View.GONE
-//    }
 
     private fun onKeyButton(){
         upView.setOnClickListener(this)
@@ -68,7 +67,7 @@ class GamePlayer: AppCompatActivity(), View.OnClickListener{
         stoneView.setOnClickListener { elementDrawer.currentMaterial = Material.STONE }
         treeView.setOnClickListener { elementDrawer.currentMaterial = Material.TREE }
         bambooView.setOnClickListener { elementDrawer.currentMaterial = Material.BAMBOO }
-        saveView.setOnClickListener {  }
+        saveView.setOnClickListener { true }
     }
 
     override fun onClick(p0: View?) {
@@ -83,6 +82,10 @@ class GamePlayer: AppCompatActivity(), View.OnClickListener{
             }
             R.id.functionView -> {
                 switchEditMode()
+            }
+            R.id.saveView -> {
+                levelSave.saveLevel(elementDrawer.elementsOnContainer)
+                return
             }
         }
     }
