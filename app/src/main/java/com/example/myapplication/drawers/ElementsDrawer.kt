@@ -79,5 +79,4 @@ class ElementsDrawer(val container: FrameLayout) {
             drawView(element.coordinate)
         }
     }
-
 }

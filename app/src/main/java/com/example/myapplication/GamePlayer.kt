@@ -20,7 +20,7 @@ const val VERTICAL_CELL_AMOUNT = 25
 const val MAX_VERTICAL = VERTICAL_CELL_AMOUNT * CELL_SIZE
 const val MAX_HORIZONTAL = HORIZONTAL_CELL_AMOUNT * CELL_SIZE
 
-class GamePlayer: AppCompatActivity(), View.OnClickListener{
+class GamePlayer: AppCompatActivity(){ //, View.OnClickListener
     private lateinit var myPanda: ImageView
     private var editMode = false
 
@@ -45,50 +45,51 @@ class GamePlayer: AppCompatActivity(), View.OnClickListener{
         setContentView(R.layout.game_layout)
         onKeyButton()
         editMode = intent.getBooleanExtra("editMode", false)
+        elementDrawer.drawElementsList(levelSave.loadLevel())
         switchEditMode()
-            myPanda = findViewById(R.id.myPanda)
+        myPanda = findViewById(R.id.myPanda)
         container.layoutParams = FrameLayout.LayoutParams(MAX_VERTICAL, MAX_HORIZONTAL)
         container.setOnTouchListener { _, motionEvent ->
             elementDrawer.onTouchContainer(motionEvent.x, motionEvent.y)
             return@setOnTouchListener true
         }
-        elementDrawer.drawElementsList(levelSave.loadLevel())
     }
 
     private fun onKeyButton(){
-        upView.setOnClickListener(this)
-        downView.setOnClickListener(this)
-        leftView.setOnClickListener(this)
-        rightView.setOnClickListener(this)
-        eatView.setOnClickListener(this)
-        functionMaterialView.setOnClickListener(this)
-        functionView.setOnClickListener(this)
+        upView.setOnClickListener{pandaDrawer.move(myPanda, UP, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)}
+        downView.setOnClickListener {  pandaDrawer.move(myPanda, DOWN, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer) }
+        leftView.setOnClickListener { pandaDrawer.move(myPanda, LEFT, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer) }
+        rightView.setOnClickListener{ pandaDrawer.move(myPanda, RIGHT, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)}
+        eatView.setOnClickListener { pandaDrawer.move(myPanda, EAT, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer) }
+        functionMaterialView.setOnClickListener {  }
+        functionView.setOnClickListener { }
+
         emptyView.setOnClickListener { elementDrawer.currentMaterial = Material.EMPTY }
         stoneView.setOnClickListener { elementDrawer.currentMaterial = Material.STONE }
         treeView.setOnClickListener { elementDrawer.currentMaterial = Material.TREE }
         bambooView.setOnClickListener { elementDrawer.currentMaterial = Material.BAMBOO }
-        saveView.setOnClickListener { true }
+        saveView.setOnClickListener {  levelSave.saveLevel(elementDrawer.elementsOnContainer)  }
     }
 
-    override fun onClick(p0: View?) {
-        when (p0?.id){
-            R.id.upView -> pandaDrawer.move(myPanda, UP, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
-            R.id.downView -> pandaDrawer.move(myPanda, DOWN, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
-            R.id.leftView -> pandaDrawer.move(myPanda, LEFT, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
-            R.id.rightView -> pandaDrawer.move(myPanda, RIGHT, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
-            R.id.eatView ->  pandaDrawer.move(myPanda, EAT, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
-            R.id.functionMaterialView -> {
-                switchEditMode()
-            }
-            R.id.functionView -> {
-                switchEditMode()
-            }
-            R.id.saveView -> {
-                levelSave.saveLevel(elementDrawer.elementsOnContainer)
-                return
-            }
-        }
-    }
+//    override fun onClick(p0: View?) {
+//        when (p0?.id){
+//            R.id.upView -> pandaDrawer.move(myPanda, UP, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
+//            R.id.downView -> pandaDrawer.move(myPanda, DOWN, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
+//            R.id.leftView -> pandaDrawer.move(myPanda, LEFT, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
+//            R.id.rightView -> pandaDrawer.move(myPanda, RIGHT, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
+//            R.id.eatView ->  pandaDrawer.move(myPanda, EAT, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
+//            R.id.functionMaterialView -> {
+//                switchEditMode()
+//            }
+//            R.id.functionView -> {
+//                switchEditMode()
+//            }
+//            R.id.saveView -> {
+//                levelSave.saveLevel(elementDrawer.elementsOnContainer)
+//                return
+//            }
+//        }
+//    }
 
     private fun switchEditMode(){
         if (editMode){

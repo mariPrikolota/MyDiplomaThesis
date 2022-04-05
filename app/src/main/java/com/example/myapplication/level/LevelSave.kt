@@ -2,13 +2,15 @@ package com.example.myapplication.level
 
 import android.app.Activity
 import android.content.Context
+import com.example.myapplication.drawers.ElementsDrawer
 import com.example.myapplication.models.Element
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlinx.android.synthetic.main.game_layout.*
 
 const val KEY_LEVEL = "key_level"
 
-class LevelSave(val context: Context) {
+class LevelSave(private val context: Context) {
     private val prefs = (context as Activity).getPreferences(Context.MODE_PRIVATE)
 
     fun saveLevel(elementsOnContainer: List<Element>){
@@ -22,6 +24,7 @@ class LevelSave(val context: Context) {
         levelFromPrefs.let {
             val type = object : TypeToken<List<Element>>(){}.type
             return Gson().fromJson(it,type)
+
         }
     }
 }
