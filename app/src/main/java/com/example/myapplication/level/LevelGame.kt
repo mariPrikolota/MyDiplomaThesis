@@ -3,12 +3,11 @@ package com.example.myapplication.level
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myapplication.GamePlayer
 import com.example.myapplication.R
+import com.example.myapplication.adapter.LevelAdapter
 import com.example.myapplication.drawers.GridDrawer
 import kotlinx.android.synthetic.main.game_layout.*
 import kotlinx.android.synthetic.main.level_layout.*
@@ -56,8 +55,4 @@ class LevelGame:  AppCompatActivity(), View.OnClickListener{
             }
         }
     }
-
-//    private fun getAllListEvent(): List<LevelItem>{
-//
-//    }
 }

@@ -1,5 +1,9 @@
 package com.example.myapplication.level
 
 data class LevelItem(
-    var number: Int
+    val number: Int
+)
+
+data class StepItem(
+    val stepView: Int
 )

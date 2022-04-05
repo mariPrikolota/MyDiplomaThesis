@@ -28,7 +28,7 @@ class PandaDrawer(private val container: FrameLayout){
         when(direction){
             UP -> {
                 myPanda.rotation = 0f
-                (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += -120
+                (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin -= 120
             }
             DOWN -> {
                 myPanda.rotation = 180f
@@ -61,7 +61,7 @@ class PandaDrawer(private val container: FrameLayout){
             (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin = currentCoordinate.left
         }
     }
-// удаление бамбука
+////////// удаление бамбука
     private fun compareCollection(elementsOnContainer: MutableList<Element>, coordinateList: List<Coordinate>){
         coordinateList.forEach {
             val element = getElementByCoordinate(it, elementsOnContainer)
@@ -83,7 +83,7 @@ class PandaDrawer(private val container: FrameLayout){
             container.removeView(activity.findViewById(element.viewId))
         }
     }
-///
+////////////
 
     private fun checkPandaCanMoveThroughMaterial(coordinate: Coordinate, elementsOnContainer: List<Element>):Boolean{
         getPandaCoordinates(coordinate).forEach {
@@ -112,5 +112,6 @@ class PandaDrawer(private val container: FrameLayout){
         coordinateList.add(Coordinate(topLeftCoordinate.top + CELL_SIZE, topLeftCoordinate.left + CELL_SIZE))
         return coordinateList
     }
+
 }
 

@@ -10,6 +10,7 @@ import com.example.myapplication.drawers.ElementsDrawer
 import com.example.myapplication.enums.Direction.*
 import com.example.myapplication.drawers.GridDrawer
 import com.example.myapplication.drawers.PandaDrawer
+import com.example.myapplication.drawers.StepDrawer
 import com.example.myapplication.enums.Material
 import com.example.myapplication.level.LevelSave
 import kotlinx.android.synthetic.main.game_layout.*
@@ -38,6 +39,9 @@ class GamePlayer: AppCompatActivity(){ //, View.OnClickListener
     private val levelSave by lazy {
         LevelSave(this)
     }
+    private val stepDrawer by lazy {
+        StepDrawer(containerStep, this)
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,14 +57,27 @@ class GamePlayer: AppCompatActivity(){ //, View.OnClickListener
             elementDrawer.onTouchContainer(motionEvent.x, motionEvent.y)
             return@setOnTouchListener true
         }
+
     }
 
     private fun onKeyButton(){
-        upView.setOnClickListener{pandaDrawer.move(myPanda, UP, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)}
-        downView.setOnClickListener {  pandaDrawer.move(myPanda, DOWN, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer) }
-        leftView.setOnClickListener { pandaDrawer.move(myPanda, LEFT, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer) }
-        rightView.setOnClickListener{ pandaDrawer.move(myPanda, RIGHT, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)}
-        eatView.setOnClickListener { pandaDrawer.move(myPanda, EAT, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer) }
+        upView.setOnClickListener {
+            pandaDrawer.move(myPanda, UP, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
+            stepDrawer.stepBind()
+        }
+        downView.setOnClickListener {
+            pandaDrawer.move(myPanda, DOWN, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
+        }
+        leftView.setOnClickListener {
+            pandaDrawer.move(myPanda, LEFT, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
+        }
+        rightView.setOnClickListener {
+            pandaDrawer.move(myPanda, RIGHT, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
+        }
+        eatView.setOnClickListener {
+            pandaDrawer.move(myPanda, EAT, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
+        }
+
         functionMaterialView.setOnClickListener {  }
         functionView.setOnClickListener { }
 
@@ -68,6 +85,7 @@ class GamePlayer: AppCompatActivity(){ //, View.OnClickListener
         stoneView.setOnClickListener { elementDrawer.currentMaterial = Material.STONE }
         treeView.setOnClickListener { elementDrawer.currentMaterial = Material.TREE }
         bambooView.setOnClickListener { elementDrawer.currentMaterial = Material.BAMBOO }
+
         saveView.setOnClickListener {  levelSave.saveLevel(elementDrawer.elementsOnContainer)  }
     }
 
