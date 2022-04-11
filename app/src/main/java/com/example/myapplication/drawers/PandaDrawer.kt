@@ -22,7 +22,6 @@ class PandaDrawer(private val container: FrameLayout){
 
     fun move(myPanda: View, direction: Direction, elementsOnContainer: List<Element>, elementsContainer: MutableList<Element>){
         val layoutParams = myPanda.layoutParams as FrameLayout.LayoutParams
-
         myPanda.setBackgroundResource(R.drawable.panda_top)
         val currentCoordinate = Coordinate(layoutParams.topMargin, layoutParams.leftMargin)
         when(direction){

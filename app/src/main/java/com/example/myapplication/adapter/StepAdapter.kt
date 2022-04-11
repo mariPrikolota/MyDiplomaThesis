@@ -1,20 +1,16 @@
 package com.example.myapplication.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-import com.example.myapplication.level.LevelItem
 import com.example.myapplication.level.StepItem
 
-class StepAdapter(context: Context): RecyclerView.Adapter<StepAdapter.StepHolder>() {
-    var listArray = ArrayList<StepItem>()
-
+class StepAdapter(listArray: ArrayList<StepItem>): RecyclerView.Adapter<StepAdapter.StepHolder>() {
     private var events = listArray
-    private var appContext = context
+//    private val context = context
 
     class StepHolder(view: View): RecyclerView.ViewHolder(view) {
         private val stepView = view.findViewById<ImageView>(R.id.stepView)
@@ -24,7 +20,7 @@ class StepAdapter(context: Context): RecyclerView.Adapter<StepAdapter.StepHolder
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StepHolder {
-        val inflater = LayoutInflater.from(appContext).inflate(R.layout.step_shablon, parent, false)
+        val inflater = LayoutInflater.from(parent.context).inflate(R.layout.step_shablon, parent, false)
         return StepHolder(inflater)
     }
 

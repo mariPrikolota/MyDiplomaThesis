@@ -11,12 +11,13 @@ import com.example.myapplication.models.Step
 
 class StepDrawer(val container: RecyclerView, context: Context) {
 //    val stepOnPanda = mutableListOf<Step>()
-    val context = context
-
-     fun stepBind(){
-        container.layoutManager = GridLayoutManager(context,5)
-        container.adapter = StepAdapter(context)
-         val step = StepItem(R.drawable.icon_up)
-        StepAdapter(context).addStep(step)
-    }
+//    val context = context
+//
+//     fun stepBind(){
+//         container.hasFixedSize()
+//         container.layoutManager = GridLayoutManager(context,5)
+//         container.adapter = StepAdapter(context)
+//         val step = StepItem(R.drawable.icon_up)
+//         StepAdapter(context).addStep(step)
+//    }
 }
