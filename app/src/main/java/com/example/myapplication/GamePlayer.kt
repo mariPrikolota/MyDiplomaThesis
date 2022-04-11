@@ -14,6 +14,7 @@ import com.example.myapplication.drawers.GridDrawer
 import com.example.myapplication.drawers.PandaDrawer
 import com.example.myapplication.drawers.StepDrawer
 import com.example.myapplication.enums.Material
+import com.example.myapplication.level.LevelItem
 import com.example.myapplication.level.LevelSave
 import com.example.myapplication.level.StepItem
 import kotlinx.android.synthetic.main.game_layout.*
@@ -64,18 +65,13 @@ class GamePlayer: AppCompatActivity(){ //, View.OnClickListener
     }
 
     private fun onKeyButton(){
-        var events = ArrayList<StepItem>()
-        containerStep.hasFixedSize()
-        containerStep.layoutManager = GridLayoutManager(this,5)
-        containerStep.adapter = StepAdapter(events)
-
         upView.setOnClickListener {
-//            val step = StepItem(R.drawable.icon_up)
-//            StepAdapter(events).addStep(StepItem(R.drawable.icon_up))
-            events.add(StepItem(R.drawable.icon_up))
             pandaDrawer.move(myPanda, UP, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
+            StepAdapter().addStep(StepItem(R.drawable.icon_up))
+
         }
         downView.setOnClickListener {
+            StepAdapter().addStep(StepItem(R.drawable.icon_up))
             pandaDrawer.move(myPanda, DOWN, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
         }
         leftView.setOnClickListener {
@@ -97,6 +93,9 @@ class GamePlayer: AppCompatActivity(){ //, View.OnClickListener
         bambooView.setOnClickListener { elementDrawer.currentMaterial = Material.BAMBOO }
 
         saveView.setOnClickListener {  levelSave.saveLevel(elementDrawer.elementsOnContainer)  }
+
+        containerStep.layoutManager = GridLayoutManager(this,5)
+        containerStep.adapter = StepAdapter()
 
     }
 

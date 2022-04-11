@@ -1,20 +1,24 @@
 package com.example.myapplication.adapter
 
+import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
+import com.example.myapplication.databinding.StepShablonBinding
 import com.example.myapplication.level.StepItem
 
-class StepAdapter(listArray: ArrayList<StepItem>): RecyclerView.Adapter<StepAdapter.StepHolder>() {
-    private var events = listArray
-//    private val context = context
+class StepAdapter(): RecyclerView.Adapter<StepAdapter.StepHolder>() {
+    val events = ArrayList<StepItem>()
 
-    class StepHolder(view: View): RecyclerView.ViewHolder(view) {
+    class StepHolder(view: View) : RecyclerView.ViewHolder(view) {
+//        private val binding = StepShablonBinding.bind(view)
         private val stepView = view.findViewById<ImageView>(R.id.stepView)
-        fun bind(step: StepItem){
+        fun bind(step: StepItem) {
+//            binding.stepView.setImageResource(step.stepView)
             stepView.setImageResource(step.stepView)
         }
     }
@@ -32,6 +36,7 @@ class StepAdapter(listArray: ArrayList<StepItem>): RecyclerView.Adapter<StepAdap
         return events.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun addStep(step: StepItem){
         events.add(step)
         notifyDataSetChanged()
