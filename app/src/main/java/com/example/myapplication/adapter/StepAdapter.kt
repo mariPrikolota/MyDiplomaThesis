@@ -39,4 +39,9 @@ class StepAdapter(): RecyclerView.Adapter<StepAdapter.StepHolder>() {
         events.add(step)
         notifyDataSetChanged()
     }
+
+    fun deleteStep(step: StepItem){
+        events.remove(step)
+        notifyDataSetChanged()
+    }
 }
