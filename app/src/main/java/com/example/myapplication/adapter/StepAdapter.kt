@@ -15,10 +15,8 @@ class StepAdapter(): RecyclerView.Adapter<StepAdapter.StepHolder>() {
     val events = ArrayList<StepItem>()
 
     class StepHolder(view: View) : RecyclerView.ViewHolder(view) {
-//        private val binding = StepShablonBinding.bind(view)
         private val stepView = view.findViewById<ImageView>(R.id.stepView)
         fun bind(step: StepItem) {
-//            binding.stepView.setImageResource(step.stepView)
             stepView.setImageResource(step.stepView)
         }
     }

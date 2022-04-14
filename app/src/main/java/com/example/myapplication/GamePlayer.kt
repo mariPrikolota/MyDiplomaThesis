@@ -28,6 +28,7 @@ const val MAX_HORIZONTAL = HORIZONTAL_CELL_AMOUNT * CELL_SIZE
 class GamePlayer: AppCompatActivity(){ //, View.OnClickListener
     private lateinit var myPanda: ImageView
     private var editMode = false
+    private val stepAdapter = StepAdapter()
 
     private val gridDrawer by lazy {
         GridDrawer(container)
@@ -51,6 +52,7 @@ class GamePlayer: AppCompatActivity(){ //, View.OnClickListener
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.game_layout)
+        onKeyButton()
         editMode = intent.getBooleanExtra("editMode", false)
         elementDrawer.drawElementsList(levelSave.loadLevel())
         switchEditMode()
@@ -60,27 +62,30 @@ class GamePlayer: AppCompatActivity(){ //, View.OnClickListener
             elementDrawer.onTouchContainer(motionEvent.x, motionEvent.y)
             return@setOnTouchListener true
         }
-        onKeyButton()
 //        stepBind()
     }
 
     private fun onKeyButton(){
+        containerStep.layoutManager = GridLayoutManager(this,5)
+        containerStep.adapter = stepAdapter
         upView.setOnClickListener {
+            stepAdapter .addStep(StepItem(R.drawable.icon_up))
             pandaDrawer.move(myPanda, UP, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
-            StepAdapter().addStep(StepItem(R.drawable.icon_up))
-
         }
         downView.setOnClickListener {
-            StepAdapter().addStep(StepItem(R.drawable.icon_up))
+            stepAdapter.addStep(StepItem(R.drawable.icon_down))
             pandaDrawer.move(myPanda, DOWN, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
         }
         leftView.setOnClickListener {
+            stepAdapter.addStep(StepItem(R.drawable.icon_left))
             pandaDrawer.move(myPanda, LEFT, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
         }
         rightView.setOnClickListener {
+            stepAdapter.addStep(StepItem(R.drawable.icon_right))
             pandaDrawer.move(myPanda, RIGHT, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
         }
         eatView.setOnClickListener {
+            stepAdapter.addStep(StepItem(R.drawable.step_eat))
             pandaDrawer.move(myPanda, EAT, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
         }
 
@@ -93,9 +98,6 @@ class GamePlayer: AppCompatActivity(){ //, View.OnClickListener
         bambooView.setOnClickListener { elementDrawer.currentMaterial = Material.BAMBOO }
 
         saveView.setOnClickListener {  levelSave.saveLevel(elementDrawer.elementsOnContainer)  }
-
-        containerStep.layoutManager = GridLayoutManager(this,5)
-        containerStep.adapter = StepAdapter()
 
     }
 
