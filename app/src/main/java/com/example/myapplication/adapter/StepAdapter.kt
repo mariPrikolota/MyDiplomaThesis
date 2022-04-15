@@ -12,7 +12,7 @@ import com.example.myapplication.databinding.StepShablonBinding
 import com.example.myapplication.level.StepItem
 
 class StepAdapter(): RecyclerView.Adapter<StepAdapter.StepHolder>() {
-    val events = ArrayList<StepItem>()
+    private val events = ArrayList<StepItem>()
 
     class StepHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val stepView = view.findViewById<ImageView>(R.id.stepView)
@@ -42,6 +42,10 @@ class StepAdapter(): RecyclerView.Adapter<StepAdapter.StepHolder>() {
 
     fun deleteStep(step: StepItem){
         events.remove(step)
+        notifyDataSetChanged()
+    }
+    fun deleteAllStep(){
+        events.clear()
         notifyDataSetChanged()
     }
 }

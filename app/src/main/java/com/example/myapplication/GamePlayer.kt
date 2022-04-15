@@ -6,17 +6,14 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
-import com.example.myapplication.adapter.StepAdapter
 import com.example.myapplication.drawers.ElementsDrawer
 import com.example.myapplication.enums.Direction.*
 import com.example.myapplication.drawers.GridDrawer
 import com.example.myapplication.drawers.PandaDrawer
 import com.example.myapplication.drawers.StepDrawer
 import com.example.myapplication.enums.Material
-import com.example.myapplication.level.LevelItem
 import com.example.myapplication.level.LevelSave
-import com.example.myapplication.level.StepItem
+import com.example.myapplication.models.Step
 import kotlinx.android.synthetic.main.game_layout.*
 
 const val CELL_SIZE = 60
@@ -68,26 +65,25 @@ class GamePlayer: AppCompatActivity(){ //, View.OnClickListener
     private fun onKeyButton(){
         upView.setOnClickListener {
             stepDrawer.stepView(UP)
-            pandaDrawer.move(myPanda, UP, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
         }
         downView.setOnClickListener {
             stepDrawer.stepView(DOWN)
-            pandaDrawer.move(myPanda, DOWN, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
         }
         leftView.setOnClickListener {
             stepDrawer.stepView(LEFT)
-            pandaDrawer.move(myPanda, LEFT, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
         }
         rightView.setOnClickListener {
             stepDrawer.stepView(RIGHT)
-            pandaDrawer.move(myPanda, RIGHT, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
         }
         eatView.setOnClickListener {
             stepDrawer.stepView(EAT)
-            pandaDrawer.move(myPanda, EAT, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
         }
 
         deleteStep.setOnClickListener { stepDrawer.eraseStep() }
+        startGame.setOnClickListener{
+            goingOnList(stepDrawer.stepOnContainer)
+//            GameOver().show(supportFragmentManager, "GameOver")
+        }
 
         functionMaterialView.setOnClickListener {  }
         functionView.setOnClickListener { }
@@ -102,31 +98,28 @@ class GamePlayer: AppCompatActivity(){ //, View.OnClickListener
 
     }
 
-
-//    override fun onClick(p0: View?) {
-//        when (p0?.id){
-//            R.id.upView -> {
-//                pandaDrawer.move(myPanda, UP, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
-//                val step = StepItem(R.drawable.icon_up)
-//                StepAdapter().addStep(step)
-//
-//            }
-//            R.id.downView -> pandaDrawer.move(myPanda, DOWN, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
-//            R.id.leftView -> pandaDrawer.move(myPanda, LEFT, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
-//            R.id.rightView -> pandaDrawer.move(myPanda, RIGHT, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
-//            R.id.eatView ->  pandaDrawer.move(myPanda, EAT, elementDrawer.elementsOnContainer,elementDrawer.elementsOnContainer)
-//            R.id.functionMaterialView -> {
-//                switchEditMode()
-//            }
-//            R.id.functionView -> {
-//                switchEditMode()
-//            }
-//            R.id.saveView -> {
-//                levelSave.saveLevel(elementDrawer.elementsOnContainer)
-//                return
-//            }
-//        }
+//    private fun startStepPanda(){
+//        Thread(Runnable {
+//            goingOnList(stepDrawer.stepOnContainer)
+//            Thread.sleep(300)
+//        }).start()
 //    }
+
+    private fun goingOnList(steps: List<Step>) {
+ //       Thread(Runnable {
+            for (stepOnList in steps) {
+                when (stepOnList.step) {
+                    UP -> pandaDrawer.move(myPanda, UP, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer)
+                    DOWN -> pandaDrawer.move(myPanda, DOWN, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer)
+                    LEFT -> pandaDrawer.move(myPanda, LEFT, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer)
+                    RIGHT -> pandaDrawer.move(myPanda, RIGHT, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer)
+                    EAT -> pandaDrawer.move(myPanda, EAT, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer)
+                }
+//                Thread.sleep(300)
+            }
+//        }).start()
+    }
+
 
     private fun switchEditMode(){
         if (editMode){

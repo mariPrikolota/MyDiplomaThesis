@@ -24,41 +24,47 @@ class PandaDrawer(private val container: FrameLayout){
         val layoutParams = myPanda.layoutParams as FrameLayout.LayoutParams
         myPanda.setBackgroundResource(R.drawable.panda_top)
         val currentCoordinate = Coordinate(layoutParams.topMargin, layoutParams.leftMargin)
-        when(direction){
-            UP -> {
-                myPanda.rotation = 0f
-                (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin -= 120
+  //      Thread(Runnable {
+            when (direction) {
+                UP -> {
+                    myPanda.rotation = 0f
+                    (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin -= 120
+                }
+                DOWN -> {
+                    myPanda.rotation = 180f
+                    (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += 120
+                }
+                LEFT -> {
+                    myPanda.rotation = 270f
+                    (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin -= 120
+                }
+                RIGHT -> {
+                    myPanda.rotation = 90f
+                    (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin += 120
+                }
+                EAT -> {
+                    myPanda.rotation = 0f
+                    myPanda.setBackgroundResource(R.drawable.panda_eat)
+                    compareCollection(
+                        elementsContainer, getPandaCoordinates(
+                            Coordinate(
+                                (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin,
+                                (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin
+                            )))
+                }
             }
-            DOWN -> {
-                myPanda.rotation = 180f
-                (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += 120
+
+ //       }).start()
+            val nextCoordinate = Coordinate(layoutParams.topMargin, layoutParams.leftMargin)
+            if (checkPandaCanMoveThroughBorder(nextCoordinate, myPanda) && checkPandaCanMoveThroughMaterial(nextCoordinate, elementsOnContainer)
+            ) {
+                container.removeView(myPanda)
+                container.addView(myPanda)
+            } else {
+                (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin = currentCoordinate.top
+                (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin = currentCoordinate.left
             }
-            LEFT -> {
-                myPanda.rotation = 270f
-                (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin -= 120
-            }
-            RIGHT -> {
-                myPanda.rotation = 90f
-                (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin += 120
-            }
-            EAT -> {
-                myPanda.rotation = 0f
-                myPanda.setBackgroundResource(R.drawable.panda_eat)
-                compareCollection(elementsContainer, getPandaCoordinates(
-                    Coordinate(
-                        (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin,
-                        (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin
-                )))
-            }
-        }
-        val nextCoordinate =  Coordinate(layoutParams.topMargin, layoutParams.leftMargin)
-        if (checkPandaCanMoveThroughBorder(nextCoordinate, myPanda) && checkPandaCanMoveThroughMaterial(nextCoordinate, elementsOnContainer)){
-            container.removeView(myPanda)
-            container.addView(myPanda)
-        } else {
-            (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin = currentCoordinate.top
-            (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin = currentCoordinate.left
-        }
+
     }
 ////////// удаление бамбука
     private fun compareCollection(elementsOnContainer: MutableList<Element>, coordinateList: List<Coordinate>){

@@ -226,6 +226,7 @@
         </LinearLayout>
 
        <TextView
+           android:id="@+id/startGame"
            android:layout_width="150dp"
            android:layout_height="50dp"
            android:text="В путь"

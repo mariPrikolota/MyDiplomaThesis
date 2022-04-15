@@ -11,9 +11,9 @@ import com.example.myapplication.adapter.StepAdapter
 import com.example.myapplication.enums.Direction
 import com.example.myapplication.enums.Direction.*
 import com.example.myapplication.level.StepItem
-import com.example.myapplication.models.Element
 import com.example.myapplication.models.Step
-import kotlinx.android.synthetic.main.game_layout.*
+
+
 
 class StepDrawer(val container: RecyclerView, context: Context) {
     val context = context
@@ -46,10 +46,20 @@ class StepDrawer(val container: RecyclerView, context: Context) {
         step.id = stepId
         stepAdapter.addStep(stepItem!!)
         stepOnContainer.add(Step(stepId,direction))
-//         Log.d("step", stepOnContainer.toString())
+         Log.d("step", stepOnContainer.toString())
     }
 
     fun eraseStep(){
-        stepAdapter.deleteStep(stepItem!!)
+        val stepContainer = stepOnContainer.last()
+        if (stepItem != null) {
+            stepAdapter.deleteStep(stepItem!!)
+            stepOnContainer.remove(stepContainer)
+        }
     }
+
+    fun eraseListAndContainer(){
+        stepAdapter.deleteAllStep()
+        stepOnContainer.clear()
+    }
+
 }
