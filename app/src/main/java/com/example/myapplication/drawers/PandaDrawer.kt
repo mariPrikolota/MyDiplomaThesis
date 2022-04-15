@@ -28,19 +28,19 @@ class PandaDrawer(private val container: FrameLayout){
             when (direction) {
                 UP -> {
                     myPanda.rotation = 0f
-                    (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin -= 120
+                    (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin -= CELL_SIZE *2
                 }
                 DOWN -> {
                     myPanda.rotation = 180f
-                    (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += 120
+                    (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += CELL_SIZE *2
                 }
                 LEFT -> {
                     myPanda.rotation = 270f
-                    (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin -= 120
+                    (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin -= CELL_SIZE *2
                 }
                 RIGHT -> {
                     myPanda.rotation = 90f
-                    (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin += 120
+                    (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin += CELL_SIZE *2
                 }
                 EAT -> {
                     myPanda.rotation = 0f
@@ -109,7 +109,7 @@ class PandaDrawer(private val container: FrameLayout){
         return false
     }
 
-    private fun getPandaCoordinates(topLeftCoordinate: Coordinate): List<Coordinate>{
+     private fun getPandaCoordinates(topLeftCoordinate: Coordinate): List<Coordinate>{
         val coordinateList = mutableListOf<Coordinate>()
         coordinateList.add(topLeftCoordinate)
         coordinateList.add(Coordinate(topLeftCoordinate.top + CELL_SIZE, topLeftCoordinate.left))
@@ -117,6 +117,16 @@ class PandaDrawer(private val container: FrameLayout){
         coordinateList.add(Coordinate(topLeftCoordinate.top + CELL_SIZE, topLeftCoordinate.left + CELL_SIZE))
         return coordinateList
     }
+
+    fun startCurrentCoordinate(myPanda: View){
+ //       val layoutParamsPanda = myPanda.layoutParams as FrameLayout.LayoutParams
+//        val startCoordinate = Coordinate(layoutParamsPanda.topMargin, layoutParamsPanda.leftMargin)
+        (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin = CELL_SIZE *2
+        (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin = CELL_SIZE *2
+        myPanda.setBackgroundResource(R.drawable.panda_stop)
+        myPanda.rotation = 0f
+    }
+
 
 }
 

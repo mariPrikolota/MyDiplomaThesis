@@ -11,12 +11,14 @@
         android:layout_height="match_parent"
         tools:context=".GamePlayer"
         >
+
         <ImageView
             android:id="@+id/myPanda"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:background="@drawable/panda_stop"
-            />
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="60dp"/>
 
     </FrameLayout>
 

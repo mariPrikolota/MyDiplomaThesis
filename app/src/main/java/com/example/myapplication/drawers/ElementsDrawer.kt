@@ -53,7 +53,17 @@ class ElementsDrawer(val container: FrameLayout) {
         }
     }
 
+    private fun removeUnwantedInstances() {
+        if (currentMaterial.elementsAmountOnScreen != 0) {
+            val erasingElements = elementsOnContainer.filter { it.material == currentMaterial }
+            if (erasingElements.size >=  currentMaterial.elementsAmountOnScreen) {
+                eraseView(erasingElements[0].coordinate)
+            }
+        }
+    }
+
     private fun drawView(coordinate: Coordinate){
+        removeUnwantedInstances()
         val view = ImageView(container.context)
         val layoutParams = FrameLayout.LayoutParams(120, 120)
         when(currentMaterial){

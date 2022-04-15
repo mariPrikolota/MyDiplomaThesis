@@ -53,6 +53,7 @@ class GamePlayer: AppCompatActivity(){ //, View.OnClickListener
         editMode = intent.getBooleanExtra("editMode", false)
         elementDrawer.drawElementsList(levelSave.loadLevel())
         switchEditMode()
+ //        myPanda = elementDrawer.elementsOnContainer.firstOrNull { it.material == Material.PANDA }
         myPanda = findViewById(R.id.myPanda)
         container.layoutParams = FrameLayout.LayoutParams(MAX_VERTICAL, MAX_HORIZONTAL)
         container.setOnTouchListener { _, motionEvent ->
@@ -82,7 +83,9 @@ class GamePlayer: AppCompatActivity(){ //, View.OnClickListener
         deleteStep.setOnClickListener { stepDrawer.eraseStep() }
         startGame.setOnClickListener{
             goingOnList(stepDrawer.stepOnContainer)
+            stepDrawer.eraseListAndContainer()
 //            GameOver().show(supportFragmentManager, "GameOver")
+//            pandaDrawer.startCurrentCoordinate(myPanda)
         }
 
         functionMaterialView.setOnClickListener {  }
@@ -92,6 +95,7 @@ class GamePlayer: AppCompatActivity(){ //, View.OnClickListener
         stoneView.setOnClickListener { elementDrawer.currentMaterial = Material.STONE }
         treeView.setOnClickListener { elementDrawer.currentMaterial = Material.TREE }
         bambooView.setOnClickListener { elementDrawer.currentMaterial = Material.BAMBOO }
+//        pandaView.setOnClickListener { elementDrawer.currentMaterial = Material.PANDA }
 
         saveView.setOnClickListener {  levelSave.saveLevel(elementDrawer.elementsOnContainer)  }
 
