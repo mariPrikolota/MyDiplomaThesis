@@ -42,14 +42,15 @@ class StepDrawer(val container: RecyclerView, context: Context) {
                 stepItem = StepItem(R.drawable.step_eat)
             }
         }
-        val stepId = View.generateViewId()
-        step.id = stepId
-        stepAdapter.addStep(stepItem!!)
-        stepOnContainer.add(Step(stepId,direction))
+         val stepId = View.generateViewId()
+         step.id = stepId
+         stepAdapter.addStep(stepItem!!)
+         stepOnContainer.add(Step(stepId, direction))
          Log.d("step", stepOnContainer.toString())
-    }
+     }
 
-    fun eraseStep(){
+    // стирание последнего элемента
+    fun eraseStep() {
         val stepContainer = stepOnContainer.last()
         if (stepItem != null) {
             stepAdapter.deleteStep(stepItem!!)
@@ -57,6 +58,7 @@ class StepDrawer(val container: RecyclerView, context: Context) {
         }
     }
 
+//    удвление всех элементов
     fun eraseListAndContainer(){
         stepAdapter.deleteAllStep()
         stepOnContainer.clear()

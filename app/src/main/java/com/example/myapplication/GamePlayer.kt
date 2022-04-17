@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
@@ -15,6 +16,7 @@ import com.example.myapplication.enums.Material
 import com.example.myapplication.level.LevelSave
 import com.example.myapplication.models.Step
 import kotlinx.android.synthetic.main.game_layout.*
+import kotlinx.android.synthetic.main.game_over_layout.*
 
 const val CELL_SIZE = 60
 const val HORIZONTAL_CELL_AMOUNT = 24
@@ -25,6 +27,8 @@ const val MAX_HORIZONTAL = HORIZONTAL_CELL_AMOUNT * CELL_SIZE
 class GamePlayer: AppCompatActivity(){ //, View.OnClickListener
     private lateinit var myPanda: ImageView
     private var editMode = false
+     var againMode = false
+    private val gameOver = GameOver()
 
 
     private val gridDrawer by lazy {
@@ -51,16 +55,15 @@ class GamePlayer: AppCompatActivity(){ //, View.OnClickListener
         setContentView(R.layout.game_layout)
         onKeyButton()
         editMode = intent.getBooleanExtra("editMode", false)
+  //      againMode = intent.getBooleanExtra("")
         elementDrawer.drawElementsList(levelSave.loadLevel())
         switchEditMode()
- //        myPanda = elementDrawer.elementsOnContainer.firstOrNull { it.material == Material.PANDA }
         myPanda = findViewById(R.id.myPanda)
         container.layoutParams = FrameLayout.LayoutParams(MAX_VERTICAL, MAX_HORIZONTAL)
         container.setOnTouchListener { _, motionEvent ->
             elementDrawer.onTouchContainer(motionEvent.x, motionEvent.y)
             return@setOnTouchListener true
         }
-
     }
 
     private fun onKeyButton(){
@@ -82,10 +85,9 @@ class GamePlayer: AppCompatActivity(){ //, View.OnClickListener
 
         deleteStep.setOnClickListener { stepDrawer.eraseStep() }
         startGame.setOnClickListener{
+            GameOver().show(supportFragmentManager, "GameOver")
             goingOnList(stepDrawer.stepOnContainer)
-            stepDrawer.eraseListAndContainer()
-//            GameOver().show(supportFragmentManager, "GameOver")
-//            pandaDrawer.startCurrentCoordinate(myPanda)
+            againGame()
         }
 
         functionMaterialView.setOnClickListener {  }
@@ -100,6 +102,15 @@ class GamePlayer: AppCompatActivity(){ //, View.OnClickListener
         saveView.setOnClickListener {  levelSave.saveLevel(elementDrawer.elementsOnContainer)  }
 
 
+    }
+
+    fun againGame(){
+        if (againMode){
+            elementDrawer.drawElementsList(levelSave.loadLevel())
+            pandaDrawer.startCurrentCoordinate(myPanda)
+            stepDrawer.eraseListAndContainer()
+            againMode = false
+        }
     }
 
 //    private fun startStepPanda(){

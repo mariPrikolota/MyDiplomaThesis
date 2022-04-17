@@ -119,8 +119,6 @@ class PandaDrawer(private val container: FrameLayout){
     }
 
     fun startCurrentCoordinate(myPanda: View){
- //       val layoutParamsPanda = myPanda.layoutParams as FrameLayout.LayoutParams
-//        val startCoordinate = Coordinate(layoutParamsPanda.topMargin, layoutParamsPanda.leftMargin)
         (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin = CELL_SIZE *2
         (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin = CELL_SIZE *2
         myPanda.setBackgroundResource(R.drawable.panda_stop)
