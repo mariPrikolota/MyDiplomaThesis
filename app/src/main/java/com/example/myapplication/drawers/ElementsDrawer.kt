@@ -82,6 +82,11 @@ class ElementsDrawer(val container: FrameLayout) {
 //        Log.d("elem", elementsOnContainer.toString())
     }
 
+     fun deleteAllElement(){
+
+
+    }
+
     fun drawElementsList(elements: List<Element>?){
         if (elements == null){
             return

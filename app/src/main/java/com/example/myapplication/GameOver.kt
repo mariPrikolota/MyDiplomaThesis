@@ -7,7 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import kotlinx.android.synthetic.main.game_over_layout.*
 
-class GameOver(): DialogFragment(){
+interface OnGameOverDialogButtonClickListener{
+   fun onGameAgainClickListener(boolean: Boolean)
+}
+
+class GameOver(listener: OnGameOverDialogButtonClickListener): DialogFragment(){
+    private val againClickListener = listener
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
@@ -20,10 +25,10 @@ class GameOver(): DialogFragment(){
         onClick()
     }
 
-     fun onClick(){
+     private fun onClick(){
         again.setOnClickListener {
+            againClickListener.onGameAgainClickListener(true)
             dialog?.hide()
         }
     }
-
 }

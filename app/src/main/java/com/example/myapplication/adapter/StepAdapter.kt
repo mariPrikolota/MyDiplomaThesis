@@ -40,10 +40,13 @@ class StepAdapter(): RecyclerView.Adapter<StepAdapter.StepHolder>() {
         notifyDataSetChanged()
     }
 
-    fun deleteStep(step: StepItem){
-        events.remove(step)
+    @SuppressLint("NotifyDataSetChanged")
+    fun deleteStep(step: Int){
+        events.removeAt(step)
         notifyDataSetChanged()
     }
+
+    @SuppressLint("NotifyDataSetChanged")
     fun deleteAllStep(){
         events.clear()
         notifyDataSetChanged()

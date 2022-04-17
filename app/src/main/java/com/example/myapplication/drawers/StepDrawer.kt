@@ -20,6 +20,7 @@ class StepDrawer(val container: RecyclerView, context: Context) {
     private val stepAdapter = StepAdapter()
     val stepOnContainer = mutableListOf<Step>()
     private var stepItem : StepItem? = null
+    var position = 0
 
      fun stepView(direction: Direction){
         container.layoutManager = GridLayoutManager(context,5)
@@ -46,16 +47,16 @@ class StepDrawer(val container: RecyclerView, context: Context) {
          step.id = stepId
          stepAdapter.addStep(stepItem!!)
          stepOnContainer.add(Step(stepId, direction))
+         position ++
          Log.d("step", stepOnContainer.toString())
      }
 
     // стирание последнего элемента
-    fun eraseStep() {
+    fun eraseStep(posit: Int) {
         val stepContainer = stepOnContainer.last()
-        if (stepItem != null) {
-            stepAdapter.deleteStep(stepItem!!)
-            stepOnContainer.remove(stepContainer)
-        }
+        stepAdapter.deleteStep(posit)
+        stepOnContainer.remove(stepContainer)
+        position --
     }
 
 //    удвление всех элементов

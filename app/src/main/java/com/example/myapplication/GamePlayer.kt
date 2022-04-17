@@ -1,7 +1,6 @@
 package com.example.myapplication
 
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
@@ -24,11 +23,10 @@ const val VERTICAL_CELL_AMOUNT = 25
 const val MAX_VERTICAL = VERTICAL_CELL_AMOUNT * CELL_SIZE
 const val MAX_HORIZONTAL = HORIZONTAL_CELL_AMOUNT * CELL_SIZE
 
-class GamePlayer: AppCompatActivity(){ //, View.OnClickListener
+class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener { //, View.OnClickListener
     private lateinit var myPanda: ImageView
     private var editMode = false
-     var againMode = false
-    private val gameOver = GameOver()
+    var againMode = false
 
 
     private val gridDrawer by lazy {
@@ -55,7 +53,7 @@ class GamePlayer: AppCompatActivity(){ //, View.OnClickListener
         setContentView(R.layout.game_layout)
         onKeyButton()
         editMode = intent.getBooleanExtra("editMode", false)
-  //      againMode = intent.getBooleanExtra("")
+        againMode = intent.getBooleanExtra("againMode", false)
         elementDrawer.drawElementsList(levelSave.loadLevel())
         switchEditMode()
         myPanda = findViewById(R.id.myPanda)
@@ -83,11 +81,15 @@ class GamePlayer: AppCompatActivity(){ //, View.OnClickListener
             stepDrawer.stepView(EAT)
         }
 
-        deleteStep.setOnClickListener { stepDrawer.eraseStep() }
+        deleteStep.setOnClickListener {
+            while (stepDrawer.position  > 0){
+                stepDrawer.eraseStep(stepDrawer.position - 1)
+                stepDrawer.position --
+            }
+          }
         startGame.setOnClickListener{
-            GameOver().show(supportFragmentManager, "GameOver")
+            GameOver(this).show(supportFragmentManager, "GameOver")
             goingOnList(stepDrawer.stepOnContainer)
-            againGame()
         }
 
         functionMaterialView.setOnClickListener {  }
@@ -104,13 +106,16 @@ class GamePlayer: AppCompatActivity(){ //, View.OnClickListener
 
     }
 
-    fun againGame(){
+    override fun onGameAgainClickListener(boolean: Boolean) {
+        againMode = boolean
+
         if (againMode){
+            elementDrawer.deleteAllElement()
+            stepDrawer.eraseListAndContainer()
             elementDrawer.drawElementsList(levelSave.loadLevel())
             pandaDrawer.startCurrentCoordinate(myPanda)
-            stepDrawer.eraseListAndContainer()
-            againMode = false
         }
+        againMode = !boolean
     }
 
 //    private fun startStepPanda(){
