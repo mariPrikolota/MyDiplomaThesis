@@ -84,7 +84,6 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener { //,
         deleteStep.setOnClickListener {
             while (stepDrawer.position  > 0){
                 stepDrawer.eraseStep(stepDrawer.position - 1)
-                stepDrawer.position --
             }
           }
         startGame.setOnClickListener{
@@ -110,10 +109,9 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener { //,
         againMode = boolean
 
         if (againMode){
-            elementDrawer.deleteAllElement()
-            stepDrawer.eraseListAndContainer()
-            elementDrawer.drawElementsList(levelSave.loadLevel())
-            pandaDrawer.startCurrentCoordinate(myPanda)
+            finish()
+            startActivity(intent)
+
         }
         againMode = !boolean
     }

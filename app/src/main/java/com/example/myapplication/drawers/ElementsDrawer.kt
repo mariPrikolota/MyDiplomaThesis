@@ -10,6 +10,7 @@ import com.example.myapplication.enums.Material
 import com.example.myapplication.models.Coordinate
 import com.example.myapplication.models.Element
 import kotlinx.android.synthetic.main.game_layout.*
+import kotlinx.android.synthetic.main.game_layout.view.*
 
 class ElementsDrawer(val container: FrameLayout) {
     var currentMaterial = Material.EMPTY
@@ -79,11 +80,6 @@ class ElementsDrawer(val container: FrameLayout) {
         view.layoutParams = layoutParams
         container.addView(view)
         elementsOnContainer.add(Element(viewId, currentMaterial, coordinate))
-//        Log.d("elem", elementsOnContainer.toString())
-    }
-
-     fun deleteAllElement(){
-
 
     }
 

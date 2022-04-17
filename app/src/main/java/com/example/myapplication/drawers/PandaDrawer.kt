@@ -117,14 +117,5 @@ class PandaDrawer(private val container: FrameLayout){
         coordinateList.add(Coordinate(topLeftCoordinate.top + CELL_SIZE, topLeftCoordinate.left + CELL_SIZE))
         return coordinateList
     }
-
-    fun startCurrentCoordinate(myPanda: View){
-        (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin = CELL_SIZE *2
-        (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin = CELL_SIZE *2
-        myPanda.setBackgroundResource(R.drawable.panda_stop)
-        myPanda.rotation = 0f
-    }
-
-
 }
 
