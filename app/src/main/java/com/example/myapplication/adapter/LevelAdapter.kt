@@ -9,16 +9,17 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.GamePlayer
 import com.example.myapplication.R
-import com.example.myapplication.level.LevelItem
+import com.example.myapplication.bd.Level
+import com.example.myapplication.bd.LevelDao
 
-class LevelAdapter(listArray: ArrayList<LevelItem>, context: Context): RecyclerView.Adapter<LevelAdapter.ViewHolderGuide>(){
+class LevelAdapter(listArray: List<Level>, context: Context): RecyclerView.Adapter<LevelAdapter.ViewHolderGuide>(){
     private var events = listArray
     private var appContext = context
 
     class ViewHolderGuide (view: View) : RecyclerView.ViewHolder(view) {
         private val numberLevel = view.findViewById<TextView>(R.id.numberLever)
-        fun bind(levelEvent: LevelItem, context: Context) {
-            numberLevel.text = levelEvent.number.toString()
+        fun bind(levelEvent: Level, context: Context) {
+            numberLevel.text = levelEvent.id.toString()
             itemView.setOnClickListener {
                 val intent = Intent(context, GamePlayer::class.java)
                 context.startActivity(intent)

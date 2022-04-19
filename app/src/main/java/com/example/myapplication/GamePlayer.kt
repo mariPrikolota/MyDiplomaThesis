@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.bd.RoomAppDB
 import com.example.myapplication.drawers.ElementsDrawer
 import com.example.myapplication.enums.Direction.*
 import com.example.myapplication.drawers.GridDrawer
@@ -53,8 +54,8 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener { //,
         setContentView(R.layout.game_layout)
         onKeyButton()
         editMode = intent.getBooleanExtra("editMode", false)
-        againMode = intent.getBooleanExtra("againMode", false)
-        elementDrawer.drawElementsList(levelSave.loadLevel())
+//        againMode = intent.getBooleanExtra("againMode", false)
+//        elementDrawer.drawElementsList(levelSave.loadLevel())
         switchEditMode()
         myPanda = findViewById(R.id.myPanda)
         container.layoutParams = FrameLayout.LayoutParams(MAX_VERTICAL, MAX_HORIZONTAL)
@@ -87,8 +88,9 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener { //,
             }
           }
         startGame.setOnClickListener{
-            GameOver(this).show(supportFragmentManager, "GameOver")
             goingOnList(stepDrawer.stepOnContainer)
+            Thread.sleep(400)
+            GameOver(this).show(supportFragmentManager, "GameOver")
         }
 
         functionMaterialView.setOnClickListener {  }
@@ -100,20 +102,21 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener { //,
         bambooView.setOnClickListener { elementDrawer.currentMaterial = Material.BAMBOO }
 //        pandaView.setOnClickListener { elementDrawer.currentMaterial = Material.PANDA }
 
-        saveView.setOnClickListener {  levelSave.saveLevel(elementDrawer.elementsOnContainer)  }
+        saveView.setOnClickListener {
+//            levelSave.saveLevel(elementDrawer.elementsOnContainer)
+            val listEventDao = RoomAppDB.getAppDB(application)?.levelDao()
+        }
 
 
     }
 
     override fun onGameAgainClickListener(boolean: Boolean) {
         againMode = boolean
-
         if (againMode){
             finish()
             startActivity(intent)
-
         }
-        againMode = !boolean
+//        againMode = !boolean
     }
 
 //    private fun startStepPanda(){

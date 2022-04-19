@@ -10,9 +10,8 @@ import com.example.myapplication.R
 import com.example.myapplication.adapter.StepAdapter
 import com.example.myapplication.enums.Direction
 import com.example.myapplication.enums.Direction.*
-import com.example.myapplication.level.StepItem
+import com.example.myapplication.models.StepItem
 import com.example.myapplication.models.Step
-
 
 
 class StepDrawer(val container: RecyclerView, context: Context) {

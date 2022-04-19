@@ -7,24 +7,23 @@ import com.example.myapplication.CELL_SIZE
 import com.example.myapplication.MAX_HORIZONTAL
 import com.example.myapplication.MAX_VERTICAL
 import com.example.myapplication.R
+import com.example.myapplication.bd.Elements
 import com.example.myapplication.enums.Direction
 import com.example.myapplication.enums.Direction.*
 import com.example.myapplication.enums.Material
 import com.example.myapplication.models.Coordinate
-import com.example.myapplication.models.Element
 
 class PandaDrawer(private val container: FrameLayout){
 
     private val activity = container.context as Activity
 
-    private fun  getElementByCoordinate(coordinate: Coordinate, elementsOnContainer: List<Element>) =
-        elementsOnContainer.firstOrNull { it.coordinate == coordinate }
+    private fun  getElementByCoordinate(coordinate: Coordinate, elementsOnContainer: List<Elements>) =
+        elementsOnContainer.firstOrNull {it.coordinateX == coordinate.top && it.coordinateY == coordinate.left }
 
-    fun move(myPanda: View, direction: Direction, elementsOnContainer: List<Element>, elementsContainer: MutableList<Element>){
+    fun move(myPanda: View, direction: Direction, elementsOnContainer: List<Elements>, elementsContainer: MutableList<Elements>){
         val layoutParams = myPanda.layoutParams as FrameLayout.LayoutParams
         myPanda.setBackgroundResource(R.drawable.panda_top)
         val currentCoordinate = Coordinate(layoutParams.topMargin, layoutParams.leftMargin)
-  //      Thread(Runnable {
             when (direction) {
                 UP -> {
                     myPanda.rotation = 0f
@@ -54,7 +53,6 @@ class PandaDrawer(private val container: FrameLayout){
                 }
             }
 
- //       }).start()
             val nextCoordinate = Coordinate(layoutParams.topMargin, layoutParams.leftMargin)
             if (checkPandaCanMoveThroughBorder(nextCoordinate, myPanda) && checkPandaCanMoveThroughMaterial(nextCoordinate, elementsOnContainer)
             ) {
@@ -67,30 +65,30 @@ class PandaDrawer(private val container: FrameLayout){
 
     }
 ////////// удаление бамбука
-    private fun compareCollection(elementsOnContainer: MutableList<Element>, coordinateList: List<Coordinate>){
+    private fun compareCollection(elementsOnContainer: MutableList<Elements>, coordinateList: List<Coordinate>){
         coordinateList.forEach {
             val element = getElementByCoordinate(it, elementsOnContainer)
             removeBambooContainer(element, elementsOnContainer)
         }
     }
 
-    private fun removeBambooContainer(element: Element?, elementsOnContainer: MutableList<Element>) {
+    private fun removeBambooContainer(element: Elements?, elementsOnContainer: MutableList<Elements>) {
         if (element != null){
-            if (element.material == Material.BAMBOO){
+            if (element.material == Material.BAMBOO.toString()){
                 removeElement(element)
                 elementsOnContainer.remove(element)
             }
         }
     }
 
-    private fun removeElement(element: Element) {
+    private fun removeElement(element: Elements) {
         activity.runOnUiThread {
-            container.removeView(activity.findViewById(element.viewId))
+            container.removeView(activity.findViewById(element.id))
         }
     }
 ////////////
 
-    private fun checkPandaCanMoveThroughMaterial(coordinate: Coordinate, elementsOnContainer: List<Element>):Boolean{
+    private fun checkPandaCanMoveThroughMaterial(coordinate: Coordinate, elementsOnContainer: List<Elements>):Boolean{
         getPandaCoordinates(coordinate).forEach {
             val element = getElementByCoordinate(it, elementsOnContainer)
             if (element != null){

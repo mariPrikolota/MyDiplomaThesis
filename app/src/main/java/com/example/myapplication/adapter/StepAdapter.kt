@@ -1,15 +1,13 @@
 package com.example.myapplication.adapter
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-import com.example.myapplication.databinding.StepShablonBinding
-import com.example.myapplication.level.StepItem
+import com.example.myapplication.models.StepItem
 
 class StepAdapter(): RecyclerView.Adapter<StepAdapter.StepHolder>() {
     private val events = ArrayList<StepItem>()

@@ -8,35 +8,34 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myapplication.GamePlayer
 import com.example.myapplication.R
 import com.example.myapplication.adapter.LevelAdapter
+import com.example.myapplication.bd.Level
+import com.example.myapplication.bd.RoomAppDB
 import com.example.myapplication.drawers.GridDrawer
 import kotlinx.android.synthetic.main.game_layout.*
 import kotlinx.android.synthetic.main.level_layout.*
 
 class LevelGame:  AppCompatActivity(), View.OnClickListener{
 
-    private val gridDrawer by lazy {
-        GridDrawer(container)
-    }
+    private var level: List<Level>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.level_layout)
         onKeyButton()
-
-        var list = ArrayList<LevelItem>()
-        list.add(LevelItem(1))
-        list.add(LevelItem(2))
-        list.add(LevelItem(3))
-        list.add(LevelItem(4))
-        list.add(LevelItem(5))
-        list.add(LevelItem(6))
-        list.add(LevelItem(7))
-        list.add(LevelItem(8))
+        getAllLevel()
 
         recyclerViewLevel.hasFixedSize()
         recyclerViewLevel.layoutManager = GridLayoutManager(this, 5)
-        recyclerViewLevel.adapter = LevelAdapter(list, this)
+        if (level == null) level = emptyList()
+        recyclerViewLevel.adapter = LevelAdapter(level!!, this)
+
     }
+
+    private fun getAllLevel() {
+        val list =  RoomAppDB.getAppDB(this)?.levelDao()
+        level = list?.getAllLevel()
+    }
+
 
     private fun onKeyButton(){
         backButton.setOnClickListener(this)
