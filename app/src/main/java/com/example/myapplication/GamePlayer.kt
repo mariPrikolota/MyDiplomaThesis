@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.bd.Level
 import com.example.myapplication.bd.RoomAppDB
 import com.example.myapplication.drawers.ElementsDrawer
 import com.example.myapplication.enums.Direction.*
@@ -105,6 +106,7 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener { //,
         saveView.setOnClickListener {
 //            levelSave.saveLevel(elementDrawer.elementsOnContainer)
             val listEventDao = RoomAppDB.getAppDB(application)?.levelDao()
+ //           listEventDao?.insertLevel(Level(0, elementDrawer.elementsOnContainer))
         }
 
 

@@ -74,7 +74,7 @@ class PandaDrawer(private val container: FrameLayout){
 
     private fun removeBambooContainer(element: Elements?, elementsOnContainer: MutableList<Elements>) {
         if (element != null){
-            if (element.material == Material.BAMBOO.toString()){
+            if (element.material == Material.BAMBOO){
                 removeElement(element)
                 elementsOnContainer.remove(element)
             }

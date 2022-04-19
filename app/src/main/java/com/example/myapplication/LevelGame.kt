@@ -1,17 +1,14 @@
-package com.example.myapplication.level
+package com.example.myapplication
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.myapplication.GamePlayer
-import com.example.myapplication.R
 import com.example.myapplication.adapter.LevelAdapter
 import com.example.myapplication.bd.Level
 import com.example.myapplication.bd.RoomAppDB
-import com.example.myapplication.drawers.GridDrawer
-import kotlinx.android.synthetic.main.game_layout.*
 import kotlinx.android.synthetic.main.level_layout.*
 
 class LevelGame:  AppCompatActivity(), View.OnClickListener{
@@ -31,10 +28,13 @@ class LevelGame:  AppCompatActivity(), View.OnClickListener{
 
     }
 
-    private fun getAllLevel() {
+    @SuppressLint("NotifyDataSetChanged")
+     fun getAllLevel() {
         val list =  RoomAppDB.getAppDB(this)?.levelDao()
         level = list?.getAllLevel()
+        recyclerViewLevel?.adapter?.notifyDataSetChanged()
     }
+
 
 
     private fun onKeyButton(){

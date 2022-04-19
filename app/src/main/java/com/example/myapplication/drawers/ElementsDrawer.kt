@@ -20,32 +20,32 @@ class ElementsDrawer(val container: FrameLayout) {
         val leftMargin = x.toInt() - (x.toInt()% 120)
         val coordinate = Coordinate(topMargin, leftMargin)
         if(currentMaterial == Material.EMPTY){
-            eraseView(coordinate)
+            eraseView(topMargin, leftMargin)
         }else{
-            drawOrReplaceView(coordinate)
+            drawOrReplaceView(topMargin, leftMargin)
         }
     }
 
-    private fun drawOrReplaceView(coordinate: Coordinate){
-        val viewOnCoordinate = getElementByCoordinate(coordinate)
+    private fun drawOrReplaceView(coordinateX: Int, coordinateY: Int){
+        val viewOnCoordinate = getElementByCoordinate(coordinateX, coordinateY)
         if (viewOnCoordinate == null){
-            drawView(coordinate)
+            drawView(coordinateX, coordinateY)
             return
         }
-        if (viewOnCoordinate.material != currentMaterial.toString()){
-            replaceView(coordinate)
+        if (viewOnCoordinate.material != currentMaterial){
+            replaceView(coordinateX, coordinateY)
         }
     }
 
-    private fun  getElementByCoordinate(coordinate: Coordinate) = elementsOnContainer.firstOrNull { it.coordinateX == coordinate.top && it.coordinateY == coordinate.left }
+    private fun  getElementByCoordinate(coordinateX: Int, coordinateY: Int) = elementsOnContainer.firstOrNull { it.coordinateX == coordinateX && it.coordinateY == coordinateY }
 
-    private fun replaceView(coordinate: Coordinate){
-        eraseView(coordinate)
-        drawView(coordinate)
+    private fun replaceView(coordinateX: Int, coordinateY: Int){
+        eraseView(coordinateX, coordinateY)
+        drawView(coordinateX, coordinateY)
     }
 
-      private fun eraseView(coordinate: Coordinate){
-        val elementOnCoordinate = getElementByCoordinate(coordinate)
+      private fun eraseView(coordinateX: Int, coordinateY: Int){
+        val elementOnCoordinate = getElementByCoordinate(coordinateX, coordinateY)
         if (elementOnCoordinate != null){
             val erasingView = container.findViewById<View>(elementOnCoordinate.id)
             container.removeView(erasingView)
@@ -53,7 +53,7 @@ class ElementsDrawer(val container: FrameLayout) {
         }
     }
 
-    private fun drawView(coordinate: Coordinate){
+    private fun drawView(coordinateX: Int, coordinateY: Int){
         val view = ImageView(container.context)
         val layoutParams = FrameLayout.LayoutParams(120, 120)
         when(currentMaterial){
@@ -62,23 +62,23 @@ class ElementsDrawer(val container: FrameLayout) {
             Material.BAMBOO -> view.setImageResource(R.drawable.bamboo)
             Material.PANDA -> view.setImageResource(R.drawable.panda_stop)
         }
-        layoutParams.topMargin = coordinate.top
-        layoutParams.leftMargin= coordinate.left
+        layoutParams.topMargin = coordinateX
+        layoutParams.leftMargin= coordinateY
         val viewId = View.generateViewId()
         view.id = viewId
         view.layoutParams = layoutParams
         container.addView(view)
-        elementsOnContainer.add(Elements(viewId, currentMaterial.toString(), coordinate.top, coordinate.left))
+        elementsOnContainer.add(Elements(viewId, currentMaterial,coordinateX,coordinateY))
 
     }
 
-//    fun drawElementsList(elements: List<Elements>?){
-//        if (elements == null){
-//            return
-//        }
-//        for (element in elements){
-//            currentMaterial= element.material
-//            drawView(element.)
-//        }
-//    }
+    fun drawElementsList(elements: List<Elements>?){
+        if (elements == null){
+            return
+        }
+        for (element in elements){
+            currentMaterial= element.material
+            drawView( element.coordinateX, element.coordinateY)
+        }
+    }
 }

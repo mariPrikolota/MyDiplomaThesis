@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".GamePlayer"/>
-        <activity android:name=".level.LevelGame"/>
+        <activity android:name=".LevelGame"/>
     </application>
 
 </manifest>

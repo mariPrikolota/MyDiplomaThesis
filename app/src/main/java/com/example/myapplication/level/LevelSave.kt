@@ -2,12 +2,6 @@ package com.example.myapplication.level
 
 import android.app.Activity
 import android.content.Context
-import com.example.myapplication.bd.Elements
-import com.example.myapplication.drawers.ElementsDrawer
-import com.example.myapplication.models.Element
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import kotlinx.android.synthetic.main.game_layout.*
 
 const val KEY_LEVEL = "key_level"
 
