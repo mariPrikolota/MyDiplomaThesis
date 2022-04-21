@@ -56,7 +56,7 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener { //,
         onKeyButton()
         editMode = intent.getBooleanExtra("editMode", false)
 //        againMode = intent.getBooleanExtra("againMode", false)
-//        elementDrawer.drawElementsList(levelSave.loadLevel())
+        elementDrawer.drawElementsList(levelSave.loadLevel())
         switchEditMode()
         myPanda = findViewById(R.id.myPanda)
         container.layoutParams = FrameLayout.LayoutParams(MAX_VERTICAL, MAX_HORIZONTAL)
@@ -104,9 +104,10 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener { //,
 //        pandaView.setOnClickListener { elementDrawer.currentMaterial = Material.PANDA }
 
         saveView.setOnClickListener {
-//            levelSave.saveLevel(elementDrawer.elementsOnContainer)
+            val level = levelSave.saveLevel(elementDrawer.elementsOnContainer)
             val listEventDao = RoomAppDB.getAppDB(application)?.levelDao()
- //           listEventDao?.insertLevel(Level(0, elementDrawer.elementsOnContainer))
+            listEventDao?.insertLevel(Level(id =0, elementList = level.toString()))
+
         }
 
 

@@ -23,8 +23,8 @@ class LevelGame:  AppCompatActivity(), View.OnClickListener{
 
         recyclerViewLevel.hasFixedSize()
         recyclerViewLevel.layoutManager = GridLayoutManager(this, 5)
-        if (level == null) level = emptyList()
         recyclerViewLevel.adapter = LevelAdapter(level!!, this)
+        recyclerViewLevel?.adapter?.notifyDataSetChanged()
 
     }
 
@@ -34,8 +34,6 @@ class LevelGame:  AppCompatActivity(), View.OnClickListener{
         level = list?.getAllLevel()
         recyclerViewLevel?.adapter?.notifyDataSetChanged()
     }
-
-
 
     private fun onKeyButton(){
         backButton.setOnClickListener(this)
