@@ -2,6 +2,7 @@ package com.example.myapplication
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -25,11 +26,10 @@ const val VERTICAL_CELL_AMOUNT = 25
 const val MAX_VERTICAL = VERTICAL_CELL_AMOUNT * CELL_SIZE
 const val MAX_HORIZONTAL = HORIZONTAL_CELL_AMOUNT * CELL_SIZE
 
-class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener { //, View.OnClickListener
+class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener{ //, View.OnClickListener
     private lateinit var myPanda: ImageView
     private var editMode = false
     var againMode = false
-
 
     private val gridDrawer by lazy {
         GridDrawer(container)
@@ -55,10 +55,12 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener { //,
         setContentView(R.layout.game_layout)
         onKeyButton()
         editMode = intent.getBooleanExtra("editMode", false)
-//        againMode = intent.getBooleanExtra("againMode", false)
-        elementDrawer.drawElementsList(levelSave.loadLevel())
+        val textLevel = intent.getStringExtra("level")
+
         switchEditMode()
         myPanda = findViewById(R.id.myPanda)
+        if(textLevel != null)  elementDrawer.drawElementsList(levelSave.loadLevel(textLevel))
+
         container.layoutParams = FrameLayout.LayoutParams(MAX_VERTICAL, MAX_HORIZONTAL)
         container.setOnTouchListener { _, motionEvent ->
             elementDrawer.onTouchContainer(motionEvent.x, motionEvent.y)
@@ -103,10 +105,13 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener { //,
         bambooView.setOnClickListener { elementDrawer.currentMaterial = Material.BAMBOO }
 //        pandaView.setOnClickListener { elementDrawer.currentMaterial = Material.PANDA }
 
+
         saveView.setOnClickListener {
-            val level = levelSave.saveLevel(elementDrawer.elementsOnContainer)
+            levelSave.saveLevel(elementDrawer.elementsOnContainer)
+            var level = levelSave.saveLevel(elementDrawer.elementsOnContainer)
             val listEventDao = RoomAppDB.getAppDB(application)?.levelDao()
-            listEventDao?.insertLevel(Level(id =0, elementList = level.toString()))
+            listEventDao?.insertLevel(Level(id = 0, elementList = level))
+            Log.d("de",level)
 
         }
 
@@ -148,6 +153,7 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener { //,
     private fun switchEditMode(){
         if (editMode){
             gridDrawer.drawGrid()
+            elementDrawer.currentMaterial = Material.NULL
             materialContainer.visibility = View.VISIBLE
             stepContainer.visibility = View.GONE
         }else{

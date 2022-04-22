@@ -11,7 +11,7 @@ import com.example.myapplication.bd.Level
 import com.example.myapplication.bd.RoomAppDB
 import kotlinx.android.synthetic.main.level_layout.*
 
-class LevelGame:  AppCompatActivity(), View.OnClickListener{
+class LevelGame:  AppCompatActivity(), View.OnClickListener {
 
     private var level: List<Level>? = null
 
@@ -23,7 +23,7 @@ class LevelGame:  AppCompatActivity(), View.OnClickListener{
 
         recyclerViewLevel.hasFixedSize()
         recyclerViewLevel.layoutManager = GridLayoutManager(this, 5)
-        recyclerViewLevel.adapter = LevelAdapter(level!!, this)
+        recyclerViewLevel.adapter = LevelAdapter(level!!, this,)
         recyclerViewLevel?.adapter?.notifyDataSetChanged()
 
     }

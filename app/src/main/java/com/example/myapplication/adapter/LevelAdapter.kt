@@ -12,6 +12,8 @@ import com.example.myapplication.R
 import com.example.myapplication.bd.Level
 import com.example.myapplication.bd.LevelDao
 
+
+
 class LevelAdapter(listArray: List<Level>, context: Context): RecyclerView.Adapter<LevelAdapter.ViewHolderGuide>(){
     private var events = listArray
     private var appContext = context
@@ -21,7 +23,9 @@ class LevelAdapter(listArray: List<Level>, context: Context): RecyclerView.Adapt
         fun bind(levelEvent: Level, context: Context) {
             numberLevel.text = levelEvent.id.toString()
             itemView.setOnClickListener {
-                val intent = Intent(context, GamePlayer::class.java)
+                val intent = Intent(context, GamePlayer::class.java).apply {
+                   putExtra("level", levelEvent.elementList)
+                }
                 context.startActivity(intent)
             }
         }
@@ -33,7 +37,8 @@ class LevelAdapter(listArray: List<Level>, context: Context): RecyclerView.Adapt
     }
 
     override fun onBindViewHolder(holder: ViewHolderGuide, position: Int) {
-        holder.bind(events[position],appContext)
+        val pos = events[position]
+        holder.bind(pos,appContext)
     }
 
     override fun getItemCount(): Int {
