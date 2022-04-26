@@ -4,7 +4,9 @@ import android.app.Activity
 import android.content.Context
 import android.view.View
 import android.widget.FrameLayout
+import com.example.myapplication.CELL_SIZE
 import com.example.myapplication.R
+import com.example.myapplication.sizeElements
 
 class GridDrawer(private val container: FrameLayout) {
 
@@ -22,11 +24,11 @@ class GridDrawer(private val container: FrameLayout) {
     }
 
     private fun drawVerticalLines() {
-        var leftMargin = 60
+        var leftMargin = 30 * sizeElements
         while (leftMargin <= container.layoutParams.width) {
             val verticalLine = View(container.context)
             val layoutParams = FrameLayout.LayoutParams(1, FrameLayout.LayoutParams.MATCH_PARENT)
-            leftMargin += 60
+            leftMargin += 30 * sizeElements
             layoutParams.leftMargin = leftMargin
             verticalLine.layoutParams = layoutParams
             verticalLine.setBackgroundColor(container.context.resources.getColor(R.color.black))
@@ -37,11 +39,11 @@ class GridDrawer(private val container: FrameLayout) {
     }
 
     private fun drawHorizontalLines() {
-        var topMargin = 60
+        var topMargin = 30 * sizeElements
         while (topMargin <= container.layoutParams.height) {
             val horizontalLine = View(container.context)
             val layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, 1)
-            topMargin += 60
+            topMargin += 30 * sizeElements
             horizontalLine.layoutParams = layoutParams
             horizontalLine.setBackgroundColor(container.context.resources.getColor(R.color.black))
             layoutParams.topMargin = topMargin

@@ -6,36 +6,19 @@
     android:layout_height="match_parent"
     android:background="@drawable/home_bamboo">
 
-    <ImageView
-        android:id="@+id/setting"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="50dp"
-        android:src="@drawable/settings"
-        android:background="@drawable/play_color"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <View
+    <TextView
         android:id="@+id/playGame"
         android:layout_width="300dp"
         android:layout_height="120dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="500dp"
+        android:layout_marginBottom="300dp"
         android:background="@drawable/play_color"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="Начать игру"
-        android:textSize="30dp"
+        android:gravity="center"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/playGame"
-        app:layout_constraintEnd_toEndOf="@+id/playGame"
-        app:layout_constraintStart_toStartOf="@+id/playGame"
-        app:layout_constraintTop_toTopOf="@+id/playGame" />
+        android:textSize="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

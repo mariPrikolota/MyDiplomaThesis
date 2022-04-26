@@ -9,15 +9,14 @@ import com.example.myapplication.bd.Elements
 import com.example.myapplication.enums.Material
 import com.example.myapplication.models.Coordinate
 
-
-
-class ElementsDrawer(val container: FrameLayout) {
+class ElementsDrawer(val container: FrameLayout){
     var currentMaterial = Material.EMPTY
     val elementsOnContainer = mutableListOf<Elements>()
 
+
     fun onTouchContainer(x:Float, y:Float){
-        val topMargin = y.toInt() - (y.toInt()% 120)
-        val leftMargin = x.toInt() - (x.toInt()% 120)
+        val topMargin = y.toInt() - (y.toInt()% (CELL_SIZE * sizeElements))
+        val leftMargin = x.toInt() - (x.toInt()% (CELL_SIZE * sizeElements))
         val coordinate = Coordinate(topMargin, leftMargin)
         if(currentMaterial == Material.EMPTY){
             eraseView(topMargin, leftMargin)
@@ -65,7 +64,7 @@ class ElementsDrawer(val container: FrameLayout) {
     private fun drawView(coordinateX: Int, coordinateY: Int){
         removeUnwantedInstances()
         val view = ImageView(container.context)
-        val layoutParams = FrameLayout.LayoutParams(120, 120)
+        val layoutParams = FrameLayout.LayoutParams(CELL_SIZE * sizeElements, CELL_SIZE * sizeElements)
         when(currentMaterial){
             Material.STONE -> view.setImageResource(R.drawable.stone)
             Material.TREE -> view.setImageResource(R.drawable.tree)
@@ -92,4 +91,14 @@ class ElementsDrawer(val container: FrameLayout) {
         }
         currentMaterial = Material.NULL
     }
+
+    fun pandaView(elementPanda: List<Elements>): Elements {
+        for (element in elementPanda){
+            if (element.material == Material.PANDA){
+                return element
+            }
+        }
+        return null
+    }
+
 }

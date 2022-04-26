@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.bd.Elements
 import com.example.myapplication.bd.Level
 import com.example.myapplication.bd.RoomAppDB
 import com.example.myapplication.drawers.ElementsDrawer
@@ -25,8 +26,9 @@ const val HORIZONTAL_CELL_AMOUNT = 24
 const val VERTICAL_CELL_AMOUNT = 25
 const val MAX_VERTICAL = VERTICAL_CELL_AMOUNT * CELL_SIZE
 const val MAX_HORIZONTAL = HORIZONTAL_CELL_AMOUNT * CELL_SIZE
+var sizeElements = 2
 
-class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener{ //, View.OnClickListener
+class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSizeElementsButton{ //, View.OnClickListener
     private lateinit var myPanda: ImageView
     private var editMode = false
     var againMode = false
@@ -58,7 +60,9 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener{ //, 
         val textLevel = intent.getStringExtra("level")
 
         switchEditMode()
-        myPanda = findViewById(R.id.myPanda)
+//        myPanda = findViewById(R.id.myPanda)
+          val  panda = elementDrawer.
+//        myPanda = findViewById()
         if(textLevel != null)  elementDrawer.drawElementsList(levelSave.loadLevel(textLevel))
 
         container.layoutParams = FrameLayout.LayoutParams(MAX_VERTICAL, MAX_HORIZONTAL)
@@ -84,7 +88,6 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener{ //, 
         eatView.setOnClickListener {
             stepDrawer.stepView(EAT)
         }
-
         deleteStep.setOnClickListener {
             while (stepDrawer.position  > 0){
                 stepDrawer.eraseStep(stepDrawer.position - 1)
@@ -97,22 +100,20 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener{ //, 
         }
 
         functionMaterialView.setOnClickListener {  }
-        functionView.setOnClickListener { }
 
         emptyView.setOnClickListener { elementDrawer.currentMaterial = Material.EMPTY }
         stoneView.setOnClickListener { elementDrawer.currentMaterial = Material.STONE }
         treeView.setOnClickListener { elementDrawer.currentMaterial = Material.TREE }
         bambooView.setOnClickListener { elementDrawer.currentMaterial = Material.BAMBOO }
-//        pandaView.setOnClickListener { elementDrawer.currentMaterial = Material.PANDA }
+        setting.setOnClickListener { SizeMaterial(this).show(supportFragmentManager, "SizeMaterial") }
+        pandaView.setOnClickListener { elementDrawer.currentMaterial = Material.PANDA }
 
 
         saveView.setOnClickListener {
-            levelSave.saveLevel(elementDrawer.elementsOnContainer)
-            var level = levelSave.saveLevel(elementDrawer.elementsOnContainer)
+            val level = levelSave.saveLevel(elementDrawer.elementsOnContainer)
             val listEventDao = RoomAppDB.getAppDB(application)?.levelDao()
             listEventDao?.insertLevel(Level(id = 0, elementList = level))
             Log.d("de",level)
-
         }
 
 
@@ -149,6 +150,10 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener{ //, 
 //        }).start()
     }
 
+    override fun elementsSize(size: Int) {
+
+        sizeElements = size
+    }
 
     private fun switchEditMode(){
         if (editMode){
@@ -156,12 +161,15 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener{ //, 
             elementDrawer.currentMaterial = Material.NULL
             materialContainer.visibility = View.VISIBLE
             stepContainer.visibility = View.GONE
+            algorithmsContainer.visibility = View.GONE
         }else{
             gridDrawer.removeGrid()
             elementDrawer.currentMaterial = Material.NULL
             materialContainer.visibility = View.GONE
             stepContainer.visibility = View.VISIBLE
+            algorithmsContainer.visibility = View.VISIBLE
         }
         editMode = !editMode
     }
+
 }

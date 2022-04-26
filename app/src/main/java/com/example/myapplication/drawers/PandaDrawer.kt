@@ -3,10 +3,7 @@ package com.example.myapplication.drawers
 import android.app.Activity
 import android.view.View
 import android.widget.FrameLayout
-import com.example.myapplication.CELL_SIZE
-import com.example.myapplication.MAX_HORIZONTAL
-import com.example.myapplication.MAX_VERTICAL
-import com.example.myapplication.R
+import com.example.myapplication.*
 import com.example.myapplication.bd.Elements
 import com.example.myapplication.enums.Direction
 import com.example.myapplication.enums.Direction.*
@@ -27,19 +24,19 @@ class PandaDrawer(private val container: FrameLayout){
             when (direction) {
                 UP -> {
                     myPanda.rotation = 0f
-                    (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin -= CELL_SIZE *2
+                    (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin -= CELL_SIZE * sizeElements
                 }
                 DOWN -> {
                     myPanda.rotation = 180f
-                    (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += CELL_SIZE *2
+                    (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += CELL_SIZE * sizeElements
                 }
                 LEFT -> {
                     myPanda.rotation = 270f
-                    (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin -= CELL_SIZE *2
+                    (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin -= CELL_SIZE * sizeElements
                 }
                 RIGHT -> {
                     myPanda.rotation = 90f
-                    (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin += CELL_SIZE *2
+                    (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin += CELL_SIZE * sizeElements
                 }
                 EAT -> {
                     myPanda.rotation = 0f
