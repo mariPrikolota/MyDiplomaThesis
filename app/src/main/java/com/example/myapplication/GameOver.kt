@@ -8,7 +8,7 @@ import androidx.fragment.app.DialogFragment
 import kotlinx.android.synthetic.main.game_over_layout.*
 
 interface OnGameOverDialogButtonClickListener{
-   fun onGameAgainClickListener(boolean: Boolean)
+    fun onGameAgainClickListener(boolean: Boolean)
 }
 
 class GameOver(listener: OnGameOverDialogButtonClickListener): DialogFragment(){

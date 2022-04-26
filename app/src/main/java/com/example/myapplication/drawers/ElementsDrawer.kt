@@ -13,7 +13,6 @@ class ElementsDrawer(val container: FrameLayout){
     var currentMaterial = Material.EMPTY
     val elementsOnContainer = mutableListOf<Elements>()
 
-
     fun onTouchContainer(x:Float, y:Float){
         val topMargin = y.toInt() - (y.toInt()% (CELL_SIZE * sizeElements))
         val leftMargin = x.toInt() - (x.toInt()% (CELL_SIZE * sizeElements))
@@ -46,7 +45,7 @@ class ElementsDrawer(val container: FrameLayout){
       private fun eraseView(coordinateX: Int, coordinateY: Int){
         val elementOnCoordinate = getElementByCoordinate(coordinateX, coordinateY)
         if (elementOnCoordinate != null){
-            val erasingView = container.findViewById<View>(elementOnCoordinate.id)
+            val erasingView = container.findViewById<View>(elementOnCoordinate.viewId)
             container.removeView(erasingView)
             elementsOnContainer.remove(elementOnCoordinate)
         }
@@ -77,7 +76,7 @@ class ElementsDrawer(val container: FrameLayout){
         view.id = viewId
         view.layoutParams = layoutParams
         container.addView(view)
-        elementsOnContainer.add(Elements(viewId, currentMaterial,coordinateX,coordinateY))
+        elementsOnContainer.add(Elements(viewId, currentMaterial,coordinateX,coordinateY, sizeElements))
 
     }
 
@@ -87,18 +86,10 @@ class ElementsDrawer(val container: FrameLayout){
         }
         for (element in elements){
             currentMaterial= element.material
+            sizeElements = element.width
             drawView( element.coordinateX, element.coordinateY)
         }
         currentMaterial = Material.NULL
-    }
-
-    fun pandaView(elementPanda: List<Elements>): Elements {
-        for (element in elementPanda){
-            if (element.material == Material.PANDA){
-                return element
-            }
-        }
-        return null
     }
 
 }

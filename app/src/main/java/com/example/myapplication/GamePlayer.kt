@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication.bd.Elements
 import com.example.myapplication.bd.Level
 import com.example.myapplication.bd.RoomAppDB
 import com.example.myapplication.drawers.ElementsDrawer
@@ -61,9 +60,11 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
 
         switchEditMode()
 //        myPanda = findViewById(R.id.myPanda)
-          val  panda = elementDrawer.
-//        myPanda = findViewById()
-        if(textLevel != null)  elementDrawer.drawElementsList(levelSave.loadLevel(textLevel))
+        
+
+        if(textLevel != null) {
+            elementDrawer.drawElementsList(levelSave.loadLevel(textLevel))
+        }
 
         container.layoutParams = FrameLayout.LayoutParams(MAX_VERTICAL, MAX_HORIZONTAL)
         container.setOnTouchListener { _, motionEvent ->
@@ -105,8 +106,9 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         stoneView.setOnClickListener { elementDrawer.currentMaterial = Material.STONE }
         treeView.setOnClickListener { elementDrawer.currentMaterial = Material.TREE }
         bambooView.setOnClickListener { elementDrawer.currentMaterial = Material.BAMBOO }
-        setting.setOnClickListener { SizeMaterial(this).show(supportFragmentManager, "SizeMaterial") }
         pandaView.setOnClickListener { elementDrawer.currentMaterial = Material.PANDA }
+        setting.setOnClickListener { SizeMaterial(this).show(supportFragmentManager, "SizeMaterial") }
+
 
 
         saveView.setOnClickListener {
@@ -151,8 +153,10 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
     }
 
     override fun elementsSize(size: Int) {
-
         sizeElements = size
+        myPanda.layoutParams.width = size
+        myPanda.layoutParams.height = size
+
     }
 
     private fun switchEditMode(){

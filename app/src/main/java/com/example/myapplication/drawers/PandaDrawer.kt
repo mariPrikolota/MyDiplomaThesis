@@ -80,7 +80,7 @@ class PandaDrawer(private val container: FrameLayout){
 
     private fun removeElement(element: Elements) {
         activity.runOnUiThread {
-            container.removeView(activity.findViewById(element.id))
+            container.removeView(activity.findViewById(element.viewId))
         }
     }
 ////////////

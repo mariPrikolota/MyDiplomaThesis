@@ -15,6 +15,7 @@ class LevelGame:  AppCompatActivity(), View.OnClickListener {
 
     private var level: List<Level>? = null
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.level_layout)
@@ -25,7 +26,6 @@ class LevelGame:  AppCompatActivity(), View.OnClickListener {
         recyclerViewLevel.layoutManager = GridLayoutManager(this, 5)
         recyclerViewLevel.adapter = LevelAdapter(level!!, this,)
         recyclerViewLevel?.adapter?.notifyDataSetChanged()
-
     }
 
     @SuppressLint("NotifyDataSetChanged")
