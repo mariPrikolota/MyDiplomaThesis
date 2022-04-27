@@ -12,6 +12,7 @@ import com.example.myapplication.models.Coordinate
 class ElementsDrawer(val container: FrameLayout){
     var currentMaterial = Material.EMPTY
     val elementsOnContainer = mutableListOf<Elements>()
+    var myPanda : ImageView? = null
 
     fun onTouchContainer(x:Float, y:Float){
         val topMargin = y.toInt() - (y.toInt()% (CELL_SIZE * sizeElements))
@@ -64,21 +65,25 @@ class ElementsDrawer(val container: FrameLayout){
         removeUnwantedInstances()
         val view = ImageView(container.context)
         val layoutParams = FrameLayout.LayoutParams(CELL_SIZE * sizeElements, CELL_SIZE * sizeElements)
-        when(currentMaterial){
-            Material.STONE -> view.setImageResource(R.drawable.stone)
-            Material.TREE -> view.setImageResource(R.drawable.tree)
-            Material.BAMBOO -> view.setImageResource(R.drawable.bamboo)
-            Material.PANDA -> view.setImageResource(R.drawable.panda_stop)
-        }
         layoutParams.topMargin = coordinateX
         layoutParams.leftMargin= coordinateY
         val viewId = View.generateViewId()
         view.id = viewId
         view.layoutParams = layoutParams
+
+        when(currentMaterial){
+            Material.STONE -> view.setImageResource(R.drawable.stone)
+            Material.TREE -> view.setImageResource(R.drawable.tree)
+            Material.BAMBOO -> view.setImageResource(R.drawable.bamboo)
+            Material.PANDA -> {
+                view.setImageResource(R.drawable.panda_stop)
+                myPanda = view
+            }
+        }
         container.addView(view)
         elementsOnContainer.add(Elements(viewId, currentMaterial,coordinateX,coordinateY, sizeElements))
-
     }
+
 
     fun drawElementsList(elements: List<Elements>?){
         if (elements == null){
@@ -90,6 +95,18 @@ class ElementsDrawer(val container: FrameLayout){
             drawView( element.coordinateX, element.coordinateY)
         }
         currentMaterial = Material.NULL
+    }
+
+    fun sizePanda(elements: List<Elements>?): Elements? {
+        if (elements == null){
+            return null
+        }
+        for (element in elements){
+            if (element.material == Material.PANDA ){
+                return element
+            }
+        }
+        return null
     }
 
 }

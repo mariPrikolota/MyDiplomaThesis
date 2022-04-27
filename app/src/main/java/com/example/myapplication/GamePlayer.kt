@@ -32,6 +32,7 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
     private var editMode = false
     var againMode = false
 
+
     private val gridDrawer by lazy {
         GridDrawer(container)
     }
@@ -54,22 +55,27 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.game_layout)
-        onKeyButton()
         editMode = intent.getBooleanExtra("editMode", false)
         val textLevel = intent.getStringExtra("level")
-
         switchEditMode()
+        elementDrawer.drawElementsList(textLevel?.let { levelSave.loadLevel(it) })
+        textLevel?.let { openLevel(it) }
+
+
+        onKeyButton()
 //        myPanda = findViewById(R.id.myPanda)
-        
-
-        if(textLevel != null) {
-            elementDrawer.drawElementsList(levelSave.loadLevel(textLevel))
-        }
-
         container.layoutParams = FrameLayout.LayoutParams(MAX_VERTICAL, MAX_HORIZONTAL)
         container.setOnTouchListener { _, motionEvent ->
             elementDrawer.onTouchContainer(motionEvent.x, motionEvent.y)
             return@setOnTouchListener true
+        }
+    }
+
+    private fun openLevel(level: String){
+        val size = elementDrawer.sizePanda(levelSave.loadLevel(level))
+            Log.d("das", size.toString())
+        if (elementDrawer.myPanda != null) {
+            myPanda = elementDrawer.myPanda!!
         }
     }
 
@@ -94,8 +100,12 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
                 stepDrawer.eraseStep(stepDrawer.position - 1)
             }
           }
+        home.setOnClickListener {
+            finish()
+        }
         startGame.setOnClickListener{
             goingOnList(stepDrawer.stepOnContainer)
+            myPanda.rotation = 0F
             Thread.sleep(400)
             GameOver(this).show(supportFragmentManager, "GameOver")
         }
@@ -126,8 +136,9 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         if (againMode){
             finish()
             startActivity(intent)
+//            recreate()
         }
-//        againMode = !boolean
+        againMode = !boolean
     }
 
 //    private fun startStepPanda(){
@@ -154,9 +165,6 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
 
     override fun elementsSize(size: Int) {
         sizeElements = size
-        myPanda.layoutParams.width = size
-        myPanda.layoutParams.height = size
-
     }
 
     private fun switchEditMode(){
@@ -172,6 +180,7 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
             materialContainer.visibility = View.GONE
             stepContainer.visibility = View.VISIBLE
             algorithmsContainer.visibility = View.VISIBLE
+            container
         }
         editMode = !editMode
     }
