@@ -21,8 +21,10 @@
         <entry key="..\:/MyApplication/app/src/main/res/drawable/west.xml" value="0.161328125" />
         <entry key="..\:/MyApplication/app/src/main/res/layout-square/game_layout.xml" value="0.25729166666666664" />
         <entry key="..\:/MyApplication/app/src/main/res/layout/activity_main.xml" value="0.12864583333333332" />
+        <entry key="..\:/MyApplication/app/src/main/res/layout/delete_dialog.xml" value="0.133203125" />
         <entry key="..\:/MyApplication/app/src/main/res/layout/game_fragment.xml" value="0.27291666666666664" />
         <entry key="..\:/MyApplication/app/src/main/res/layout/game_layout.xml" value="0.22" />
+        <entry key="..\:/MyApplication/app/src/main/res/layout/game_over_dialog.xml" value="0.18633879781420765" />
         <entry key="..\:/MyApplication/app/src/main/res/layout/game_over_layout.xml" value="0.138671875" />
         <entry key="..\:/MyApplication/app/src/main/res/layout/home_layout.xml" value="0.22" />
         <entry key="..\:/MyApplication/app/src/main/res/layout/level_layout.xml" value="0.19296875" />

@@ -28,6 +28,11 @@ class LevelAdapter(listArray: List<Level>, context: Context): RecyclerView.Adapt
                 }
                 context.startActivity(intent)
             }
+            itemView.setOnLongClickListener {
+                val intentDelete = Intent(context, GamePlayer::class.java)
+                context.startActivity(intentDelete)
+                return@setOnLongClickListener true
+            }
         }
     }
 
