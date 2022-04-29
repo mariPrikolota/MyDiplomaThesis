@@ -46,6 +46,7 @@ class LevelGame:  AppCompatActivity(), View.OnClickListener {
                 finish()
             }
             R.id.createLevel -> {
+                finish()
                 val intent = Intent(this, GamePlayer::class.java)
                 intent.putExtra("editMode", true)
                 startActivity(intent)

@@ -97,16 +97,4 @@ class ElementsDrawer(val container: FrameLayout){
         currentMaterial = Material.NULL
     }
 
-    fun sizePanda(elements: List<Elements>?): Elements? {
-        if (elements == null){
-            return null
-        }
-        for (element in elements){
-            if (element.material == Material.PANDA ){
-                return element
-            }
-        }
-        return null
-    }
-
 }

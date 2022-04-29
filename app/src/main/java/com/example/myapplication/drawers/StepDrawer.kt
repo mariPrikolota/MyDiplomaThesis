@@ -14,8 +14,7 @@ import com.example.myapplication.models.StepItem
 import com.example.myapplication.models.Step
 
 
-class StepDrawer(val container: RecyclerView, context: Context) {
-    val context = context
+class StepDrawer(val container: RecyclerView, val context: Context) {
     private val stepAdapter = StepAdapter()
     val stepOnContainer = mutableListOf<Step>()
     private var stepItem : StepItem? = null

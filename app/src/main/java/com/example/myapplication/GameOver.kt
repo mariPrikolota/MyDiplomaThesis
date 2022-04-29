@@ -16,7 +16,7 @@ class GameOver(listener: OnGameOverDialogButtonClickListener): DialogFragment(){
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
-        return inflater.inflate(R.layout.game_over_layout, container, false)
+        return inflater.inflate(R.layout.game_over_dialog, container, false)
     }
 
     override fun onStart() {
@@ -26,10 +26,13 @@ class GameOver(listener: OnGameOverDialogButtonClickListener): DialogFragment(){
     }
 
      private fun onClick(){
-        again.setOnClickListener {
-            againClickListener.onGameAgainClickListener(true)
-            Thread.sleep(300)
-            dialog?.hide()
-        }
+         again.setOnClickListener {
+             againClickListener.onGameAgainClickListener(true)
+             Thread.sleep(300)
+             dialog?.hide()
+         }
+         playAlt.setOnClickListener {
+
+         }
     }
 }

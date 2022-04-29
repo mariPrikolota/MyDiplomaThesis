@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -59,11 +60,11 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         val textLevel = intent.getStringExtra("level")
         switchEditMode()
         elementDrawer.drawElementsList(textLevel?.let { levelSave.loadLevel(it) })
-        textLevel?.let { openLevel(it) }
+        textLevel?.let { openLevel() }
 
 
         onKeyButton()
-//        myPanda = findViewById(R.id.myPanda)
+
         container.layoutParams = FrameLayout.LayoutParams(MAX_VERTICAL, MAX_HORIZONTAL)
         container.setOnTouchListener { _, motionEvent ->
             elementDrawer.onTouchContainer(motionEvent.x, motionEvent.y)
@@ -71,9 +72,7 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         }
     }
 
-    private fun openLevel(level: String){
-        val size = elementDrawer.sizePanda(levelSave.loadLevel(level))
-            Log.d("das", size.toString())
+    private fun openLevel(){
         if (elementDrawer.myPanda != null) {
             myPanda = elementDrawer.myPanda!!
         }
@@ -106,7 +105,7 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         startGame.setOnClickListener{
             goingOnList(stepDrawer.stepOnContainer)
             myPanda.rotation = 0F
-            Thread.sleep(400)
+            Thread.sleep(500)
             GameOver(this).show(supportFragmentManager, "GameOver")
         }
 
@@ -119,16 +118,14 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         pandaView.setOnClickListener { elementDrawer.currentMaterial = Material.PANDA }
         setting.setOnClickListener { SizeMaterial(this).show(supportFragmentManager, "SizeMaterial") }
 
-
-
         saveView.setOnClickListener {
             val level = levelSave.saveLevel(elementDrawer.elementsOnContainer)
             val listEventDao = RoomAppDB.getAppDB(application)?.levelDao()
             listEventDao?.insertLevel(Level(id = 0, elementList = level))
-            Log.d("de",level)
+            finish()
+            val intent = Intent(this, LevelGame::class.java)
+            startActivity(intent)
         }
-
-
     }
 
     override fun onGameAgainClickListener(boolean: Boolean) {
