@@ -17,10 +17,11 @@ class PandaDrawer(private val container: FrameLayout){
     private fun  getElementByCoordinate(coordinate: Coordinate, elementsOnContainer: List<Elements>) =
         elementsOnContainer.firstOrNull {it.coordinateX == coordinate.top && it.coordinateY == coordinate.left }
 
-    fun move(myPanda: View, direction: Direction, elementsOnContainer: List<Elements>, elementsContainer: MutableList<Elements>){
+    fun move(myPanda: View, direction: Direction, elementsOnContainer: List<Elements>, elementsContainer: MutableList<Elements>) {
         val layoutParams = myPanda.layoutParams as FrameLayout.LayoutParams
-        myPanda.setBackgroundResource(R.drawable.panda_top)
         val currentCoordinate = Coordinate(layoutParams.topMargin, layoutParams.leftMargin)
+        myPanda.setBackgroundResource(R.drawable.panda_top)
+ //       Thread {
             when (direction) {
                 UP -> {
                     myPanda.rotation = 0f
@@ -46,10 +47,11 @@ class PandaDrawer(private val container: FrameLayout){
                             Coordinate(
                                 (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin,
                                 (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin
-                            )))
+                            )
+                        )
+                    )
                 }
             }
-
             val nextCoordinate = Coordinate(layoutParams.topMargin, layoutParams.leftMargin)
             if (checkPandaCanMoveThroughBorder(nextCoordinate, myPanda) && checkPandaCanMoveThroughMaterial(nextCoordinate, elementsOnContainer)
             ) {
@@ -57,9 +59,11 @@ class PandaDrawer(private val container: FrameLayout){
                 container.addView(myPanda)
             } else {
                 (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin = currentCoordinate.top
-                (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin = currentCoordinate.left
+                (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin =
+                    currentCoordinate.left
             }
-
+ //           Thread.sleep(300)
+ //       }.start()
     }
 ////////// удаление бамбука
     private fun compareCollection(elementsOnContainer: MutableList<Elements>, coordinateList: List<Coordinate>){

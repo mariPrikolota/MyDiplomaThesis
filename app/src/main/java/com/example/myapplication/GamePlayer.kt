@@ -3,6 +3,7 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.SystemClock
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -105,9 +106,11 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         }
         startGame.setOnClickListener{
             goingOnList(stepDrawer.stepOnContainer)
-            myPanda.rotation = 0F
-            Thread.sleep(500)
-            GameOver(this).show(supportFragmentManager, "GameOver")
+            myPanda.rotation = 0f
+            Thread {
+                Thread.sleep(1000)
+                GameOver(this).show(supportFragmentManager, "GameOver")
+            }.start()
         }
 
         functionMaterialView.setOnClickListener {  }
@@ -134,20 +137,11 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         if (againMode){
             finish()
             startActivity(intent)
-//            recreate()
         }
         againMode = !boolean
     }
 
-//    private fun startStepPanda(){
-//        Thread(Runnable {
-//            goingOnList(stepDrawer.stepOnContainer)
-//            Thread.sleep(300)
-//        }).start()
-//    }
-
     private fun goingOnList(steps: List<Step>) {
- //       Thread(Runnable {
             for (stepOnList in steps) {
                 when (stepOnList.step) {
                     UP -> pandaDrawer.move(myPanda, UP, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer)
@@ -156,9 +150,7 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
                     RIGHT -> pandaDrawer.move(myPanda, RIGHT, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer)
                     EAT -> pandaDrawer.move(myPanda, EAT, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer)
                 }
-//                Thread.sleep(300)
             }
-//        }).start()
     }
 
     override fun elementsSize(size: Int) {

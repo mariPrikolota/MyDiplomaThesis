@@ -29,7 +29,6 @@ class GameOver(listener: OnGameOverDialogButtonClickListener): DialogFragment(){
      private fun onClick(){
          again.setOnClickListener {
              againClickListener.onGameAgainClickListener(true)
-             Thread.sleep(300)
              dialog?.hide()
          }
          playAlt.setOnClickListener {

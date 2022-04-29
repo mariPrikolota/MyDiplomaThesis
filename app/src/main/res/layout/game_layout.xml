@@ -30,7 +30,7 @@
         android:orientation="vertical"
         android:gravity="center"
         android:visibility="gone"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <ImageView
             android:id="@+id/setting"
@@ -165,7 +165,7 @@
         android:layout_gravity="right"
         android:orientation="vertical"
         android:visibility="visible"
-        tools:visibility="gone"
+        tools:visibility="visible"
        >
 
         <TextView
