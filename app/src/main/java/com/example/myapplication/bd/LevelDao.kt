@@ -11,8 +11,8 @@ interface LevelDao {
     @Insert
     fun insertLevel(event: Level?)
 
-    @Delete
-    fun deleteLevel(event: Level?)
+    @Query("DELETE FROM level WHERE Id = :id")
+    fun deleteLevel(id: Int)
 
     @Update
     fun updateLevel(event: Level?)

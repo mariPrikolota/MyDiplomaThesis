@@ -10,6 +10,7 @@
         <entry key="..\:/MyApplication/app/src/main/res/drawable/delete.xml" value="0.179296875" />
         <entry key="..\:/MyApplication/app/src/main/res/drawable/game.xml" value="0.205078125" />
         <entry key="..\:/MyApplication/app/src/main/res/drawable/home.xml" value="0.216796875" />
+        <entry key="..\:/MyApplication/app/src/main/res/drawable/ic_again.xml" value="0.1453125" />
         <entry key="..\:/MyApplication/app/src/main/res/drawable/ic_baseline_refresh_24.xml" value="0.205078125" />
         <entry key="..\:/MyApplication/app/src/main/res/drawable/ic_get_app.xml" value="0.216796875" />
         <entry key="..\:/MyApplication/app/src/main/res/drawable/ic_home.xml" value="0.1953125" />
@@ -21,7 +22,7 @@
         <entry key="..\:/MyApplication/app/src/main/res/drawable/west.xml" value="0.161328125" />
         <entry key="..\:/MyApplication/app/src/main/res/layout-square/game_layout.xml" value="0.25729166666666664" />
         <entry key="..\:/MyApplication/app/src/main/res/layout/activity_main.xml" value="0.12864583333333332" />
-        <entry key="..\:/MyApplication/app/src/main/res/layout/delete_dialog.xml" value="0.133203125" />
+        <entry key="..\:/MyApplication/app/src/main/res/layout/delete_dialog.xml" value="0.25" />
         <entry key="..\:/MyApplication/app/src/main/res/layout/game_fragment.xml" value="0.27291666666666664" />
         <entry key="..\:/MyApplication/app/src/main/res/layout/game_layout.xml" value="0.22" />
         <entry key="..\:/MyApplication/app/src/main/res/layout/game_over_dialog.xml" value="0.18633879781420765" />

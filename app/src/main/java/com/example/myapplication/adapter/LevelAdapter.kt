@@ -5,21 +5,25 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.GamePlayer
 import com.example.myapplication.R
 import com.example.myapplication.bd.Level
-import com.example.myapplication.bd.LevelDao
 
+interface OnOpenDialogClickListener{
+    fun onOpenDialog(int: Int)
+}
 
-
-class LevelAdapter(listArray: List<Level>, context: Context): RecyclerView.Adapter<LevelAdapter.ViewHolderGuide>(){
+class LevelAdapter(listArray: List<Level>, context: Context, list: OnOpenDialogClickListener): RecyclerView.Adapter<LevelAdapter.ViewHolderGuide>(){
     private var events = listArray
     private var appContext = context
+    private val againLongClickListener = list
 
     class ViewHolderGuide (view: View) : RecyclerView.ViewHolder(view) {
         private val numberLevel = view.findViewById<TextView>(R.id.numberLever)
+        private val colorLevel = view.findViewById<ImageView>(R.id.imageView)
         fun bind(levelEvent: Level, context: Context) {
             numberLevel.text = levelEvent.id.toString()
             itemView.setOnClickListener {
@@ -27,11 +31,6 @@ class LevelAdapter(listArray: List<Level>, context: Context): RecyclerView.Adapt
                    putExtra("level", levelEvent.elementList)
                 }
                 context.startActivity(intent)
-            }
-            itemView.setOnLongClickListener {
-                val intentDelete = Intent(context, GamePlayer::class.java)
-                context.startActivity(intentDelete)
-                return@setOnLongClickListener true
             }
         }
     }
@@ -43,6 +42,10 @@ class LevelAdapter(listArray: List<Level>, context: Context): RecyclerView.Adapt
 
     override fun onBindViewHolder(holder: ViewHolderGuide, position: Int) {
         val pos = events[position]
+        holder.itemView.setOnLongClickListener {
+            againLongClickListener.onOpenDialog(pos.id)
+            return@setOnLongClickListener true
+        }
         holder.bind(pos,appContext)
     }
 

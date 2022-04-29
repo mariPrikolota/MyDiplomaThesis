@@ -3,15 +3,16 @@ package com.example.myapplication
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myapplication.adapter.LevelAdapter
+import com.example.myapplication.adapter.OnOpenDialogClickListener
 import com.example.myapplication.bd.Level
 import com.example.myapplication.bd.RoomAppDB
+import com.example.myapplication.dialog.DeleteDialog
 import kotlinx.android.synthetic.main.level_layout.*
 
-class LevelGame:  AppCompatActivity(), View.OnClickListener {
+class LevelGame:  AppCompatActivity(), OnOpenDialogClickListener {
 
     private var level: List<Level>? = null
 
@@ -19,38 +20,32 @@ class LevelGame:  AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.level_layout)
-        onKeyButton()
+        onClick()
         getAllLevel()
 
         recyclerViewLevel.hasFixedSize()
         recyclerViewLevel.layoutManager = GridLayoutManager(this, 5)
-        recyclerViewLevel.adapter = LevelAdapter(level!!, this,)
+        recyclerViewLevel.adapter = LevelAdapter(level!!, this, this)
         recyclerViewLevel?.adapter?.notifyDataSetChanged()
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-     fun getAllLevel() {
-        val list =  RoomAppDB.getAppDB(this)?.levelDao()
-        level = list?.getAllLevel()
-        recyclerViewLevel?.adapter?.notifyDataSetChanged()
+
+     private fun getAllLevel() {
+         val list =  RoomAppDB.getAppDB(this)?.levelDao()
+         level = list?.getAllLevel()
     }
 
-    private fun onKeyButton(){
-        backButton.setOnClickListener(this)
-        createLevel.setOnClickListener(this)
+    override fun onOpenDialog(int: Int) {
+        DeleteDialog().show(supportFragmentManager, "DeleteDialog")
     }
 
-    override fun onClick(view: View) {
-        when(view.id){
-            R.id.backButton -> {
-                finish()
-            }
-            R.id.createLevel -> {
-                finish()
-                val intent = Intent(this, GamePlayer::class.java)
-                intent.putExtra("editMode", true)
-                startActivity(intent)
-            }
+    private fun onClick(){
+        backButton.setOnClickListener {  finish() }
+        createLevel.setOnClickListener {
+            finish()
+            val intent = Intent(this, GamePlayer::class.java)
+            intent.putExtra("editMode", true)
+            startActivity(intent)
         }
     }
 }

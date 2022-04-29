@@ -3,13 +3,14 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.bd.Level
 import com.example.myapplication.bd.RoomAppDB
+import com.example.myapplication.dialog.GameOver
+import com.example.myapplication.dialog.OnGameOverDialogButtonClickListener
 import com.example.myapplication.drawers.ElementsDrawer
 import com.example.myapplication.enums.Direction.*
 import com.example.myapplication.drawers.GridDrawer
@@ -19,7 +20,7 @@ import com.example.myapplication.enums.Material
 import com.example.myapplication.level.LevelSave
 import com.example.myapplication.models.Step
 import kotlinx.android.synthetic.main.game_layout.*
-import kotlinx.android.synthetic.main.game_over_layout.*
+import kotlinx.android.synthetic.main.level_shablon.*
 
 const val CELL_SIZE = 60
 const val HORIZONTAL_CELL_AMOUNT = 24

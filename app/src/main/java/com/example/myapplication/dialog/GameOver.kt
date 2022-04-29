@@ -1,11 +1,12 @@
-package com.example.myapplication
+package com.example.myapplication.dialog
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import kotlinx.android.synthetic.main.game_over_layout.*
+import com.example.myapplication.R
+import kotlinx.android.synthetic.main.game_over_dialog.*
 
 interface OnGameOverDialogButtonClickListener{
     fun onGameAgainClickListener(boolean: Boolean)
