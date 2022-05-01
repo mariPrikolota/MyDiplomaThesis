@@ -21,7 +21,6 @@ class PandaDrawer(private val container: FrameLayout){
         val layoutParams = myPanda.layoutParams as FrameLayout.LayoutParams
         val currentCoordinate = Coordinate(layoutParams.topMargin, layoutParams.leftMargin)
         myPanda.setBackgroundResource(R.drawable.panda_top)
- //       Thread {
             when (direction) {
                 UP -> {
                     myPanda.rotation = 0f
@@ -53,6 +52,7 @@ class PandaDrawer(private val container: FrameLayout){
                 }
             }
             val nextCoordinate = Coordinate(layoutParams.topMargin, layoutParams.leftMargin)
+//        Thread {
             if (checkPandaCanMoveThroughBorder(nextCoordinate, myPanda) && checkPandaCanMoveThroughMaterial(nextCoordinate, elementsOnContainer)
             ) {
                 container.removeView(myPanda)
@@ -62,8 +62,8 @@ class PandaDrawer(private val container: FrameLayout){
                 (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin =
                     currentCoordinate.left
             }
- //           Thread.sleep(300)
- //       }.start()
+//            Thread.sleep(300)
+//   }.start()
     }
 ////////// удаление бамбука
     private fun compareCollection(elementsOnContainer: MutableList<Elements>, coordinateList: List<Coordinate>){

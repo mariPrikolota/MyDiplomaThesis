@@ -178,15 +178,29 @@
             android:layout_margin="10dp"
             android:background="@drawable/algorithms_color"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/containerStep"
+        <LinearLayout
+            android:id="@+id/linearContainer"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:padding="10dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/algorithms_color"
+            android:orientation="horizontal"
+            android:background="@drawable/algorithms_color">
 
-            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Шаг"
+                android:textColor="@color/black"
+                android:textSize="30dp"
+                android:layout_margin="10dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/containerStep"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                />
+
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/deleteStep"
@@ -198,6 +212,7 @@
             android:src="@drawable/delete"/>
 
         <LinearLayout
+            android:id="@+id/functionOne"
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:orientation="horizontal"
@@ -213,11 +228,12 @@
                 android:textSize="30dp"
                 android:layout_margin="10dp"/>
 
-<!--            <androidx.recyclerview.widget.RecyclerView-->
-<!--                android:id="@+id/functionOneView"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:padding="10dp"/>-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/functionOneView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"/>
+
         </LinearLayout>
 
         <LinearLayout

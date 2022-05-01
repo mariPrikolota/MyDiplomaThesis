@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.ImageView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.GamePlayer
 import com.example.myapplication.R
 import com.example.myapplication.adapter.StepAdapter
 import com.example.myapplication.enums.Direction
@@ -13,10 +14,12 @@ import com.example.myapplication.enums.Direction.*
 import com.example.myapplication.models.StepItem
 import com.example.myapplication.models.Step
 
+var numberStepFunction = true
 
-class StepDrawer(val container: RecyclerView, val context: Context) {
+class StepDrawer(val container: RecyclerView, val context: Context){
     private val stepAdapter = StepAdapter()
-    val stepOnContainer = mutableListOf<Step>()
+    var stepOnContainer = mutableListOf<Step>()
+    val stepFunctionContainer = mutableListOf<Step>()
     private var stepItem : StepItem? = null
     var position = 0
 
@@ -40,13 +43,20 @@ class StepDrawer(val container: RecyclerView, val context: Context) {
             EAT -> {
                 stepItem = StepItem(R.drawable.step_eat)
             }
+            FUN -> stepItem = StepItem(R.drawable.step_function)
         }
          val stepId = View.generateViewId()
          step.id = stepId
          stepAdapter.addStep(stepItem!!)
-         stepOnContainer.add(Step(stepId, direction))
+         Log.d("num", numberStepFunction.toString())
+         if (numberStepFunction ){
+             stepOnContainer.add(Step(stepId, direction))
+         }else{
+             stepFunctionContainer.add(Step(stepId, direction))
+         }
          position ++
          Log.d("step", stepOnContainer.toString())
+         Log.d("step", stepFunctionContainer.toString())
      }
 
     // стирание последнего элемента
@@ -62,5 +72,4 @@ class StepDrawer(val container: RecyclerView, val context: Context) {
         stepAdapter.deleteAllStep()
         stepOnContainer.clear()
     }
-
 }

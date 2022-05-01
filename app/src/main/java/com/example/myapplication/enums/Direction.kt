@@ -5,5 +5,6 @@ enum class Direction {
     LEFT,
     RIGHT,
     DOWN,
-    EAT
+    EAT,
+    FUN
 }
