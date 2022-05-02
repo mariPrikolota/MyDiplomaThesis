@@ -15,13 +15,12 @@ import com.example.myapplication.models.StepItem
 import com.example.myapplication.models.Step
 
 var numberStepFunction = true
+var stepOnContainer = mutableListOf<Step>()
+var stepFunctionContainer = mutableListOf<Step>()
 
 class StepDrawer(val container: RecyclerView, val context: Context){
     private val stepAdapter = StepAdapter()
-    var stepOnContainer = mutableListOf<Step>()
-    val stepFunctionContainer = mutableListOf<Step>()
     private var stepItem : StepItem? = null
-    var position = 0
 
      fun stepView(direction: Direction){
         container.layoutManager = GridLayoutManager(context,5)
@@ -48,23 +47,22 @@ class StepDrawer(val container: RecyclerView, val context: Context){
          val stepId = View.generateViewId()
          step.id = stepId
          stepAdapter.addStep(stepItem!!)
-         Log.d("num", numberStepFunction.toString())
-         if (numberStepFunction ){
-             stepOnContainer.add(Step(stepId, direction))
-         }else{
-             stepFunctionContainer.add(Step(stepId, direction))
+         if (direction != FUN){
+             if (numberStepFunction ){
+                 stepOnContainer.add(Step(stepId, direction))
+             }else{
+                 stepFunctionContainer.add(Step(stepId, direction))
+             }
          }
-         position ++
+
          Log.d("step", stepOnContainer.toString())
-         Log.d("step", stepFunctionContainer.toString())
+         Log.d("step2", stepFunctionContainer.toString())
      }
 
     // стирание последнего элемента
-    fun eraseStep(posit: Int) {
-        val stepContainer = stepOnContainer.last()
-        stepAdapter.deleteStep(posit)
-        stepOnContainer.remove(stepContainer)
-        position --
+    fun eraseStep() {
+        stepAdapter.deleteAllStep()
+        stepOnContainer.clear()
     }
 
 //    удвление всех элементов

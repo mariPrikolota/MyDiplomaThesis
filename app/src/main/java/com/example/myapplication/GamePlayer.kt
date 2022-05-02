@@ -39,7 +39,7 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
     private var editMode = false
     var againMode = false
     var stepsGame = true
-    lateinit var stepListTwo : MutableList<Step>
+    lateinit var stepListTwo : ArrayList<Step>
 
     private val gridDrawer by lazy {
         GridDrawer(container)
@@ -71,7 +71,7 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         switchEditMode()
         elementDrawer.drawElementsList(textLevel?.let { levelSave.loadLevel(it) })
         textLevel?.let { openLevel() }
-        stepListTwo = stepDrawer.stepOnContainer
+        stepListTwo = stepOnContainer as ArrayList<Step>
         functionClick()
         onKeyButton()
 
@@ -96,6 +96,10 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
             stepsGame = true
             numberStepFunction = true
         }
+    }
+    private fun deleteList(){
+        stepOnContainer.clear()
+        stepFunctionContainer.clear()
     }
 
     private fun onKeyButton(){
@@ -136,23 +140,22 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
                 }
         }
         functionMaterialView.setOnClickListener {
-            val osnStep =stepDrawer.stepOnContainer
-            val funStep = stepDrawer.stepFunctionContainer
-             val stepListTw = osnStep.plus(funStep).toMutableList()
+            if(stepsGame){
+                stepDrawer.stepView(FUN)
+                stepListTwo = (stepOnContainer + stepFunctionContainer) as ArrayList<Step>
 
-            Log.d("steps",  stepListTw.toString())
-            stepDrawer.stepView(FUN)
+                Log.d("steps",  stepListTwo.toString())
+            }
         }
 
         deleteStep.setOnClickListener {
-            while (stepDrawer.position > 0) {
-                stepDrawer.eraseStep(stepDrawer.position - 1)
-            }
+                stepDrawer.eraseStep()
         }
 
         home.setOnClickListener {
             finish()
-            stepsGame = true
+            numberStepFunction = true
+            deleteList()
         }
 
         startGame.setOnClickListener{
@@ -186,6 +189,7 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         if (againMode){
             finish()
             startActivity(intent)
+            deleteList()
         }
         againMode = !boolean
     }
