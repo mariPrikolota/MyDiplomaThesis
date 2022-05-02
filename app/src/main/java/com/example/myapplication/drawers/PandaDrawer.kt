@@ -39,8 +39,8 @@ class PandaDrawer(private val container: FrameLayout){
                     (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin += CELL_SIZE * sizeElements
                 }
                 EAT -> {
-                    myPanda.rotation = 0f
                     myPanda.setBackgroundResource(R.drawable.panda_eat)
+                    myPanda.rotation = 0f
                     compareCollection(
                         elementsContainer, getPandaCoordinates(
                             Coordinate(
@@ -52,20 +52,23 @@ class PandaDrawer(private val container: FrameLayout){
                 }
             }
             val nextCoordinate = Coordinate(layoutParams.topMargin, layoutParams.leftMargin)
-//        Thread {
-            if (checkPandaCanMoveThroughBorder(nextCoordinate, myPanda) && checkPandaCanMoveThroughMaterial(nextCoordinate, elementsOnContainer)
-            ) {
-                container.removeView(myPanda)
-                container.addView(myPanda)
-            } else {
-                (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin = currentCoordinate.top
-                (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin =
-                    currentCoordinate.left
-            }
-//            Thread.sleep(300)
-//   }.start()
+                if (checkPandaCanMoveThroughBorder(
+                        nextCoordinate,
+                        myPanda
+                    ) && checkPandaCanMoveThroughMaterial(nextCoordinate, elementsOnContainer)
+                ) {
+
+                    container.removeView(myPanda)
+                    container.addView(myPanda)
+                } else {
+                    (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin =
+                        currentCoordinate.top
+                    (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin =
+                        currentCoordinate.left
+                }
     }
-////////// удаление бамбука
+
+    ////////// удаление бамбука
     private fun compareCollection(elementsOnContainer: MutableList<Elements>, coordinateList: List<Coordinate>){
         coordinateList.forEach {
             val element = getElementByCoordinate(it, elementsOnContainer)

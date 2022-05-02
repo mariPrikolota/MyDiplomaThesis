@@ -39,7 +39,7 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
     private var editMode = false
     var againMode = false
     var stepsGame = true
-    lateinit var stepListTwo : ArrayList<Step>
+//    lateinit var stepListTwo : ArrayList<Step>
 
     private val gridDrawer by lazy {
         GridDrawer(container)
@@ -71,7 +71,7 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         switchEditMode()
         elementDrawer.drawElementsList(textLevel?.let { levelSave.loadLevel(it) })
         textLevel?.let { openLevel() }
-        stepListTwo = stepOnContainer as ArrayList<Step>
+//        stepListTwo = stepOnContainer as ArrayList<Step>
         functionClick()
         onKeyButton()
 
@@ -82,11 +82,18 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         }
     }
 
+    override fun onStop() {
+        super.onStop()
+        numberStepFunction = true
+        deleteList()
+    }
+
     private fun openLevel(){
         if (elementDrawer.myPanda != null) {
             myPanda = elementDrawer.myPanda!!
         }
     }
+
     private fun functionClick(){
         functionOne.setOnClickListener{
             stepsGame = false
@@ -97,6 +104,7 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
             numberStepFunction = true
         }
     }
+
     private fun deleteList(){
         stepOnContainer.clear()
         stepFunctionContainer.clear()
@@ -142,9 +150,10 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         functionMaterialView.setOnClickListener {
             if(stepsGame){
                 stepDrawer.stepView(FUN)
-                stepListTwo = (stepOnContainer + stepFunctionContainer) as ArrayList<Step>
+//                stepListTwo = (stepOnContainer + stepFunctionContainer) as ArrayList<Step>
+                stepOnContainer = (stepOnContainer + stepFunctionContainer).toMutableList()
 
-                Log.d("steps",  stepListTwo.toString())
+                Log.d("steps",  stepOnContainer.toString())
             }
         }
 
@@ -154,12 +163,10 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
 
         home.setOnClickListener {
             finish()
-            numberStepFunction = true
-            deleteList()
         }
 
         startGame.setOnClickListener{
-            goingOnList(stepListTwo)
+            goingOnList(stepOnContainer)
             myPanda.rotation = 0f
             Thread {
                 Thread.sleep(1000)
@@ -189,21 +196,26 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         if (againMode){
             finish()
             startActivity(intent)
-            deleteList()
+//            deleteList()
         }
         againMode = !boolean
     }
 
     private fun goingOnList(steps: List<Step>) {
+        Thread(Runnable {
             for (stepOnList in steps) {
-                when (stepOnList.step) {
-                    UP -> pandaDrawer.move(myPanda, UP, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer)
-                    DOWN -> pandaDrawer.move(myPanda, DOWN, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer)
-                    LEFT -> pandaDrawer.move(myPanda, LEFT, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer)
-                    RIGHT -> pandaDrawer.move(myPanda, RIGHT, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer)
-                    EAT -> pandaDrawer.move(myPanda, EAT, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer)
+                Thread.sleep(500)
+                runOnUiThread {
+                    when (stepOnList.step) {
+                        UP -> pandaDrawer.move(myPanda, UP, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer)
+                        DOWN -> pandaDrawer.move(myPanda, DOWN, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer)
+                        LEFT -> pandaDrawer.move(myPanda, LEFT, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer)
+                        RIGHT -> pandaDrawer.move(myPanda, RIGHT, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer)
+                        EAT -> pandaDrawer.move(myPanda, EAT, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer)
+                    }
                 }
             }
+        }).start()
     }
 
     override fun elementsSize(size: Int) {

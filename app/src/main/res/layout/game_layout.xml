@@ -237,32 +237,25 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:orientation="horizontal"
-            android:layout_margin="10dp"
-            android:background="@drawable/algorithms_color">
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="300dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/algorithms_color"
+            android:src="@drawable/delete"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="F(2):"
-                android:textColor="@color/black"
-                android:textSize="30dp"
-                android:layout_margin="10dp"/>
-        </LinearLayout>
 
        <TextView
            android:id="@+id/startGame"
-           android:layout_width="150dp"
+           android:layout_width="match_parent"
            android:layout_height="50dp"
            android:text="В путь"
            android:textSize="30dp"
            android:gravity="center"
            android:textColor="@color/black"
-           android:layout_marginLeft="300dp"
-           android:layout_marginTop="10dp"
+           android:layout_margin="20dp"
            android:background="@drawable/algorithms_color"/>
     </LinearLayout>
 </FrameLayout>
