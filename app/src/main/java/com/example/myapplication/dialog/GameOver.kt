@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.game_over_dialog.*
 
 interface OnGameOverDialogButtonClickListener{
     fun onGameAgainClickListener(boolean: Boolean)
+    fun onFinishGame(boolean: Boolean)
 }
 
 class GameOver(listener: OnGameOverDialogButtonClickListener): DialogFragment(){
@@ -33,6 +34,10 @@ class GameOver(listener: OnGameOverDialogButtonClickListener): DialogFragment(){
          }
          playAlt.setOnClickListener {
 
+         }
+         icHome.setOnClickListener {
+             againClickListener.onFinishGame(true)
+             dialog?.hide()
          }
     }
 }

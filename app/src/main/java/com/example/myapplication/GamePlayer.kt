@@ -119,13 +119,13 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
             }
 
         }
-        downView.setOnClickListener {
-                if (stepsGame){
-                    stepDrawer.stepView(DOWN)
-                }else{
-                    stepOneDrawer.stepView(DOWN)
-                }
-        }
+//        downView.setOnClickListener {
+//                if (stepsGame){
+//                    stepDrawer.stepView(DOWN)
+//                }else{
+//                    stepOneDrawer.stepView(DOWN)
+//                }
+//        }
         leftView.setOnClickListener {
                 if (stepsGame){
                     stepDrawer.stepView(LEFT)
@@ -167,7 +167,7 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
 
         startGame.setOnClickListener{
             goingOnList(stepOnContainer)
-            myPanda.rotation = 0f
+ //           myPanda.rotation = 0f
             Thread {
                 Thread.sleep(1000)
                 GameOver(this).show(supportFragmentManager, "GameOver")
@@ -196,9 +196,17 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         if (againMode){
             finish()
             startActivity(intent)
-//            deleteList()
         }
         againMode = !boolean
+    }
+
+    override fun onFinishGame(boolean: Boolean) {
+        againMode = boolean
+        if (againMode){
+            finish()
+        }
+        againMode = !boolean
+
     }
 
     private fun goingOnList(steps: List<Step>) {
@@ -208,7 +216,7 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
                 runOnUiThread {
                     when (stepOnList.step) {
                         UP -> pandaDrawer.move(myPanda, UP, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer)
-                        DOWN -> pandaDrawer.move(myPanda, DOWN, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer)
+//                        DOWN -> pandaDrawer.move(myPanda, DOWN, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer)
                         LEFT -> pandaDrawer.move(myPanda, LEFT, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer)
                         RIGHT -> pandaDrawer.move(myPanda, RIGHT, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer)
                         EAT -> pandaDrawer.move(myPanda, EAT, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer)

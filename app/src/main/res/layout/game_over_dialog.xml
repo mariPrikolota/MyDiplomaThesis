@@ -38,5 +38,12 @@
             android:layout_marginStart="20dp"
             android:src="@drawable/ic_right_alt" />
 
+        <ImageView
+            android:id="@+id/icHome"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/ic_home" />
+
     </LinearLayout>
 </LinearLayout>

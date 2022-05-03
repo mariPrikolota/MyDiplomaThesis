@@ -76,7 +76,8 @@ class ElementsDrawer(val container: FrameLayout){
             Material.TREE -> view.setImageResource(R.drawable.tree)
             Material.BAMBOO -> view.setImageResource(R.drawable.bamboo)
             Material.PANDA -> {
-                view.setImageResource(R.drawable.panda_stop)
+                view.setImageResource(R.drawable.panda_top)
+                view.rotation = 180f
                 myPanda = view
             }
         }

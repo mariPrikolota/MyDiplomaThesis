@@ -108,13 +108,13 @@
             android:background="@drawable/play_color"
             android:src="@drawable/icon_up" />
 
-        <ImageView
-            android:id="@+id/downView"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/play_color"
-            android:src="@drawable/icon_down" />
+<!--        <ImageView-->
+<!--            android:id="@+id/downView"-->
+<!--            android:layout_width="60dp"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:layout_margin="10dp"-->
+<!--            android:background="@drawable/play_color"-->
+<!--            android:src="@drawable/icon_down" />-->
 
         <ImageView
             android:id="@+id/leftView"
@@ -122,7 +122,7 @@
             android:layout_height="60dp"
             android:layout_margin="10dp"
             android:background="@drawable/play_color"
-            android:src="@drawable/icon_left" />
+            android:src="@drawable/left" />
 
         <ImageView
             android:id="@+id/rightView"
@@ -130,7 +130,7 @@
             android:layout_height="60dp"
             android:layout_margin="10dp"
             android:background="@drawable/play_color"
-            android:src="@drawable/icon_right" />
+            android:src="@drawable/right" />
 
         <ImageView
             android:id="@+id/eatView"

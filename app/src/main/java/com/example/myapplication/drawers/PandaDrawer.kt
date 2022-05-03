@@ -23,24 +23,31 @@ class PandaDrawer(private val container: FrameLayout){
         myPanda.setBackgroundResource(R.drawable.panda_top)
             when (direction) {
                 UP -> {
-                    myPanda.rotation = 0f
-                    (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin -= CELL_SIZE * sizeElements
-                }
-                DOWN -> {
-                    myPanda.rotation = 180f
-                    (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += CELL_SIZE * sizeElements
+                    when (myPanda.rotation){
+                        0f -> { (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += CELL_SIZE * sizeElements }
+                        180f -> {   (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += CELL_SIZE * sizeElements}
+                        270f -> { (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin -= CELL_SIZE * sizeElements}
+                        90f -> {(myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin += CELL_SIZE * sizeElements}
+                    }
                 }
                 LEFT -> {
-                    myPanda.rotation = 270f
-                    (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin -= CELL_SIZE * sizeElements
+                    when (myPanda.rotation){
+                        0f -> { myPanda.rotation = 270f }
+                        180f ->{ myPanda.rotation = 90f }
+                        270f -> { myPanda.rotation = 180f }
+                        90f -> { myPanda.rotation = 0f }
+                    }
+
                 }
                 RIGHT -> {
-                    myPanda.rotation = 90f
-                    (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin += CELL_SIZE * sizeElements
+                    when (myPanda.rotation){
+                        0f -> { myPanda.rotation = 90f }
+                        180f -> { myPanda.rotation = 270f}
+                        270f -> { myPanda.rotation = 0f}
+                        90f -> {myPanda.rotation = 180f}
+                    }
                 }
                 EAT -> {
-                    myPanda.setBackgroundResource(R.drawable.panda_eat)
-                    myPanda.rotation = 0f
                     compareCollection(
                         elementsContainer, getPandaCoordinates(
                             Coordinate(
@@ -50,6 +57,7 @@ class PandaDrawer(private val container: FrameLayout){
                         )
                     )
                 }
+
             }
             val nextCoordinate = Coordinate(layoutParams.topMargin, layoutParams.leftMargin)
                 if (checkPandaCanMoveThroughBorder(
