@@ -21,6 +21,7 @@ import com.example.myapplication.level.LevelSave
 import com.example.myapplication.models.Step
 import kotlinx.android.synthetic.main.game_layout.*
 import kotlinx.android.synthetic.main.level_shablon.*
+import kotlinx.android.synthetic.main.size_material.*
 import kotlin.math.log
 
 const val CELL_SIZE = 60
@@ -39,7 +40,6 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
     private var editMode = false
     var againMode = false
     var stepsGame = true
-//    lateinit var stepListTwo : ArrayList<Step>
 
     private val gridDrawer by lazy {
         GridDrawer(container)
@@ -71,7 +71,6 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         switchEditMode()
         elementDrawer.drawElementsList(textLevel?.let { levelSave.loadLevel(it) })
         textLevel?.let { openLevel() }
-//        stepListTwo = stepOnContainer as ArrayList<Step>
         functionClick()
         onKeyButton()
 
@@ -86,12 +85,6 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         super.onStop()
         numberStepFunction = true
         deleteList()
-    }
-
-    private fun openLevel(){
-        if (elementDrawer.myPanda != null) {
-            myPanda = elementDrawer.myPanda!!
-        }
     }
 
     private fun functionClick(){
@@ -119,13 +112,7 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
             }
 
         }
-//        downView.setOnClickListener {
-//                if (stepsGame){
-//                    stepDrawer.stepView(DOWN)
-//                }else{
-//                    stepOneDrawer.stepView(DOWN)
-//                }
-//        }
+
         leftView.setOnClickListener {
                 if (stepsGame){
                     stepDrawer.stepView(LEFT)
@@ -150,7 +137,6 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         functionMaterialView.setOnClickListener {
             if(stepsGame){
                 stepDrawer.stepView(FUN)
-//                stepListTwo = (stepOnContainer + stepFunctionContainer) as ArrayList<Step>
                 stepOnContainer = (stepOnContainer + stepFunctionContainer).toMutableList()
 
                 Log.d("steps",  stepOnContainer.toString())
@@ -165,13 +151,12 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
             finish()
         }
 
+        finishMaterial.setOnClickListener {
+            openLevelActivity()
+        }
+
         startGame.setOnClickListener{
             goingOnList(stepOnContainer)
- //           myPanda.rotation = 0f
-            Thread {
-                Thread.sleep(1000)
-                GameOver(this).show(supportFragmentManager, "GameOver")
-            }.start()
         }
 
         emptyView.setOnClickListener { elementDrawer.currentMaterial = Material.EMPTY }
@@ -185,10 +170,20 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
             val level = levelSave.saveLevel(elementDrawer.elementsOnContainer)
             val listEventDao = RoomAppDB.getAppDB(application)?.levelDao()
             listEventDao?.insertLevel(Level(id = 0, elementList = level))
-            finish()
-            val intent = Intent(this, LevelGame::class.java)
-            startActivity(intent)
+            openLevelActivity()
         }
+    }
+
+    private fun openLevel(){
+        if (elementDrawer.myPanda != null) {
+            myPanda = elementDrawer.myPanda!!
+        }
+    }
+
+    private fun openLevelActivity(){
+        finish()
+        val intent = Intent(this, LevelGame::class.java)
+        startActivity(intent)
     }
 
     override fun onGameAgainClickListener(boolean: Boolean) {
@@ -212,7 +207,7 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
     private fun goingOnList(steps: List<Step>) {
         Thread(Runnable {
             for (stepOnList in steps) {
-                Thread.sleep(500)
+                Thread.sleep(300)
                 runOnUiThread {
                     when (stepOnList.step) {
                         UP -> pandaDrawer.move(myPanda, UP, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer)
@@ -223,11 +218,16 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
                     }
                 }
             }
+            Thread.sleep(300)
+            GameOver(this).show(supportFragmentManager, "GameOver")
         }).start()
     }
 
     override fun elementsSize(size: Int) {
         sizeElements = size
+        when(size){
+
+        }
     }
 
     private fun switchEditMode(){

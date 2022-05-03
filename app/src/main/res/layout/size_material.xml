@@ -104,49 +104,6 @@
                 android:background="@drawable/bamboo" />
 
         </LinearLayout>
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginLeft="100dp"-->
-<!--            android:gravity="center"-->
-<!--            android:orientation="vertical">-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/viewBig"-->
-<!--                android:layout_width="200dp"-->
-<!--                android:layout_height="70dp"-->
-<!--                android:background="@drawable/play_color"-->
-<!--                android:text="Низкий"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="30dp"-->
-<!--                android:gravity="center"/>-->
-
-<!--            <LinearLayout-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="30dp"-->
-<!--                android:orientation="horizontal">-->
-
-<!--                <View-->
-<!--                    android:layout_width="120dp"-->
-<!--                    android:layout_height="120dp"-->
-<!--                    android:background="@drawable/tree" />-->
-
-<!--                <View-->
-<!--                    android:layout_width="120dp"-->
-<!--                    android:layout_height="120dp"-->
-<!--                    android:layout_marginStart="20dp"-->
-<!--                    android:background="@drawable/stone" />-->
-<!--            </LinearLayout>-->
-
-<!--            <View-->
-<!--                android:layout_width="120dp"-->
-<!--                android:layout_height="120dp"-->
-<!--                android:layout_marginTop="20dp"-->
-<!--                android:background="@drawable/bamboo" />-->
-
-<!--        </LinearLayout>-->
     </LinearLayout>
 
     <TextView
@@ -154,6 +111,10 @@
         android:layout_width="200dp"
         android:layout_height="70dp"
         android:layout_margin="20dp"
+        android:text="Удачи)"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        android:gravity="center"
         android:background="@drawable/play_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.468"

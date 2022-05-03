@@ -23,72 +23,86 @@
 
     </FrameLayout>
 
-    <LinearLayout
-        android:id="@+id/materialContainer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:visibility="gone"
-        tools:visibility="gone">
+        <LinearLayout
+            android:id="@+id/materialContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="right"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
 
-        <ImageView
-            android:id="@+id/setting"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@drawable/play_color"
-            android:src="@drawable/settings"
-            android:layout_margin="50dp" />
+            <ImageView
+                android:id="@+id/setting"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="50dp"
+                android:background="@drawable/play_color"
+                android:src="@drawable/settings" />
 
-        <ImageView
-            android:id="@+id/emptyView"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/play_color"
-            android:src="@drawable/delete"
-            />
+            <ImageView
+                android:id="@+id/emptyView"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/play_color"
+                android:src="@drawable/delete" />
 
-        <ImageView
-            android:id="@+id/stoneView"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="10dp"
-            android:src="@drawable/stone"
-            />
+            <ImageView
+                android:id="@+id/stoneView"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/stone" />
 
-        <ImageView
-            android:id="@+id/treeView"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="10dp"
-            android:src="@drawable/tree" />
+            <ImageView
+                android:id="@+id/treeView"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/tree" />
 
-        <ImageView
-            android:id="@+id/bambooView"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="10dp"
-            android:background="@color/gray"
-            android:src="@drawable/bamboo"/>
+            <ImageView
+                android:id="@+id/bambooView"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_margin="10dp"
+                android:background="@color/gray"
+                android:src="@drawable/bamboo" />
 
-        <ImageView
-            android:id="@+id/pandaView"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="10dp"
-            android:src="@drawable/panda_stop" />
+            <ImageView
+                android:id="@+id/pandaView"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/panda_stop" />
 
-        <ImageView
-            android:id="@+id/saveView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_margin="50dp"
-            android:background="@drawable/play_color"
-            android:src="@drawable/ic_get_app" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_margin="50dp"
+                tools:ignore="RtlHardcoded">
 
-    </LinearLayout>
+                <ImageView
+                    android:id="@+id/finishMaterial"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/play_color"
+                    android:src="@drawable/ic_home" />
+
+                <ImageView
+                    android:id="@+id/saveView"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="50dp"
+                    android:background="@drawable/play_color"
+                    android:src="@drawable/ic_get_app" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     <LinearLayout
         android:id="@+id/stepContainer"
@@ -166,7 +180,7 @@
         android:layout_gravity="right"
         android:orientation="vertical"
         android:visibility="visible"
-        tools:visibility="visible"
+        tools:visibility="gone"
        >
 
         <TextView
