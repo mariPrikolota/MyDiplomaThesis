@@ -9,7 +9,8 @@
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="780dp"
-        android:layout_height="match_parent"
+        android:layout_height="720dp"
+        android:background="@drawable/pole"
         tools:context=".GamePlayer"
         >
 
@@ -112,7 +113,7 @@
         android:layout_marginBottom="10dp"
         android:orientation="horizontal"
         android:visibility="visible"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <ImageView
             android:id="@+id/upView"

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.myapplication.R
+import com.example.myapplication.drawers.numberBamboo
 import kotlinx.android.synthetic.main.game_over_dialog.*
 
 interface OnGameOverDialogButtonClickListener{
@@ -23,6 +24,7 @@ class GameOver(listener: OnGameOverDialogButtonClickListener): DialogFragment(){
 
     override fun onStart() {
         super.onStart()
+        restartOrHome()
         dialog?.setCanceledOnTouchOutside(false)
         onClick()
     }
@@ -31,13 +33,23 @@ class GameOver(listener: OnGameOverDialogButtonClickListener): DialogFragment(){
          again.setOnClickListener {
              againClickListener.onGameAgainClickListener(true)
              dialog?.hide()
+             numberBamboo = 0
          }
          playAlt.setOnClickListener {
-
+             numberBamboo = 0
          }
          icHome.setOnClickListener {
              againClickListener.onFinishGame(true)
              dialog?.hide()
+             numberBamboo = 0
          }
+    }
+
+    private fun restartOrHome(){
+        if (numberBamboo != 0){
+            playAlt.visibility = View.GONE
+        }else{
+            playAlt.visibility = View.VISIBLE
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.dialog
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -6,8 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import com.example.myapplication.dialog.GameOver
-import com.example.myapplication.enums.Direction
+import com.example.myapplication.R
 import kotlinx.android.synthetic.main.size_material.*
 
 interface OnSizeElementsButton{

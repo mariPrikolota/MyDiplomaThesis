@@ -7,12 +7,16 @@ import android.widget.ImageView
 import com.example.myapplication.*
 import com.example.myapplication.bd.Elements
 import com.example.myapplication.enums.Material
+import com.example.myapplication.enums.Material.BAMBOO
 import com.example.myapplication.models.Coordinate
+
+var numberBamboo = 0
 
 class ElementsDrawer(val container: FrameLayout){
     var currentMaterial = Material.EMPTY
     val elementsOnContainer = mutableListOf<Elements>()
     var myPanda : ImageView? = null
+
 
     fun onTouchContainer(x:Float, y:Float){
         val topMargin = y.toInt() - (y.toInt()% (CELL_SIZE * sizeElements))
@@ -74,7 +78,7 @@ class ElementsDrawer(val container: FrameLayout){
         when(currentMaterial){
             Material.STONE -> view.setImageResource(R.drawable.stone)
             Material.TREE -> view.setImageResource(R.drawable.tree)
-            Material.BAMBOO -> view.setImageResource(R.drawable.bamboo)
+            BAMBOO -> view.setImageResource(R.drawable.bamboo)
             Material.PANDA -> {
                 view.setImageResource(R.drawable.panda_top)
                 view.rotation = 180f
@@ -94,6 +98,9 @@ class ElementsDrawer(val container: FrameLayout){
             currentMaterial= element.material
             sizeElements = element.width
             drawView( element.coordinateX, element.coordinateY)
+            if (element.material == BAMBOO){
+                numberBamboo += 1
+            }
         }
         currentMaterial = Material.NULL
     }

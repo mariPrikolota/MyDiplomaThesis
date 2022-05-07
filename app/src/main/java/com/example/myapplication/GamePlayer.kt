@@ -1,28 +1,26 @@
 package com.example.myapplication
 
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.os.SystemClock
 import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.bd.Level
 import com.example.myapplication.bd.RoomAppDB
 import com.example.myapplication.dialog.GameOver
 import com.example.myapplication.dialog.OnGameOverDialogButtonClickListener
+import com.example.myapplication.dialog.OnSizeElementsButton
+import com.example.myapplication.dialog.SizeMaterial
 import com.example.myapplication.drawers.*
 import com.example.myapplication.enums.Direction.*
 import com.example.myapplication.enums.Material
 import com.example.myapplication.level.LevelSave
 import com.example.myapplication.models.Step
 import kotlinx.android.synthetic.main.game_layout.*
-import kotlinx.android.synthetic.main.level_shablon.*
-import kotlinx.android.synthetic.main.size_material.*
-import kotlin.math.log
 
 const val CELL_SIZE = 60
 const val HORIZONTAL_CELL_AMOUNT = 24
@@ -35,7 +33,7 @@ var sizeElements = 2
 //    fun newContainer(boolean: Boolean)
 //}
 
-class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSizeElementsButton{ //, View.OnClickListener
+class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSizeElementsButton { //, View.OnClickListener
     private lateinit var myPanda: ImageView
     private var editMode = false
     var againMode = false
@@ -225,20 +223,19 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
 
     override fun elementsSize(size: Int) {
         sizeElements = size
-        when(size){
-
-        }
     }
 
+    @SuppressLint("ResourceAsColor")
     private fun switchEditMode(){
         if (editMode){
-            gridDrawer.drawGrid()
+//            gridDrawer.drawGrid()
             elementDrawer.currentMaterial = Material.NULL
             materialContainer.visibility = View.VISIBLE
             stepContainer.visibility = View.GONE
             algorithmsContainer.visibility = View.GONE
         }else{
-            gridDrawer.removeGrid()
+
+//            gridDrawer.removeGrid()
             elementDrawer.currentMaterial = Material.NULL
             materialContainer.visibility = View.GONE
             stepContainer.visibility = View.VISIBLE

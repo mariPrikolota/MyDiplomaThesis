@@ -82,6 +82,7 @@ class PandaDrawer(private val container: FrameLayout){
             val element = getElementByCoordinate(it, elementsOnContainer)
             removeBambooContainer(element, elementsOnContainer)
         }
+        numberBamboo--
     }
 
     private fun removeBambooContainer(element: Elements?, elementsOnContainer: MutableList<Elements>) {

@@ -19,6 +19,7 @@
         <entry key="..\:/MyApplication/app/src/main/res/drawable/ic_save.xml" value="0.205078125" />
         <entry key="..\:/MyApplication/app/src/main/res/drawable/icon_color.xml" value="0.2890625" />
         <entry key="..\:/MyApplication/app/src/main/res/drawable/play_color.xml" value="0.216796875" />
+        <entry key="..\:/MyApplication/app/src/main/res/drawable/pole.xml" value="0.138" />
         <entry key="..\:/MyApplication/app/src/main/res/drawable/settings.xml" value="0.216796875" />
         <entry key="..\:/MyApplication/app/src/main/res/drawable/west.xml" value="0.161328125" />
         <entry key="..\:/MyApplication/app/src/main/res/layout-square/game_layout.xml" value="0.25729166666666664" />
@@ -29,7 +30,7 @@
         <entry key="..\:/MyApplication/app/src/main/res/layout/game_over_dialog.xml" value="0.18633879781420765" />
         <entry key="..\:/MyApplication/app/src/main/res/layout/game_over_layout.xml" value="0.138671875" />
         <entry key="..\:/MyApplication/app/src/main/res/layout/home_layout.xml" value="0.22" />
-        <entry key="..\:/MyApplication/app/src/main/res/layout/level_layout.xml" value="0.19296875" />
+        <entry key="..\:/MyApplication/app/src/main/res/layout/level_layout.xml" value="0.25" />
         <entry key="..\:/MyApplication/app/src/main/res/layout/level_shablon.xml" value="0.2" />
         <entry key="..\:/MyApplication/app/src/main/res/layout/navigation_layout.xml" value="0.16" />
         <entry key="..\:/MyApplication/app/src/main/res/layout/over_layout.xml" value="0.122265625" />
