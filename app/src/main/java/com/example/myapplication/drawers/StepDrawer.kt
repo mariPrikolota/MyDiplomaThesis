@@ -34,10 +34,10 @@ class StepDrawer(val container: RecyclerView, val context: Context){
 //                stepItem = StepItem(R.drawable.icon_down)
 //            }
             LEFT -> {
-                stepItem = StepItem(R.drawable.icon_left)
+                stepItem = StepItem(R.drawable.left)
             }
             RIGHT -> {
-                stepItem = StepItem(R.drawable.icon_right)
+                stepItem = StepItem(R.drawable.right)
             }
             EAT -> {
                 stepItem = StepItem(R.drawable.step_eat)

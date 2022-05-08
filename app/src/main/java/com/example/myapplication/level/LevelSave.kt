@@ -8,8 +8,7 @@ import com.google.gson.reflect.TypeToken
 class LevelSave(private val context: Context) {
 
     fun saveLevel(elementsOnContainer: List<Elements>): String {
-        val gson =  Gson().toJson(elementsOnContainer)
-        return gson
+        return Gson().toJson(elementsOnContainer)
     }
 
     fun loadLevel(level: String): List<Elements>?{

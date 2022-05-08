@@ -32,7 +32,7 @@
             android:layout_gravity="right"
             android:orientation="vertical"
             android:visibility="gone"
-            tools:visibility="visible">
+            tools:visibility="gone">
 
             <ImageView
                 android:id="@+id/setting"
@@ -113,7 +113,7 @@
         android:layout_marginBottom="10dp"
         android:orientation="horizontal"
         android:visibility="visible"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <ImageView
             android:id="@+id/upView"
@@ -181,7 +181,7 @@
         android:layout_gravity="right"
         android:orientation="vertical"
         android:visibility="visible"
-        tools:visibility="gone"
+        tools:visibility="visible"
        >
 
         <TextView
@@ -196,10 +196,11 @@
 
         <LinearLayout
             android:id="@+id/linearContainer"
-            android:layout_width="match_parent"
+            android:layout_width="500dp"
             android:layout_height="300dp"
             android:orientation="horizontal"
-            android:background="@drawable/algorithms_color">
+            android:background="@drawable/play_color"
+            android:backgroundTint="@color/white">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -207,7 +208,7 @@
                 android:text="Шаг"
                 android:textColor="@color/black"
                 android:textSize="30dp"
-                android:layout_margin="10dp"/>
+                android:layout_margin="14dp"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/containerStep"
@@ -233,7 +234,7 @@
             android:layout_height="140dp"
             android:orientation="horizontal"
             android:layout_margin="10dp"
-            android:background="@drawable/algorithms_color"
+            android:background="@drawable/play_color"
             >
 
             <TextView
@@ -242,7 +243,7 @@
                 android:text="F(1):"
                 android:textColor="@color/black"
                 android:textSize="30dp"
-                android:layout_margin="10dp"/>
+                android:layout_margin="14dp"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/functionOneView"
@@ -253,6 +254,7 @@
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/deleteFunStep"
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_marginStart="300dp"

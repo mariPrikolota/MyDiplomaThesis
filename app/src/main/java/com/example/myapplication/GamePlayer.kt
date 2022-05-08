@@ -29,26 +29,19 @@ const val MAX_VERTICAL = VERTICAL_CELL_AMOUNT * CELL_SIZE
 const val MAX_HORIZONTAL = HORIZONTAL_CELL_AMOUNT * CELL_SIZE
 var sizeElements = 2
 
-//interface OnNewContainerClick{
-//    fun newContainer(boolean: Boolean)
-//}
-
-class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSizeElementsButton { //, View.OnClickListener
+class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSizeElementsButton, OnStopGameClickListener{ //, View.OnClickListener
     private lateinit var myPanda: ImageView
     private var editMode = false
     var againMode = false
     var stepsGame = true
-
-    private val gridDrawer by lazy {
-        GridDrawer(container)
-    }
+    var stopGame = false
 
     private val elementDrawer by lazy {
         ElementsDrawer(container)
     }
 
     private  val pandaDrawer by lazy {
-        PandaDrawer(container)
+        PandaDrawer(container, this)
     }
     private val levelSave by lazy {
         LevelSave(this)
@@ -61,6 +54,7 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         StepDrawer(functionOneView, this)
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.game_layout)
@@ -85,32 +79,39 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         deleteList()
     }
 
-    private fun functionClick(){
+    @SuppressLint("ResourceAsColor")
+    private fun functionClick() {
         functionOne.setOnClickListener{
             stepsGame = false
             numberStepFunction = false
+            this.resources?.getColor(R.color.white, null)
+                ?.let { it1 -> functionOne.background.setTint(it1) }
+            this.resources?.getColor(R.color.gray, null)
+                ?.let { it1 -> linearContainer.background.setTint(it1) }
         }
         linearContainer.setOnClickListener {
             stepsGame = true
             numberStepFunction = true
+            this.resources?.getColor(R.color.white, null)
+                ?.let { it1 -> linearContainer.background.setTint(it1) }
+            this.resources?.getColor(R.color.gray, null)
+                ?.let { it1 -> functionOne.background.setTint(it1) }
         }
     }
 
-    private fun deleteList(){
+    private fun deleteList() {
         stepOnContainer.clear()
         stepFunctionContainer.clear()
     }
 
-    private fun onKeyButton(){
+    private fun onKeyButton() {
         upView.setOnClickListener {
             if (stepsGame){
                 stepDrawer.stepView(UP)
             }else{
                 stepOneDrawer.stepView(UP)
             }
-
         }
-
         leftView.setOnClickListener {
                 if (stepsGame){
                     stepDrawer.stepView(LEFT)
@@ -141,21 +142,14 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
             }
         }
 
-        deleteStep.setOnClickListener {
-                stepDrawer.eraseStep()
-        }
+        deleteStep.setOnClickListener { stepDrawer.eraseStep() }
+        deleteFunStep.setOnClickListener { stepOneDrawer.eraseStep() }
 
-        home.setOnClickListener {
-            finish()
-        }
+        home.setOnClickListener { finish() }
 
-        finishMaterial.setOnClickListener {
-            openLevelActivity()
-        }
+        finishMaterial.setOnClickListener { openLevelActivity() }
 
-        startGame.setOnClickListener{
-            goingOnList(stepOnContainer)
-        }
+        startGame.setOnClickListener { goingOnList(stepOnContainer) }
 
         emptyView.setOnClickListener { elementDrawer.currentMaterial = Material.EMPTY }
         stoneView.setOnClickListener { elementDrawer.currentMaterial = Material.STONE }
@@ -169,16 +163,17 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
             val listEventDao = RoomAppDB.getAppDB(application)?.levelDao()
             listEventDao?.insertLevel(Level(id = 0, elementList = level))
             openLevelActivity()
+
         }
     }
 
-    private fun openLevel(){
+    private fun openLevel() {
         if (elementDrawer.myPanda != null) {
             myPanda = elementDrawer.myPanda!!
         }
     }
 
-    private fun openLevelActivity(){
+    private fun openLevelActivity() {
         finish()
         val intent = Intent(this, LevelGame::class.java)
         startActivity(intent)
@@ -203,22 +198,30 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
     }
 
     private fun goingOnList(steps: List<Step>) {
-        Thread(Runnable {
-            for (stepOnList in steps) {
-                Thread.sleep(300)
-                runOnUiThread {
-                    when (stepOnList.step) {
-                        UP -> pandaDrawer.move(myPanda, UP, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer)
-//                        DOWN -> pandaDrawer.move(myPanda, DOWN, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer)
-                        LEFT -> pandaDrawer.move(myPanda, LEFT, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer)
-                        RIGHT -> pandaDrawer.move(myPanda, RIGHT, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer)
-                        EAT -> pandaDrawer.move(myPanda, EAT, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer)
+            Thread(Runnable {
+                for (stepOnList in steps) {
+                    Thread.sleep(300)
+                    runOnUiThread {
+                        when (stepOnList.step) {
+                            UP -> pandaDrawer.move(
+                                myPanda, UP, elementDrawer.elementsOnContainer
+                            )
+                            LEFT -> pandaDrawer.move(
+                                myPanda, LEFT, elementDrawer.elementsOnContainer
+                            )
+                            RIGHT -> pandaDrawer.move(
+                                myPanda, RIGHT, elementDrawer.elementsOnContainer
+                            )
+                            EAT -> pandaDrawer.move(
+                                myPanda, EAT, elementDrawer.elementsOnContainer
+                            )
+                        }
                     }
                 }
-            }
-            Thread.sleep(300)
-            GameOver(this).show(supportFragmentManager, "GameOver")
-        }).start()
+                Thread.sleep(300)
+                GameOver(this).show(supportFragmentManager, "GameOver")
+            }).start()
+        stopGame = false
     }
 
     override fun elementsSize(size: Int) {
@@ -226,7 +229,7 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
     }
 
     @SuppressLint("ResourceAsColor")
-    private fun switchEditMode(){
+    private fun switchEditMode() {
         if (editMode){
 //            gridDrawer.drawGrid()
             elementDrawer.currentMaterial = Material.NULL
@@ -245,5 +248,11 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         editMode = !editMode
     }
 
-
+    override fun stopGame(boolean: Boolean) {
+        stopGame = boolean
+        Log.d("boo", stopGame.toString())
+        if (stopGame) {
+            GameOver(this).show(supportFragmentManager, "GameOver")
+        }
+    }
 }

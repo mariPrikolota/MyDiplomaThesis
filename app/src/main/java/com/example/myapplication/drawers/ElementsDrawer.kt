@@ -68,7 +68,7 @@ class ElementsDrawer(val container: FrameLayout){
     private fun drawView(coordinateX: Int, coordinateY: Int){
         removeUnwantedInstances()
         val view = ImageView(container.context)
-        val layoutParams = FrameLayout.LayoutParams(CELL_SIZE * sizeElements, CELL_SIZE * sizeElements)
+            val layoutParams = FrameLayout.LayoutParams(CELL_SIZE * sizeElements, CELL_SIZE * sizeElements)
         layoutParams.topMargin = coordinateX
         layoutParams.leftMargin= coordinateY
         val viewId = View.generateViewId()

@@ -4,20 +4,26 @@ import android.app.Activity
 import android.view.View
 import android.widget.FrameLayout
 import com.example.myapplication.*
+import com.example.myapplication.adapter.OnOpenDialogClickListener
 import com.example.myapplication.bd.Elements
+import com.example.myapplication.dialog.GameOver
 import com.example.myapplication.enums.Direction
 import com.example.myapplication.enums.Direction.*
 import com.example.myapplication.enums.Material
 import com.example.myapplication.models.Coordinate
 
-class PandaDrawer(private val container: FrameLayout){
+interface OnStopGameClickListener{
+    fun stopGame(boolean: Boolean)
+}
+
+class PandaDrawer(private val container: FrameLayout, val list: OnStopGameClickListener){
 
     private val activity = container.context as Activity
 
     private fun  getElementByCoordinate(coordinate: Coordinate, elementsOnContainer: List<Elements>) =
         elementsOnContainer.firstOrNull {it.coordinateX == coordinate.top && it.coordinateY == coordinate.left }
 
-    fun move(myPanda: View, direction: Direction, elementsOnContainer: List<Elements>, elementsContainer: MutableList<Elements>) {
+    fun move(myPanda: View, direction: Direction, elementsContainer: MutableList<Elements>) {
         val layoutParams = myPanda.layoutParams as FrameLayout.LayoutParams
         val currentCoordinate = Coordinate(layoutParams.topMargin, layoutParams.leftMargin)
         myPanda.setBackgroundResource(R.drawable.panda_top)
@@ -63,7 +69,7 @@ class PandaDrawer(private val container: FrameLayout){
                 if (checkPandaCanMoveThroughBorder(
                         nextCoordinate,
                         myPanda
-                    ) && checkPandaCanMoveThroughMaterial(nextCoordinate, elementsOnContainer)
+                    ) && checkPandaCanMoveThroughMaterial(nextCoordinate, elementsContainer)
                 ) {
 
                     container.removeView(myPanda)
@@ -73,6 +79,7 @@ class PandaDrawer(private val container: FrameLayout){
                         currentCoordinate.top
                     (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin =
                         currentCoordinate.left
+                    list.stopGame(true)
                 }
     }
 
