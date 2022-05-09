@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.ImageView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.GamePlayer
 import com.example.myapplication.R
 import com.example.myapplication.adapter.StepAdapter
 import com.example.myapplication.enums.Direction
@@ -30,14 +29,20 @@ class StepDrawer(val container: RecyclerView, val context: Context){
             UP -> {
                 stepItem = StepItem(R.drawable.icon_up)
             }
-//            DOWN -> {
-//                stepItem = StepItem(R.drawable.icon_down)
-//            }
+            JUMP -> {
+                stepItem = StepItem(R.drawable.jump)
+            }
             LEFT -> {
                 stepItem = StepItem(R.drawable.left)
             }
             RIGHT -> {
                 stepItem = StepItem(R.drawable.right)
+            }
+            CORNER_LEFT -> {
+                stepItem = StepItem(R.drawable.corner_left_jump)
+            }
+            CORNER_RIGHT -> {
+                stepItem = StepItem(R.drawable.corner_right_jump)
             }
             EAT -> {
                 stepItem = StepItem(R.drawable.step_eat)

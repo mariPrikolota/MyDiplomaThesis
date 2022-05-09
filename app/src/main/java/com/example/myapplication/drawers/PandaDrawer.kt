@@ -4,9 +4,7 @@ import android.app.Activity
 import android.view.View
 import android.widget.FrameLayout
 import com.example.myapplication.*
-import com.example.myapplication.adapter.OnOpenDialogClickListener
 import com.example.myapplication.bd.Elements
-import com.example.myapplication.dialog.GameOver
 import com.example.myapplication.enums.Direction
 import com.example.myapplication.enums.Direction.*
 import com.example.myapplication.enums.Material
@@ -16,7 +14,7 @@ interface OnStopGameClickListener{
     fun stopGame(boolean: Boolean)
 }
 
-class PandaDrawer(private val container: FrameLayout, val list: OnStopGameClickListener){
+class PandaDrawer(private val container: FrameLayout){ //val list: OnStopGameClickListener
 
     private val activity = container.context as Activity
 
@@ -30,7 +28,7 @@ class PandaDrawer(private val container: FrameLayout, val list: OnStopGameClickL
             when (direction) {
                 UP -> {
                     when (myPanda.rotation){
-                        0f -> { (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += CELL_SIZE * sizeElements }
+                        0f -> { (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin -= CELL_SIZE * sizeElements }
                         180f -> {   (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += CELL_SIZE * sizeElements}
                         270f -> { (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin -= CELL_SIZE * sizeElements}
                         90f -> {(myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin += CELL_SIZE * sizeElements}
@@ -51,6 +49,63 @@ class PandaDrawer(private val container: FrameLayout, val list: OnStopGameClickL
                         180f -> { myPanda.rotation = 270f}
                         270f -> { myPanda.rotation = 0f}
                         90f -> {myPanda.rotation = 180f}
+                    }
+                }
+                JUMP -> {
+                    when (myPanda.rotation){
+                    0f -> { (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin -= CELL_SIZE * sizeElements * 2}
+                    180f -> { (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += CELL_SIZE * sizeElements * 2}
+                    270f -> { (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin -= CELL_SIZE * sizeElements * 2}
+                    90f -> { (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin += CELL_SIZE * sizeElements * 2}
+                    }
+                }
+                CORNER_LEFT -> {
+                    when (myPanda.rotation){
+                        0f -> {
+                            (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin -= CELL_SIZE * sizeElements
+                            (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin -= CELL_SIZE * sizeElements
+                            myPanda.rotation = 270f
+                        }
+                        180f -> {
+                            (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += CELL_SIZE * sizeElements
+                            (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin -= CELL_SIZE * sizeElements
+                            myPanda.rotation = 270f
+                        }
+                        270f -> {
+                            (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += CELL_SIZE * sizeElements
+                            (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin -= CELL_SIZE * sizeElements
+                            myPanda.rotation = 180f
+                        }
+                        90f -> {
+                            (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += CELL_SIZE * sizeElements
+                            (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin += CELL_SIZE * sizeElements
+                            myPanda.rotation = 180f
+                        }
+                    }
+                }
+                CORNER_RIGHT -> {
+                    when (myPanda.rotation){
+                        0f -> {
+                            (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin -= CELL_SIZE * sizeElements
+                            (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin += CELL_SIZE * sizeElements
+                            myPanda.rotation = 90f
+                        }
+                        180f -> {
+                            (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += CELL_SIZE * sizeElements
+                            (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin += CELL_SIZE * sizeElements
+                            myPanda.rotation = 90f
+                        }
+
+                        270f -> {
+                            (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin -= CELL_SIZE * sizeElements
+                            (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin -= CELL_SIZE * sizeElements
+                            myPanda.rotation = 0f
+                        }
+                        90f -> {
+                            (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin -= CELL_SIZE * sizeElements
+                            (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin += CELL_SIZE * sizeElements
+                            myPanda.rotation = 0f
+                        }
                     }
                 }
                 EAT -> {
@@ -79,7 +134,7 @@ class PandaDrawer(private val container: FrameLayout, val list: OnStopGameClickL
                         currentCoordinate.top
                     (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin =
                         currentCoordinate.left
-                    list.stopGame(true)
+ //                   list.stopGame(true)
                 }
     }
 
@@ -108,10 +163,18 @@ class PandaDrawer(private val container: FrameLayout, val list: OnStopGameClickL
     }
 ////////////
 
+
+    private fun checkPandaCanMoveThroughStone(element: Elements?): Boolean {
+        if (element != null && element.material == Material.STONE){
+           return false
+        }
+        return false
+    }
+
     private fun checkPandaCanMoveThroughMaterial(coordinate: Coordinate, elementsOnContainer: List<Elements>):Boolean{
         getPandaCoordinates(coordinate).forEach {
             val element = getElementByCoordinate(it, elementsOnContainer)
-            if (element != null){
+            if (element != null && element.material.pandaCanGoThrough){
                 return true
             }
         }

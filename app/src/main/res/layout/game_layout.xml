@@ -123,13 +123,13 @@
             android:background="@drawable/play_color"
             android:src="@drawable/icon_up" />
 
-<!--        <ImageView-->
-<!--            android:id="@+id/downView"-->
-<!--            android:layout_width="60dp"-->
-<!--            android:layout_height="60dp"-->
-<!--            android:layout_margin="10dp"-->
-<!--            android:background="@drawable/play_color"-->
-<!--            android:src="@drawable/icon_down" />-->
+        <!--        <ImageView-->
+        <!--            android:id="@+id/downView"-->
+        <!--            android:layout_width="60dp"-->
+        <!--            android:layout_height="60dp"-->
+        <!--            android:layout_margin="10dp"-->
+        <!--            android:background="@drawable/play_color"-->
+        <!--            android:src="@drawable/icon_down" />-->
 
         <ImageView
             android:id="@+id/leftView"
@@ -146,6 +146,30 @@
             android:layout_margin="10dp"
             android:background="@drawable/play_color"
             android:src="@drawable/right" />
+
+        <ImageView
+            android:id="@+id/jumpView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/play_color"
+            android:src="@drawable/jump" />
+
+        <ImageView
+            android:id="@+id/cornerLeftView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/play_color"
+            android:src="@drawable/corner_left_jump" />
+
+        <ImageView
+            android:id="@+id/cornerRightView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/play_color"
+            android:src="@drawable/corner_right_jump" />
 
         <ImageView
             android:id="@+id/eatView"
@@ -167,8 +191,8 @@
             android:id="@+id/home"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="10dp"
-            android:layout_marginStart="200dp"
             android:background="@drawable/play_color"
             android:src="@drawable/ic_home" />
 

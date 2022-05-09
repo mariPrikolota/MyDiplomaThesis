@@ -15,7 +15,7 @@
         android:id="@+id/backButton"
         android:layout_width="200dp"
         android:layout_height="70dp"
-        android:background="@drawable/play_color"
+        android:background="@drawable/algorithms_color"
         android:src="@drawable/icon_left"
         android:layout_marginTop="40dp"
         android:layout_marginLeft="40dp"/>
@@ -32,7 +32,7 @@
         android:id="@+id/createLevel"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@drawable/play_color"
+        android:background="@drawable/algorithms_color"
         android:layout_gravity="center"
         android:layout_marginTop="60dp"
         android:src="@drawable/add"
