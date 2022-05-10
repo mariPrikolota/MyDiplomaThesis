@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="400dp"
+    android:layout_height="400dp"
+    android:background="@drawable/algorithms_color"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <View
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:background="@drawable/panda_forget"
+        />
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Вы збыли меня"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:textSize="40dp"/>
+
+</LinearLayout>

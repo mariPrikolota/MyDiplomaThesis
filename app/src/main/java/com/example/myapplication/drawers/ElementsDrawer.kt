@@ -7,7 +7,7 @@ import android.widget.ImageView
 import com.example.myapplication.*
 import com.example.myapplication.bd.Elements
 import com.example.myapplication.enums.Material
-import com.example.myapplication.enums.Material.BAMBOO
+import com.example.myapplication.enums.Material.*
 import com.example.myapplication.models.Coordinate
 
 var numberBamboo = 0
@@ -68,17 +68,17 @@ class ElementsDrawer(private val container: FrameLayout){
     private fun drawView(coordinateX: Int, coordinateY: Int){
         removeUnwantedInstances()
         val view = ImageView(container.context)
-            val layoutParams = FrameLayout.LayoutParams(CELL_SIZE * sizeElements, CELL_SIZE * sizeElements)
+        val layoutParams = FrameLayout.LayoutParams(CELL_SIZE * sizeElements, CELL_SIZE * sizeElements)
         layoutParams.topMargin = coordinateX
         layoutParams.leftMargin= coordinateY
         val viewId = View.generateViewId()
         view.id = viewId
         view.layoutParams = layoutParams
         when(currentMaterial){
-            Material.STONE -> view.setImageResource(R.drawable.stone)
-            Material.TREE -> view.setImageResource(R.drawable.tree)
+            STONE -> view.setImageResource(R.drawable.stone)
+            TREE -> view.setImageResource(R.drawable.tree)
             BAMBOO -> view.setImageResource(R.drawable.bamboo)
-            Material.PANDA -> {
+            PANDA -> {
                 view.setImageResource(R.drawable.panda_top)
                 view.rotation = 180f
                 myPanda = view

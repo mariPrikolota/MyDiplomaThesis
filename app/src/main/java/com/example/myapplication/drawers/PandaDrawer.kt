@@ -130,10 +130,10 @@ class PandaDrawer(private val container: FrameLayout,val list: OnStopGameClickLi
                     container.addView(myPanda)
                 } else {
                     list.stopGame(true)
-//                    (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin =
-//                        currentCoordinate.top
-//                    (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin =
-//                        currentCoordinate.left
+                    (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin =
+                        currentCoordinate.top
+                    (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin =
+                        currentCoordinate.left
                 }
     }
 
@@ -143,7 +143,7 @@ class PandaDrawer(private val container: FrameLayout,val list: OnStopGameClickLi
             val element = getElementByCoordinate(it, elementsOnContainer)
             removeBambooContainer(element, elementsOnContainer)
         }
-        numberBamboo--
+        numberBamboo -= 1
     }
 
     private fun removeBambooContainer(element: Elements?, elementsOnContainer: MutableList<Elements>) {

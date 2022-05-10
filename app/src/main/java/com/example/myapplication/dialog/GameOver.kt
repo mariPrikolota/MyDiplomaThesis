@@ -9,12 +9,13 @@ import com.example.myapplication.R
 import com.example.myapplication.drawers.numberBamboo
 import kotlinx.android.synthetic.main.game_over_dialog.*
 
-interface OnGameOverDialogButtonClickListener{
+interface OnGameOverDialogButtonClickListener {
     fun onGameAgainClickListener(boolean: Boolean)
     fun onFinishGame(boolean: Boolean)
+//    fun startLevelPlus(boolean: Boolean)
 }
 
-class GameOver(listener: OnGameOverDialogButtonClickListener): DialogFragment(){
+class GameOver(listener: OnGameOverDialogButtonClickListener): DialogFragment() {
     private val againClickListener = listener
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -36,7 +37,6 @@ class GameOver(listener: OnGameOverDialogButtonClickListener): DialogFragment(){
              numberBamboo = 0
          }
          playAlt.setOnClickListener {
-
              numberBamboo = 0
          }
          icHome.setOnClickListener {
@@ -47,10 +47,12 @@ class GameOver(listener: OnGameOverDialogButtonClickListener): DialogFragment(){
     }
 
     private fun restartOrHome(){
-        if (numberBamboo != 0){
-            playAlt.visibility = View.GONE
-        }else{
+        if (numberBamboo == 0){
             playAlt.visibility = View.VISIBLE
+            happy.visibility =  View.VISIBLE
+        }else{
+            playAlt.visibility = View.GONE
+            happy.visibility =  View.GONE
         }
     }
 }

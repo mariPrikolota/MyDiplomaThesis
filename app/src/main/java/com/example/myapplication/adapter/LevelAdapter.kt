@@ -16,10 +16,9 @@ interface OnOpenDialogClickListener{
     fun onOpenDialog(int: Int)
 }
 
-class LevelAdapter(listArray: List<Level>, context: Context, list: OnOpenDialogClickListener): RecyclerView.Adapter<LevelAdapter.ViewHolderGuide>(){
+class LevelAdapter(listArray: List<Level>, context: Context, val list: OnOpenDialogClickListener): RecyclerView.Adapter<LevelAdapter.ViewHolderGuide>(){
     private var events = listArray
     private var appContext = context
-    private val againLongClickListener = list
 
     class ViewHolderGuide (view: View) : RecyclerView.ViewHolder(view) {
         private val numberLevel = view.findViewById<TextView>(R.id.numberLever)
@@ -41,12 +40,11 @@ class LevelAdapter(listArray: List<Level>, context: Context, list: OnOpenDialogC
     }
 
     override fun onBindViewHolder(holder: ViewHolderGuide, position: Int) {
-        val pos = events[position]
         holder.itemView.setOnLongClickListener {
-            againLongClickListener.onOpenDialog(pos.id)
+            list.onOpenDialog(events[position].id)
             return@setOnLongClickListener true
         }
-        holder.bind(pos,appContext)
+        holder.bind(events[position],appContext)
     }
 
     override fun getItemCount(): Int {

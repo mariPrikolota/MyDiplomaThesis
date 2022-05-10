@@ -11,10 +11,7 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.bd.Level
 import com.example.myapplication.bd.RoomAppDB
-import com.example.myapplication.dialog.GameOver
-import com.example.myapplication.dialog.OnGameOverDialogButtonClickListener
-import com.example.myapplication.dialog.OnSizeElementsButton
-import com.example.myapplication.dialog.SizeMaterial
+import com.example.myapplication.dialog.*
 import com.example.myapplication.drawers.*
 import com.example.myapplication.enums.Direction.*
 import com.example.myapplication.enums.Material
@@ -65,7 +62,7 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         textLevel?.let { openLevel() }
         functionClick()
         onKeyButton()
-
+        Log.d("tag", numberBamboo.toString())
         container.layoutParams = FrameLayout.LayoutParams(MAX_VERTICAL, MAX_HORIZONTAL)
         container.setOnTouchListener { _, motionEvent ->
             elementDrawer.onTouchContainer(motionEvent.x, motionEvent.y)
@@ -175,7 +172,6 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         startGame.setOnClickListener {
             goingOnList(stepOnContainer)
             stepContainer.visibility = View.GONE
-            Log.d("tag", numberBamboo.toString())
         }
 
         emptyView.setOnClickListener { elementDrawer.currentMaterial = Material.EMPTY }
@@ -186,12 +182,24 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         setting.setOnClickListener { SizeMaterial(this).show(supportFragmentManager, "SizeMaterial") }
 
         saveView.setOnClickListener {
-            val level = levelSave.saveLevel(elementDrawer.elementsOnContainer)
-            val listEventDao = RoomAppDB.getAppDB(application)?.levelDao()
-            listEventDao?.insertLevel(Level(id = 0, elementList = level))
-            openLevelActivity()
-
+            if (checkPandaOnContainer()){
+                val level = levelSave.saveLevel(elementDrawer.elementsOnContainer)
+                val listEventDao = RoomAppDB.getAppDB(application)?.levelDao()
+                listEventDao?.insertLevel(Level(id = 0, elementList = level))
+                openLevelActivity()
+                }else{
+                    ForgotPanda().show(supportFragmentManager, "ForgotPanda")
+                }
         }
+    }
+
+    private fun checkPandaOnContainer(): Boolean{
+        for (elem in elementDrawer.elementsOnContainer) {
+            if (elem.material == Material.PANDA) {
+               return true
+            }
+        }
+        return false
     }
 
     private fun openLevel() {
@@ -227,9 +235,6 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
     private fun goingOnList(steps: List<Step>) {
         Thread(Runnable {
             for (stepOnList in steps) {
-                if (stopGame){
-                    break
-                }
                 Thread.sleep(300)
                 runOnUiThread {
                     when (stepOnList.step) {
@@ -256,8 +261,12 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
                         )
                     }
                 }
+            if (stopGame) {
+                break
+            }
             }
             Thread.sleep(300)
+            Log.d("tag", numberBamboo.toString())
             if (!stopGame) {
                 GameOver(this).show(supportFragmentManager, "GameOver")
             }

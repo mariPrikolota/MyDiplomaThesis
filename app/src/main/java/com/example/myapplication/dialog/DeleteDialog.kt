@@ -14,7 +14,6 @@ interface OnDeleteLevelClickListener{
 
 class DeleteDialog: DialogFragment(){
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
         return inflater.inflate(R.layout.delete_dialog, container, false)
