@@ -36,6 +36,7 @@ class GameOver(listener: OnGameOverDialogButtonClickListener): DialogFragment(){
              numberBamboo = 0
          }
          playAlt.setOnClickListener {
+
              numberBamboo = 0
          }
          icHome.setOnClickListener {

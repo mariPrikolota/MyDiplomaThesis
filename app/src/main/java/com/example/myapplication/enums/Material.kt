@@ -6,5 +6,5 @@ enum class Material(val elementsAmountOnScreen: Int, val pandaCanGoThrough: Bool
     TREE(0,true),
     BAMBOO(0,true),
     PANDA(1,true),
-    NULL(1,false)
+    NULL(1,true)
 }

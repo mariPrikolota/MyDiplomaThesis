@@ -3,6 +3,7 @@ package com.example.myapplication.drawers
 import android.app.Activity
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.ImageView
 import com.example.myapplication.*
 import com.example.myapplication.bd.Elements
 import com.example.myapplication.enums.Direction
@@ -14,14 +15,14 @@ interface OnStopGameClickListener{
     fun stopGame(boolean: Boolean)
 }
 
-class PandaDrawer(private val container: FrameLayout){ //val list: OnStopGameClickListener
+class PandaDrawer(private val container: FrameLayout,val list: OnStopGameClickListener){ //val list: OnStopGameClickListener
 
     private val activity = container.context as Activity
 
     private fun  getElementByCoordinate(coordinate: Coordinate, elementsOnContainer: List<Elements>) =
         elementsOnContainer.firstOrNull {it.coordinateX == coordinate.top && it.coordinateY == coordinate.left }
 
-    fun move(myPanda: View, direction: Direction, elementsContainer: MutableList<Elements>) {
+    fun move(myPanda: View, direction: Direction, elementsContainer: MutableList<Elements>, elementsOnContainer: List<Elements>) {
         val layoutParams = myPanda.layoutParams as FrameLayout.LayoutParams
         val currentCoordinate = Coordinate(layoutParams.topMargin, layoutParams.leftMargin)
         myPanda.setBackgroundResource(R.drawable.panda_top)
@@ -118,23 +119,21 @@ class PandaDrawer(private val container: FrameLayout){ //val list: OnStopGameCli
                         )
                     )
                 }
-
             }
             val nextCoordinate = Coordinate(layoutParams.topMargin, layoutParams.leftMargin)
                 if (checkPandaCanMoveThroughBorder(
                         nextCoordinate,
                         myPanda
-                    ) && checkPandaCanMoveThroughMaterial(nextCoordinate, elementsContainer)
+                    ) && checkPandaCanMoveThroughMaterial(nextCoordinate, elementsOnContainer)
                 ) {
-
                     container.removeView(myPanda)
                     container.addView(myPanda)
                 } else {
-                    (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin =
-                        currentCoordinate.top
-                    (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin =
-                        currentCoordinate.left
- //                   list.stopGame(true)
+                    list.stopGame(true)
+//                    (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin =
+//                        currentCoordinate.top
+//                    (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin =
+//                        currentCoordinate.left
                 }
     }
 
@@ -151,25 +150,24 @@ class PandaDrawer(private val container: FrameLayout){ //val list: OnStopGameCli
         if (element != null){
             if (element.material == Material.BAMBOO){
                 removeElement(element)
-                elementsOnContainer.remove(element)
             }
         }
     }
 
     private fun removeElement(element: Elements) {
         activity.runOnUiThread {
+            val view = ImageView(container.context)
+            val layoutParams = FrameLayout.LayoutParams(CELL_SIZE * sizeElements, CELL_SIZE * sizeElements)
+            view.layoutParams = layoutParams
+            view.setImageResource(R.drawable.tree)
+            layoutParams.topMargin = element.coordinateX
+            layoutParams.leftMargin= element.coordinateY
+            container.addView(view)
             container.removeView(activity.findViewById(element.viewId))
         }
     }
 ////////////
 
-
-    private fun checkPandaCanMoveThroughStone(element: Elements?): Boolean {
-        if (element != null && element.material == Material.STONE){
-           return false
-        }
-        return false
-    }
 
     private fun checkPandaCanMoveThroughMaterial(coordinate: Coordinate, elementsOnContainer: List<Elements>):Boolean{
         getPandaCoordinates(coordinate).forEach {

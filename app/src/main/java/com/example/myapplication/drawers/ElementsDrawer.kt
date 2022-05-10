@@ -12,7 +12,7 @@ import com.example.myapplication.models.Coordinate
 
 var numberBamboo = 0
 
-class ElementsDrawer(val container: FrameLayout){
+class ElementsDrawer(private val container: FrameLayout){
     var currentMaterial = Material.EMPTY
     val elementsOnContainer = mutableListOf<Elements>()
     var myPanda : ImageView? = null
@@ -74,7 +74,6 @@ class ElementsDrawer(val container: FrameLayout){
         val viewId = View.generateViewId()
         view.id = viewId
         view.layoutParams = layoutParams
-
         when(currentMaterial){
             Material.STONE -> view.setImageResource(R.drawable.stone)
             Material.TREE -> view.setImageResource(R.drawable.tree)

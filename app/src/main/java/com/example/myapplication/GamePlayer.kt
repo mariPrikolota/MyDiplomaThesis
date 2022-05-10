@@ -29,7 +29,7 @@ const val MAX_VERTICAL = VERTICAL_CELL_AMOUNT * CELL_SIZE
 const val MAX_HORIZONTAL = HORIZONTAL_CELL_AMOUNT * CELL_SIZE
 var sizeElements = 2
 
-class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSizeElementsButton{ //, View.OnClickListener , OnStopGameClickListener
+class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSizeElementsButton, OnStopGameClickListener{ //, View.OnClickListener , OnStopGameClickListener
     private lateinit var myPanda: ImageView
     private var editMode = false
     var againMode = false
@@ -41,7 +41,7 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
     }
 
     private  val pandaDrawer by lazy {
-        PandaDrawer(container)
+        PandaDrawer(container, this)
     }
     private val levelSave by lazy {
         LevelSave(this)
@@ -227,35 +227,40 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
     private fun goingOnList(steps: List<Step>) {
         Thread(Runnable {
             for (stepOnList in steps) {
-                Thread.sleep(300, 1)
+                if (stopGame){
+                    break
+                }
+                Thread.sleep(300)
                 runOnUiThread {
                     when (stepOnList.step) {
                         UP -> pandaDrawer.move(
-                            myPanda, UP, elementDrawer.elementsOnContainer
+                            myPanda, UP, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer
                         )
                         LEFT -> pandaDrawer.move(
-                            myPanda, LEFT, elementDrawer.elementsOnContainer
+                            myPanda, LEFT, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer
                         )
                         RIGHT -> pandaDrawer.move(
-                            myPanda, RIGHT, elementDrawer.elementsOnContainer
+                            myPanda, RIGHT, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer
                         )
                         JUMP -> pandaDrawer.move(
-                            myPanda, JUMP, elementDrawer.elementsOnContainer
+                            myPanda, JUMP, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer
                         )
                         CORNER_LEFT -> pandaDrawer.move(
-                            myPanda, CORNER_LEFT, elementDrawer.elementsOnContainer
+                            myPanda, CORNER_LEFT, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer
                         )
                         CORNER_RIGHT ->  pandaDrawer.move(
-                            myPanda, CORNER_RIGHT, elementDrawer.elementsOnContainer
+                            myPanda, CORNER_RIGHT, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer
                         )
                         EAT -> pandaDrawer.move(
-                            myPanda, EAT, elementDrawer.elementsOnContainer
+                            myPanda, EAT, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer
                         )
                     }
                 }
             }
             Thread.sleep(300)
-            GameOver(this).show(supportFragmentManager, "GameOver")
+            if (!stopGame) {
+                GameOver(this).show(supportFragmentManager, "GameOver")
+            }
         }).start()
     }
 
@@ -271,7 +276,7 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
             stepContainer.visibility = View.GONE
             algorithmsContainer.visibility = View.GONE
         }else{
-            elementDrawer.currentMaterial = Material.NULL
+            elementDrawer.currentMaterial = Material.TREE
             materialContainer.visibility = View.GONE
             stepContainer.visibility = View.VISIBLE
             algorithmsContainer.visibility = View.VISIBLE
@@ -280,12 +285,11 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         editMode = !editMode
     }
 
-//    override fun stopGame(boolean: Boolean) {
-//        stopGame = boolean
-//        Log.d("boo", stopGame.toString())
-//        if (stopGame) {
-//            GameOver(this).show(supportFragmentManager, "GameOver")
-//        }
-//        stopGame = !boolean
-//    }
+    override fun stopGame(boolean: Boolean) {
+        stopGame = boolean
+        Log.d("boo", stopGame.toString())
+        if (stopGame) {
+            GameOver(this).show(supportFragmentManager, "GameOver")
+        }
+    }
 }
