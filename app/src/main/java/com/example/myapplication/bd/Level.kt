@@ -1,6 +1,5 @@
 package com.example.myapplication.bd
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -8,4 +7,10 @@ import androidx.room.PrimaryKey
 data class Level(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
    val elementList: String,
+)
+
+
+data class LevelStudy(
+    val id: Int,
+    val elementList: String,
 )

@@ -17,8 +17,10 @@ class NavigationActivity : AppCompatActivity(){
 
     private fun configureClickPlay(){
         playGame.setOnClickListener {
-            val intent = Intent(this, LevelGame::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, LevelGame::class.java))
+        }
+        studyButton.setOnClickListener {
+            startActivity(Intent(this, LevelStudyGame::class.java))
         }
     }
 }

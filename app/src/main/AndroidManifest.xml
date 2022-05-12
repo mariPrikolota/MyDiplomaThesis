@@ -20,6 +20,7 @@
         </activity>
         <activity android:name=".GamePlayer"/>
         <activity android:name=".LevelGame"/>
+        <activity android:name=".LevelStudyGame"/>
     </application>
 
 </manifest>

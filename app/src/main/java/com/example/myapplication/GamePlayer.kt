@@ -56,10 +56,11 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         super.onCreate(savedInstanceState)
         setContentView(R.layout.game_layout)
         editMode = intent.getBooleanExtra("editMode", false)
-        val textLevel = intent.getStringExtra("level")
+        val idLevel = intent.getStringExtra("idStudyLevel")
         switchEditMode()
-        elementDrawer.drawElementsList(textLevel?.let { levelSave.loadLevel(it) })
-        textLevel?.let { openLevel() }
+        studyLevelGame()
+        LevelStudyGame()
+        stepStudyLevel(intent.getStringExtra("idStudyLevel"))
         functionClick()
         onKeyButton()
         Log.d("tag", numberBamboo.toString())
@@ -74,6 +75,16 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         super.onStop()
         numberStepFunction = true
         deleteList()
+    }
+
+    private fun studyLevelGame(){
+        val textLevel = intent.getStringExtra("level")
+        elementDrawer.drawElementsList(textLevel?.let { levelSave.loadLevel(it) })
+        textLevel?.let { openLevel() }
+
+        val textStudyLevel = intent.getStringExtra("levelStudy")
+        elementDrawer.drawElementsList(textStudyLevel?.let { levelSave.loadLevel(it) })
+        textStudyLevel?.let { openLevel() }
     }
 
     @SuppressLint("ResourceAsColor")
@@ -186,6 +197,7 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
                 val level = levelSave.saveLevel(elementDrawer.elementsOnContainer)
                 val listEventDao = RoomAppDB.getAppDB(application)?.levelDao()
                 listEventDao?.insertLevel(Level(id = 0, elementList = level))
+                Log.d("level", level)
                 openLevelActivity()
                 }else{
                     ForgotPanda().show(supportFragmentManager, "ForgotPanda")
@@ -261,9 +273,9 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
                         )
                     }
                 }
-            if (stopGame) {
-                break
-            }
+                if (stopGame) {
+                    break
+                }
             }
             Thread.sleep(300)
             Log.d("tag", numberBamboo.toString())
@@ -299,6 +311,59 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         Log.d("boo", stopGame.toString())
         if (stopGame) {
             GameOver(this).show(supportFragmentManager, "GameOver")
+        }
+    }
+
+    fun stepStudyLevel(level: String?) {
+        when(level){
+            "1" -> {
+                leftView.visibility = View.GONE
+                rightView.visibility = View.GONE
+                jumpView.visibility = View.GONE
+                cornerLeftView.visibility = View.GONE
+                cornerRightView.visibility = View.GONE
+                functionMaterialView.visibility = View.GONE
+            }
+            "2" -> {
+                rightView.visibility = View.GONE
+                jumpView.visibility = View.GONE
+                cornerLeftView.visibility = View.GONE
+                cornerRightView.visibility = View.GONE
+                functionMaterialView.visibility = View.GONE
+            }
+            "3" -> {
+                leftView.visibility = View.GONE
+                rightView.visibility = View.GONE
+                cornerLeftView.visibility = View.GONE
+                cornerRightView.visibility = View.GONE
+                functionMaterialView.visibility = View.GONE
+            }
+            "4" -> {
+                leftView.visibility = View.GONE
+                rightView.visibility = View.GONE
+                jumpView.visibility = View.GONE
+                cornerLeftView.visibility = View.GONE
+                functionMaterialView.visibility = View.GONE
+            }
+            "5" -> {
+                leftView.visibility = View.GONE
+                rightView.visibility = View.GONE
+                jumpView.visibility = View.GONE
+                cornerRightView.visibility = View.GONE
+                functionMaterialView.visibility = View.GONE
+            }
+            "6" -> {
+                rightView.visibility = View.GONE
+                jumpView.visibility = View.GONE
+                cornerRightView.visibility = View.GONE
+                functionMaterialView.visibility = View.GONE
+            }
+            "7" -> {
+                rightView.visibility = View.GONE
+                jumpView.visibility = View.GONE
+                cornerRightView.visibility = View.GONE
+                functionMaterialView.visibility = View.GONE
+            }
         }
     }
 }

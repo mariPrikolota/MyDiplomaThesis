@@ -7,12 +7,13 @@
     android:background="@drawable/home_bamboo">
 
 
+
     <TextView
         android:id="@+id/playGame"
         android:layout_width="300dp"
         android:layout_height="120dp"
         android:layout_marginStart="100dp"
-        android:layout_marginBottom="300dp"
+        android:layout_marginBottom="250dp"
         android:background="@drawable/algorithms_color"
         android:text="Начать игру"
         android:gravity="center"
@@ -20,5 +21,15 @@
         android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/studyButton"
+        android:layout_width="300dp"
+        android:layout_height="120dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/algorithms_color"
+        android:src="@drawable/panda_study"
+        app:layout_constraintBottom_toTopOf="@+id/playGame"
+        app:layout_constraintEnd_toEndOf="@+id/playGame" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

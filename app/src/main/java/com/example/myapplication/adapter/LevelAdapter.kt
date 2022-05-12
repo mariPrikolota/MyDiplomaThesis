@@ -16,7 +16,7 @@ interface OnOpenDialogClickListener{
     fun onOpenDialog(int: Int)
 }
 
-class LevelAdapter(listArray: List<Level>, context: Context, val list: OnOpenDialogClickListener): RecyclerView.Adapter<LevelAdapter.ViewHolderGuide>(){
+class LevelAdapter(listArray: List<Level>, context: Context, val list: OnOpenDialogClickListener): RecyclerView.Adapter<LevelAdapter.ViewHolderGuide>() {
     private var events = listArray
     private var appContext = context
 
