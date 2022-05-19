@@ -26,7 +26,7 @@ const val MAX_VERTICAL = VERTICAL_CELL_AMOUNT * CELL_SIZE
 const val MAX_HORIZONTAL = HORIZONTAL_CELL_AMOUNT * CELL_SIZE
 var sizeElements = 2
 
-class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSizeElementsButton, OnStopGameClickListener{ //, View.OnClickListener , OnStopGameClickListener
+class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnStopGameClickListener{ //, View.OnClickListener , OnStopGameClickListener
     private lateinit var myPanda: ImageView
     private var editMode = false
     var againMode = false
@@ -51,16 +51,21 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         StepDrawer(functionOneView, this)
     }
 
+    private val levelDrawer by lazy {
+        LevelDrawer(flameLayout)
+    }
+
+
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.game_layout)
         editMode = intent.getBooleanExtra("editMode", false)
-        val idLevel = intent.getStringExtra("idStudyLevel")
         switchEditMode()
         studyLevelGame()
         LevelStudyGame()
-        stepStudyLevel(intent.getStringExtra("idStudyLevel"))
+        levelDrawer.stepStudyLevel(intent.getStringExtra("idStudyLevel"))
         functionClick()
         onKeyButton()
         Log.d("tag", numberBamboo.toString())
@@ -166,8 +171,6 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
             if(stepsGame){
                 stepDrawer.stepView(FUN)
                 stepOnContainer = (stepOnContainer + stepFunctionContainer).toMutableList()
-
-                Log.d("steps",  stepOnContainer.toString())
             }
         }
 
@@ -190,7 +193,7 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         treeView.setOnClickListener { elementDrawer.currentMaterial = Material.TREE }
         bambooView.setOnClickListener { elementDrawer.currentMaterial = Material.BAMBOO }
         pandaView.setOnClickListener { elementDrawer.currentMaterial = Material.PANDA }
-        setting.setOnClickListener { SizeMaterial(this).show(supportFragmentManager, "SizeMaterial") }
+        setting.setOnClickListener { SizeMaterial().show(supportFragmentManager, "SizeMaterial") }
 
         saveView.setOnClickListener {
             if (checkPandaOnContainer()){
@@ -285,10 +288,6 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         }).start()
     }
 
-    override fun elementsSize(size: Int) {
-        sizeElements = size
-    }
-
     @SuppressLint("ResourceAsColor")
     private fun switchEditMode() {
         if (editMode){
@@ -314,56 +313,56 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSi
         }
     }
 
-    fun stepStudyLevel(level: String?) {
-        when(level){
-            "1" -> {
-                leftView.visibility = View.GONE
-                rightView.visibility = View.GONE
-                jumpView.visibility = View.GONE
-                cornerLeftView.visibility = View.GONE
-                cornerRightView.visibility = View.GONE
-                functionMaterialView.visibility = View.GONE
-            }
-            "2" -> {
-                rightView.visibility = View.GONE
-                jumpView.visibility = View.GONE
-                cornerLeftView.visibility = View.GONE
-                cornerRightView.visibility = View.GONE
-                functionMaterialView.visibility = View.GONE
-            }
-            "3" -> {
-                leftView.visibility = View.GONE
-                rightView.visibility = View.GONE
-                cornerLeftView.visibility = View.GONE
-                cornerRightView.visibility = View.GONE
-                functionMaterialView.visibility = View.GONE
-            }
-            "4" -> {
-                leftView.visibility = View.GONE
-                rightView.visibility = View.GONE
-                jumpView.visibility = View.GONE
-                cornerLeftView.visibility = View.GONE
-                functionMaterialView.visibility = View.GONE
-            }
-            "5" -> {
-                leftView.visibility = View.GONE
-                rightView.visibility = View.GONE
-                jumpView.visibility = View.GONE
-                cornerRightView.visibility = View.GONE
-                functionMaterialView.visibility = View.GONE
-            }
-            "6" -> {
-                rightView.visibility = View.GONE
-                jumpView.visibility = View.GONE
-                cornerRightView.visibility = View.GONE
-                functionMaterialView.visibility = View.GONE
-            }
-            "7" -> {
-                rightView.visibility = View.GONE
-                jumpView.visibility = View.GONE
-                cornerRightView.visibility = View.GONE
-                functionMaterialView.visibility = View.GONE
-            }
-        }
-    }
+//    fun stepStudyLevel(level: String?) {
+//        when(level){
+//            "1" -> {
+//                leftView.visibility = View.GONE
+//                rightView.visibility = View.GONE
+//                jumpView.visibility = View.GONE
+//                cornerLeftView.visibility = View.GONE
+//                cornerRightView.visibility = View.GONE
+//                functionMaterialView.visibility = View.GONE
+//            }
+//            "2" -> {
+//                rightView.visibility = View.GONE
+//                jumpView.visibility = View.GONE
+//                cornerLeftView.visibility = View.GONE
+//                cornerRightView.visibility = View.GONE
+//                functionMaterialView.visibility = View.GONE
+//            }
+//            "3" -> {
+//                leftView.visibility = View.GONE
+//                rightView.visibility = View.GONE
+//                cornerLeftView.visibility = View.GONE
+//                cornerRightView.visibility = View.GONE
+//                functionMaterialView.visibility = View.GONE
+//            }
+//            "4" -> {
+//                leftView.visibility = View.GONE
+//                rightView.visibility = View.GONE
+//                jumpView.visibility = View.GONE
+//                cornerLeftView.visibility = View.GONE
+//                functionMaterialView.visibility = View.GONE
+//            }
+//            "5" -> {
+//                leftView.visibility = View.GONE
+//                rightView.visibility = View.GONE
+//                jumpView.visibility = View.GONE
+//                cornerRightView.visibility = View.GONE
+//                functionMaterialView.visibility = View.GONE
+//            }
+//            "6" -> {
+//                rightView.visibility = View.GONE
+//                jumpView.visibility = View.GONE
+//                cornerRightView.visibility = View.GONE
+//                functionMaterialView.visibility = View.GONE
+//            }
+//            "7" -> {
+//                rightView.visibility = View.GONE
+//                jumpView.visibility = View.GONE
+//                cornerRightView.visibility = View.GONE
+//                functionMaterialView.visibility = View.GONE
+//            }
+//        }
+//    }
 }

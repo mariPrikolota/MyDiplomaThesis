@@ -7,14 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.myapplication.R
+import com.example.myapplication.sizeElements
 import kotlinx.android.synthetic.main.size_material.*
 
-interface OnSizeElementsButton{
-    fun elementsSize(size: Int)
-}
+//interface OnSizeElementsButton{
+//    fun elementsSize(size: Int)
+//}
 
-class SizeMaterial(listener: OnSizeElementsButton): DialogFragment() {
-    private val sizeClickListener = listener
+class SizeMaterial(): DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
@@ -30,14 +30,14 @@ class SizeMaterial(listener: OnSizeElementsButton): DialogFragment() {
     @SuppressLint("ResourceType")
     private fun onClick(){
         viewLittle.setOnClickListener {
-            sizeClickListener.elementsSize(2)
+            sizeElements = 2
             context?.resources?.getColor(R.color.text_subtitle, null)
                 ?.let { it1 -> viewLittle.background.setTint(it1) }
             context?.resources?.getColor(R.color.gray, null)
                 ?.let { it1 -> viewAverage.background.setTint(it1) }
         }
         viewAverage.setOnClickListener {
-            sizeClickListener.elementsSize(3)
+            sizeElements = 3
             context?.resources?.getColor(R.color.text_subtitle, null)
                 ?.let { it1 -> viewAverage.background.setTint(it1) }
             context?.resources?.getColor(R.color.gray, null)

@@ -26,27 +26,13 @@ class StepDrawer(val container: RecyclerView, val context: Context){
         container.adapter = stepAdapter
         val step = ImageView(container.context)
         when(direction){
-            UP -> {
-                stepItem = StepItem(R.drawable.icon_up)
-            }
-            JUMP -> {
-                stepItem = StepItem(R.drawable.jump)
-            }
-            LEFT -> {
-                stepItem = StepItem(R.drawable.left)
-            }
-            RIGHT -> {
-                stepItem = StepItem(R.drawable.right)
-            }
-            CORNER_LEFT -> {
-                stepItem = StepItem(R.drawable.corner_left_jump)
-            }
-            CORNER_RIGHT -> {
-                stepItem = StepItem(R.drawable.corner_right_jump)
-            }
-            EAT -> {
-                stepItem = StepItem(R.drawable.step_eat)
-            }
+            UP -> stepItem = StepItem(R.drawable.icon_up)
+            JUMP -> stepItem = StepItem(R.drawable.jump)
+            LEFT -> stepItem = StepItem(R.drawable.left)
+            RIGHT -> stepItem = StepItem(R.drawable.right)
+            CORNER_LEFT -> stepItem = StepItem(R.drawable.corner_left_jump)
+            CORNER_RIGHT -> stepItem = StepItem(R.drawable.corner_right_jump)
+            EAT -> stepItem = StepItem(R.drawable.step_eat)
             FUN -> stepItem = StepItem(R.drawable.step_function)
         }
          val stepId = View.generateViewId()

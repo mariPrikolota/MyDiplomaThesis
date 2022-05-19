@@ -1,6 +1,7 @@
 package com.example.myapplication.drawers
 
 
+import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -85,7 +86,7 @@ class ElementsDrawer(private val container: FrameLayout){
             }
         }
         container.addView(view)
-        elementsOnContainer.add(Elements(viewId, currentMaterial,coordinateX,coordinateY, sizeElements))
+        elementsOnContainer.add(Elements(viewId, currentMaterial, coordinateX, coordinateY, sizeElements))
     }
 
 

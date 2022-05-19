@@ -13,10 +13,7 @@ class StepAdapter(): RecyclerView.Adapter<StepAdapter.StepHolder>() {
     private val events = ArrayList<StepItem>()
 
     class StepHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val stepView = view.findViewById<ImageView>(R.id.stepView)
-        fun bind(step: StepItem) {
-            stepView.setImageResource(step.stepView)
-        }
+         val stepView: ImageView = view.findViewById(R.id.stepView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StepHolder {
@@ -25,7 +22,7 @@ class StepAdapter(): RecyclerView.Adapter<StepAdapter.StepHolder>() {
     }
 
     override fun onBindViewHolder(holder: StepHolder, position: Int) {
-        holder.bind(events[position])
+        holder.stepView.setImageResource(events[position].stepView)
     }
 
     override fun getItemCount(): Int {

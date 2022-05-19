@@ -141,21 +141,20 @@ class PandaDrawer(private val container: FrameLayout,val list: OnStopGameClickLi
     private fun compareCollection(elementsOnContainer: MutableList<Elements>, coordinateList: List<Coordinate>){
         coordinateList.forEach {
             val element = getElementByCoordinate(it, elementsOnContainer)
-            removeBambooContainer(element, elementsOnContainer)
+            removeElement(element)
         }
         numberBamboo -= 1
     }
 
-    private fun removeBambooContainer(element: Elements?, elementsOnContainer: MutableList<Elements>) {
-        if (element != null){
-            if (element.material == Material.BAMBOO){
-                removeElement(element)
-            }
-        }
-    }
+//    private fun removeBambooContainer(element: Elements?,) {
+//        if (element != null && element.material == Material.BAMBOO){
+//            removeElement(element)
+//        }
+//    }
 
-    private fun removeElement(element: Elements) {
-        activity.runOnUiThread {
+    private fun removeElement(element: Elements?) {
+   //     activity.runOnUiThread {
+        if (element != null && element.material == Material.BAMBOO){
             val view = ImageView(container.context)
             val layoutParams = FrameLayout.LayoutParams(CELL_SIZE * sizeElements, CELL_SIZE * sizeElements)
             view.layoutParams = layoutParams
@@ -165,6 +164,7 @@ class PandaDrawer(private val container: FrameLayout,val list: OnStopGameClickLi
             container.addView(view)
             container.removeView(activity.findViewById(element.viewId))
         }
+   //}
     }
 ////////////
 
