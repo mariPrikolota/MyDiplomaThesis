@@ -13,6 +13,7 @@ import com.example.myapplication.bd.Level
 import com.example.myapplication.bd.RoomAppDB
 import com.example.myapplication.dialog.*
 import com.example.myapplication.drawers.*
+import com.example.myapplication.enums.Direction
 import com.example.myapplication.enums.Direction.*
 import com.example.myapplication.enums.Material
 import com.example.myapplication.level.LevelSave
@@ -55,12 +56,12 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSt
         LevelDrawer(flameLayout)
     }
 
-
-
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.game_layout)
+        SoundManager.context = this
+        SoundManager.gameStart()
         editMode = intent.getBooleanExtra("editMode", false)
         switchEditMode()
         studyLevelGame()
@@ -76,10 +77,11 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSt
         }
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroy() {
+        super.onDestroy()
         numberStepFunction = true
         deleteList()
+        SoundManager.pauseSound()
     }
 
     private fun studyLevelGame(){
@@ -253,27 +255,16 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSt
                 Thread.sleep(300)
                 runOnUiThread {
                     when (stepOnList.step) {
-                        UP -> pandaDrawer.move(
-                            myPanda, UP, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer
-                        )
-                        LEFT -> pandaDrawer.move(
-                            myPanda, LEFT, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer
-                        )
-                        RIGHT -> pandaDrawer.move(
-                            myPanda, RIGHT, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer
-                        )
-                        JUMP -> pandaDrawer.move(
-                            myPanda, JUMP, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer
-                        )
-                        CORNER_LEFT -> pandaDrawer.move(
-                            myPanda, CORNER_LEFT, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer
-                        )
-                        CORNER_RIGHT ->  pandaDrawer.move(
-                            myPanda, CORNER_RIGHT, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer
-                        )
-                        EAT -> pandaDrawer.move(
-                            myPanda, EAT, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer
-                        )
+                        UP -> {
+                            SoundManager.stepSound()
+                            onPandaStep(UP)
+                        }
+                        LEFT -> onPandaStep(LEFT)
+                        RIGHT -> onPandaStep(RIGHT)
+                        JUMP -> onPandaStep(JUMP)
+                        CORNER_LEFT -> onPandaStep(CORNER_LEFT)
+                        CORNER_RIGHT ->  onPandaStep(CORNER_RIGHT)
+                        EAT -> onPandaStep(EAT)
                     }
                 }
                 if (stopGame) {
@@ -286,6 +277,10 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSt
                 GameOver(this).show(supportFragmentManager, "GameOver")
             }
         }).start()
+    }
+
+    private fun onPandaStep(direction: Direction) {
+        pandaDrawer.move(myPanda, direction, elementDrawer.elementsOnContainer, elementDrawer.elementsOnContainer)
     }
 
     @SuppressLint("ResourceAsColor")
@@ -312,57 +307,4 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSt
             GameOver(this).show(supportFragmentManager, "GameOver")
         }
     }
-
-//    fun stepStudyLevel(level: String?) {
-//        when(level){
-//            "1" -> {
-//                leftView.visibility = View.GONE
-//                rightView.visibility = View.GONE
-//                jumpView.visibility = View.GONE
-//                cornerLeftView.visibility = View.GONE
-//                cornerRightView.visibility = View.GONE
-//                functionMaterialView.visibility = View.GONE
-//            }
-//            "2" -> {
-//                rightView.visibility = View.GONE
-//                jumpView.visibility = View.GONE
-//                cornerLeftView.visibility = View.GONE
-//                cornerRightView.visibility = View.GONE
-//                functionMaterialView.visibility = View.GONE
-//            }
-//            "3" -> {
-//                leftView.visibility = View.GONE
-//                rightView.visibility = View.GONE
-//                cornerLeftView.visibility = View.GONE
-//                cornerRightView.visibility = View.GONE
-//                functionMaterialView.visibility = View.GONE
-//            }
-//            "4" -> {
-//                leftView.visibility = View.GONE
-//                rightView.visibility = View.GONE
-//                jumpView.visibility = View.GONE
-//                cornerLeftView.visibility = View.GONE
-//                functionMaterialView.visibility = View.GONE
-//            }
-//            "5" -> {
-//                leftView.visibility = View.GONE
-//                rightView.visibility = View.GONE
-//                jumpView.visibility = View.GONE
-//                cornerRightView.visibility = View.GONE
-//                functionMaterialView.visibility = View.GONE
-//            }
-//            "6" -> {
-//                rightView.visibility = View.GONE
-//                jumpView.visibility = View.GONE
-//                cornerRightView.visibility = View.GONE
-//                functionMaterialView.visibility = View.GONE
-//            }
-//            "7" -> {
-//                rightView.visibility = View.GONE
-//                jumpView.visibility = View.GONE
-//                cornerRightView.visibility = View.GONE
-//                functionMaterialView.visibility = View.GONE
-//            }
-//        }
-//    }
 }

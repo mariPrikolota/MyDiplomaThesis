@@ -54,7 +54,7 @@ class LevelDrawer(private val container: FrameLayout) {
                 container.functionOne.visibility = View.GONE
             }
             "6" -> {
-                container.rightView.visibility = View.GONE
+                container.leftView.visibility = View.GONE
                 container.jumpView.visibility = View.GONE
                 container.cornerRightView.visibility = View.GONE
                 container.functionMaterialView.visibility = View.GONE
