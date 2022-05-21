@@ -3,6 +3,7 @@ package com.example.myapplication
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -56,13 +57,16 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSt
         LevelDrawer(flameLayout)
     }
 
+    private val soundManager by lazy {
+        SoundManager(this)
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.game_layout)
-        SoundManager.context = this
-        SoundManager.gameStart()
         editMode = intent.getBooleanExtra("editMode", false)
+        soundManager.soundStart()
         switchEditMode()
         studyLevelGame()
         LevelStudyGame()
@@ -77,11 +81,12 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSt
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onPause() {
+        super.onPause()
         numberStepFunction = true
         deleteList()
-        SoundManager.pauseSound()
+        numberBamboo = 0
+        soundManager.soundStop()
     }
 
     private fun studyLevelGame(){
@@ -117,6 +122,7 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSt
     private fun deleteList() {
         stepOnContainer.clear()
         stepFunctionContainer.clear()
+
     }
 
     private fun onKeyButton() {
@@ -256,7 +262,6 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSt
                 runOnUiThread {
                     when (stepOnList.step) {
                         UP -> {
-                            SoundManager.stepSound()
                             onPandaStep(UP)
                         }
                         LEFT -> onPandaStep(LEFT)

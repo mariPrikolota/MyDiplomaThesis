@@ -5,13 +5,10 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.GamePlayer
 import com.example.myapplication.R
-import com.example.myapplication.SoundManager
-import com.example.myapplication.bd.Level
 import com.example.myapplication.bd.LevelStudy
 
 class LevelStudyAdapter( var listArray: List<LevelStudy>, var context: Context): RecyclerView.Adapter<LevelStudyAdapter.ViewHolderStudy>() {
