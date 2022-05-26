@@ -6,13 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.myapplication.R
+import com.example.myapplication.bd.LevelStudy
 import com.example.myapplication.drawers.numberBamboo
 import kotlinx.android.synthetic.main.game_over_dialog.*
 
 interface OnGameOverDialogButtonClickListener {
     fun onGameAgainClickListener(boolean: Boolean)
     fun onFinishGame(boolean: Boolean)
-//    fun startLevelPlus(boolean: Boolean)
+    fun startLevelPlus(boolean: Boolean)
 }
 
 class GameOver(listener: OnGameOverDialogButtonClickListener): DialogFragment() {
@@ -30,13 +31,14 @@ class GameOver(listener: OnGameOverDialogButtonClickListener): DialogFragment() 
         onClick()
     }
 
-     private fun onClick(){
+     private fun onClick() {
          again.setOnClickListener {
              againClickListener.onGameAgainClickListener(true)
              dialog?.hide()
              numberBamboo = 0
          }
          playAlt.setOnClickListener {
+             againClickListener.startLevelPlus(true)
              numberBamboo = 0
          }
          icHome.setOnClickListener {

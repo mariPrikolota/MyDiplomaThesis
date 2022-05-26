@@ -22,12 +22,12 @@ class LevelAdapter(listArray: List<Level>, context: Context, val list: OnOpenDia
 
     class ViewHolderGuide (view: View) : RecyclerView.ViewHolder(view) {
         private val numberLevel = view.findViewById<TextView>(R.id.numberLever)
-        private val colorLevel = view.findViewById<ImageView>(R.id.imageView)
         fun bind(levelEvent: Level, context: Context) {
             numberLevel.text = levelEvent.id.toString()
             itemView.setOnClickListener {
                 val intent = Intent(context, GamePlayer::class.java).apply {
-                   putExtra("level", levelEvent.elementList)
+                    putExtra("level", levelEvent.elementList)
+                    putExtra("idLevel", levelEvent.id.toString())
                 }
                 context.startActivity(intent)
             }

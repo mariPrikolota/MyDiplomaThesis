@@ -10,13 +10,14 @@ import kotlinx.android.synthetic.main.game_layout.*
 import kotlinx.android.synthetic.main.level_study_game.*
 
 class LevelStudyGame: AppCompatActivity() {
+    val list = ArrayList<LevelStudy>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.level_study_game)
         onClick()
 
-        val list = ArrayList<LevelStudy>()
         list.addAll(filArray(resources.getStringArray(R.array.level)))
         recyclerViewStudyLevel.hasFixedSize()
         recyclerViewStudyLevel.layoutManager = GridLayoutManager(this, 5)

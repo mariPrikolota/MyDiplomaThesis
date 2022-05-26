@@ -29,7 +29,7 @@ class LevelStudyAdapter( var listArray: List<LevelStudy>, var context: Context):
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderStudy {
         val inflater = LayoutInflater.from(context)
-        return LevelStudyAdapter.ViewHolderStudy(inflater.inflate(R.layout.level_shablon, parent, false))
+        return ViewHolderStudy(inflater.inflate(R.layout.level_shablon, parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolderStudy, position: Int) {

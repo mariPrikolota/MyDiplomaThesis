@@ -14,8 +14,7 @@ class SoundManager(context: Context) {
     private fun gameSound(){
         gameSoundFirst.isLooping = true
         gameSoundSecond.isLooping = true
-        gameSoundFirst.setNextMediaPlayer(gameSoundSecond)
-        gameSoundSecond.setNextMediaPlayer(gameSoundFirst)
+
     }
 
     fun soundStart(){

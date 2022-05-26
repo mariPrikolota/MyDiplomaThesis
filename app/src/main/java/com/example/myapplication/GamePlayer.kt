@@ -217,9 +217,13 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSt
     }
 
     private fun checkPandaOnContainer(): Boolean{
+        var panda = 0
         for (elem in elementDrawer.elementsOnContainer) {
-            if (elem.material == Material.PANDA) {
-               return true
+             if (elem.material == Material.PANDA) panda += 1
+            if (elem.material == Material.BAMBOO){
+                if (panda == 1){
+                    return true
+                }
             }
         }
         return false
@@ -253,6 +257,13 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSt
         }
         againMode = !boolean
 
+    }
+
+    override fun startLevelPlus(boolean: Boolean) {
+        againMode = boolean
+        if (againMode){
+            finish()
+        }
     }
 
     private fun goingOnList(steps: List<Step>) {
