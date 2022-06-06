@@ -12,7 +12,8 @@ interface OnDeleteLevelClickListener{
     fun onDeleteLevel(boolean: Boolean)
 }
 
-class DeleteDialog: DialogFragment(){
+class DeleteDialog(listener:OnDeleteLevelClickListener): DialogFragment(){
+    private var list = listener
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
@@ -27,6 +28,7 @@ class DeleteDialog: DialogFragment(){
 
     private fun onClick(){
         deleteLevel.setOnClickListener {
+            list.onDeleteLevel(true)
             dialog?.hide()
         }
         hideDialog.setOnClickListener {

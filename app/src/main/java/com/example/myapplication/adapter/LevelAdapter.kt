@@ -23,7 +23,7 @@ class LevelAdapter(listArray: List<Level>, context: Context, val list: OnOpenDia
     class ViewHolderGuide (view: View) : RecyclerView.ViewHolder(view) {
         private val numberLevel = view.findViewById<TextView>(R.id.numberLever)
         fun bind(levelEvent: Level, context: Context) {
-            numberLevel.text = levelEvent.id.toString()
+          //  numberLevel.text = levelEvent.id.toString()
             itemView.setOnClickListener {
                 val intent = Intent(context, GamePlayer::class.java).apply {
                     putExtra("level", levelEvent.elementList)

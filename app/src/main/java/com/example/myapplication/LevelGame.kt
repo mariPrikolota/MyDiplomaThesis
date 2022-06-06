@@ -7,14 +7,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myapplication.adapter.LevelAdapter
 import com.example.myapplication.adapter.OnOpenDialogClickListener
+import com.example.myapplication.dialog.OnDeleteLevelClickListener
 import com.example.myapplication.bd.Level
 import com.example.myapplication.bd.RoomAppDB
 import com.example.myapplication.dialog.DeleteDialog
 import kotlinx.android.synthetic.main.level_layout.*
 
-class LevelGame:  AppCompatActivity(), OnOpenDialogClickListener {
-
+class LevelGame:  AppCompatActivity(), OnOpenDialogClickListener, OnDeleteLevelClickListener {
     private var level: List<Level>? = null
+    var numberLevel: Int? = null
+    
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +38,8 @@ class LevelGame:  AppCompatActivity(), OnOpenDialogClickListener {
     }
 
     override fun onOpenDialog(int: Int) {
-        DeleteDialog().show(supportFragmentManager, "DeleteDialog")
+        DeleteDialog(this).show(supportFragmentManager, "DeleteDialog")
+        numberLevel = int
     }
 
     private fun onClick(){
@@ -46,6 +49,14 @@ class LevelGame:  AppCompatActivity(), OnOpenDialogClickListener {
             val intent = Intent(this, GamePlayer::class.java)
             intent.putExtra("editMode", true)
             startActivity(intent)
+        }
+    }
+    override fun onDeleteLevel(boolean: Boolean) {
+        val list1 =  RoomAppDB.getAppDB(this)?.levelDao()
+        if (boolean){
+            if(numberLevel != null) {
+                list1?.deleteLevel(numberLevel!!)
+            }
         }
     }
 }
