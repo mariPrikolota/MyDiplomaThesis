@@ -16,7 +16,8 @@ import kotlinx.android.synthetic.main.level_layout.*
 class LevelGame:  AppCompatActivity(), OnOpenDialogClickListener, OnDeleteLevelClickListener {
     private var level: List<Level>? = null
     var numberLevel: Int? = null
-    
+
+
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {

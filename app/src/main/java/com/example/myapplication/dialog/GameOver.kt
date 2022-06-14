@@ -13,7 +13,6 @@ import kotlinx.android.synthetic.main.game_over_dialog.*
 interface OnGameOverDialogButtonClickListener {
     fun onGameAgainClickListener(boolean: Boolean)
     fun onFinishGame(boolean: Boolean)
-    fun startLevelPlus(boolean: Boolean)
 }
 
 class GameOver(listener: OnGameOverDialogButtonClickListener): DialogFragment() {
@@ -37,10 +36,6 @@ class GameOver(listener: OnGameOverDialogButtonClickListener): DialogFragment() 
              dialog?.hide()
              numberBamboo = 0
          }
-         playAlt.setOnClickListener {
-             againClickListener.startLevelPlus(true)
-             numberBamboo = 0
-         }
          icHome.setOnClickListener {
              againClickListener.onFinishGame(true)
              dialog?.hide()
@@ -50,11 +45,11 @@ class GameOver(listener: OnGameOverDialogButtonClickListener): DialogFragment() 
 
     private fun restartOrHome(){
         if (numberBamboo == 0){
-            playAlt.visibility = View.VISIBLE
-            happy.visibility =  View.VISIBLE
+            happy.text = "Вы выйграли"
+            finishGameImage.setImageResource(R.drawable.game_over)
         }else{
-            playAlt.visibility = View.GONE
-            happy.visibility =  View.GONE
+            happy.text = "Вы не прошли"
+            finishGameImage.setImageResource(R.drawable.panda_forget)
         }
     }
 }

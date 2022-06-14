@@ -33,15 +33,15 @@
         <entry key="..\:/MyApplication/app/src/main/res/layout/game_layout.xml" value="0.22" />
         <entry key="..\:/MyApplication/app/src/main/res/layout/game_over_dialog.xml" value="0.18633879781420765" />
         <entry key="..\:/MyApplication/app/src/main/res/layout/game_over_layout.xml" value="0.138671875" />
-        <entry key="..\:/MyApplication/app/src/main/res/layout/home_layout.xml" value="0.22" />
+        <entry key="..\:/MyApplication/app/src/main/res/layout/home_layout.xml" value="0.12" />
         <entry key="..\:/MyApplication/app/src/main/res/layout/level_layout.xml" value="0.13" />
-        <entry key="..\:/MyApplication/app/src/main/res/layout/level_shablon.xml" value="0.2" />
+        <entry key="..\:/MyApplication/app/src/main/res/layout/level_shablon.xml" value="0.5" />
         <entry key="..\:/MyApplication/app/src/main/res/layout/level_study_game.xml" value="0.12" />
         <entry key="..\:/MyApplication/app/src/main/res/layout/navigation_layout.xml" value="0.16" />
         <entry key="..\:/MyApplication/app/src/main/res/layout/over_layout.xml" value="0.122265625" />
         <entry key="..\:/MyApplication/app/src/main/res/layout/shablon_game_layout.xml" value="0.25" />
         <entry key="..\:/MyApplication/app/src/main/res/layout/size_material.xml" value="0.22" />
-        <entry key="..\:/MyApplication/app/src/main/res/layout/step_shablon.xml" value="0.19296875" />
+        <entry key="..\:/MyApplication/app/src/main/res/layout/step_shablon.xml" value="0.33" />
         <entry key="..\:/MyApplication/app/src/main/res/menu/navigation.xml" value="0.25" />
       </map>
     </option>

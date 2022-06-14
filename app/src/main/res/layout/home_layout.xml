@@ -15,7 +15,7 @@
         android:layout_marginStart="100dp"
         android:layout_marginBottom="250dp"
         android:background="@drawable/algorithms_color"
-        android:text="ВПЕРЕД"
+        android:text="ВПЕРЁД"
         android:gravity="center"
         android:textColor="@color/black"
         android:textSize="30dp"

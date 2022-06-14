@@ -28,15 +28,15 @@ class PandaDrawer(private val container: FrameLayout,val list: OnStopGameClickLi
         myPanda.setBackgroundResource(R.drawable.panda_top)
             when (direction) {
                 UP -> {
-                    when (myPanda.rotation){
+                    when (myPanda.rotation) {
                         0f -> { (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin -= CELL_SIZE * sizeElements }
-                        180f -> {   (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += CELL_SIZE * sizeElements}
-                        270f -> { (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin -= CELL_SIZE * sizeElements}
-                        90f -> {(myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin += CELL_SIZE * sizeElements}
+                        180f -> { (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += CELL_SIZE * sizeElements }
+                        270f -> { (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin -= CELL_SIZE * sizeElements }
+                        90f -> { (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin += CELL_SIZE * sizeElements }
                     }
                 }
                 LEFT -> {
-                    when (myPanda.rotation){
+                    when (myPanda.rotation) {
                         0f -> { myPanda.rotation = 270f }
                         180f ->{ myPanda.rotation = 90f }
                         270f -> { myPanda.rotation = 180f }
@@ -45,23 +45,23 @@ class PandaDrawer(private val container: FrameLayout,val list: OnStopGameClickLi
 
                 }
                 RIGHT -> {
-                    when (myPanda.rotation){
+                    when (myPanda.rotation) {
                         0f -> { myPanda.rotation = 90f }
-                        180f -> { myPanda.rotation = 270f}
-                        270f -> { myPanda.rotation = 0f}
-                        90f -> {myPanda.rotation = 180f}
+                        180f -> { myPanda.rotation = 270f }
+                        270f -> { myPanda.rotation = 0f }
+                        90f -> { myPanda.rotation = 180f }
                     }
                 }
                 JUMP -> {
-                    when (myPanda.rotation){
-                    0f -> { (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin -= CELL_SIZE * sizeElements * 2}
-                    180f -> { (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += CELL_SIZE * sizeElements * 2}
-                    270f -> { (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin -= CELL_SIZE * sizeElements * 2}
-                    90f -> { (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin += CELL_SIZE * sizeElements * 2}
+                    when (myPanda.rotation) {
+                    0f -> { (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin -= CELL_SIZE * sizeElements * 2 }
+                    180f -> { (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin += CELL_SIZE * sizeElements * 2 }
+                    270f -> { (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin -= CELL_SIZE * sizeElements * 2 }
+                    90f -> { (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin += CELL_SIZE * sizeElements * 2 }
                     }
                 }
                 CORNER_LEFT -> {
-                    when (myPanda.rotation){
+                    when (myPanda.rotation) {
                         0f -> {
                             (myPanda.layoutParams as FrameLayout.LayoutParams).topMargin -= CELL_SIZE * sizeElements
                             (myPanda.layoutParams as FrameLayout.LayoutParams).leftMargin -= CELL_SIZE * sizeElements
