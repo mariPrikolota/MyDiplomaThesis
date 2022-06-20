@@ -19,31 +19,31 @@
             {"coordinateX":900,"coordinateY":540,"material":"BAMBOO","viewId":14,"width":3}]</item>
 
         <item>
-            [{"coordinateX":180,"coordinateY":180,"material":"PANDA","viewId":18,"width":3},
-            {"coordinateX":360,"coordinateY":180,"material":"TREE","viewId":19,"width":3},
-            {"coordinateX":540,"coordinateY":180,"material":"STONE","viewId":20,"width":3},
-            {"coordinateX":540,"coordinateY":360,"material":"TREE","viewId":21,"width":3},
-            {"coordinateX":540,"coordinateY":540,"material":"BAMBOO","viewId":22,"width":3}]</item>
+            [{"coordinateX":180,"coordinateY":180,"material":"PANDA","viewId":15,"width":3},
+            {"coordinateX":360,"coordinateY":180,"material":"TREE","viewId":16,"width":3},
+            {"coordinateX":540,"coordinateY":180,"material":"STONE","viewId":17,"width":3},
+            {"coordinateX":540,"coordinateY":360,"material":"TREE","viewId":18,"width":3},
+            {"coordinateX":540,"coordinateY":540,"material":"BAMBOO","viewId":19,"width":3}]</item>
 
         <item>
-            [{\"coordinateX\":360,\"coordinateY\":720,\"material\":\"PANDA\",\"viewId\":28,\"width\":3},
-            {\"coordinateX\":540,\"coordinateY\":720,\"material\":\"TREE\",\"viewId\":29,\"width\":3},
-            {\"coordinateX\":720,\"coordinateY\":720,\"material\":\"STONE\",\"viewId\":30,\"width\":3},
-            {\"coordinateX\":720,\"coordinateY\":540,\"material\":\"TREE\",\"viewId\":31,\"width\":3},
-            {\"coordinateX\":720,\"coordinateY\":360,\"material\":\"BAMBOO\",\"viewId\":32,\"width\":3}]</item>
+            [{\"coordinateX\":360,\"coordinateY\":720,\"material\":\"PANDA\",\"viewId\":20,\"width\":3},
+            {\"coordinateX\":540,\"coordinateY\":720,\"material\":\"TREE\",\"viewId\":21,\"width\":3},
+            {\"coordinateX\":720,\"coordinateY\":720,\"material\":\"STONE\",\"viewId\":22,\"width\":3},
+            {\"coordinateX\":720,\"coordinateY\":540,\"material\":\"TREE\",\"viewId\":23,\"width\":3},
+            {\"coordinateX\":720,\"coordinateY\":360,\"material\":\"BAMBOO\",\"viewId\":24,\"width\":3}]</item>
 
         <item>
-            [{\"coordinateX\":720,\"coordinateY\":900,\"material\":\"PANDA\",\"viewId\":33,\"width\":3},
-            {\"coordinateX\":720,\"coordinateY\":720,\"material\":\"TREE\",\"viewId\":34,\"width\":3},
-            {\"coordinateX\":540,\"coordinateY\":720,\"material\":\"STONE\",\"viewId\":35,\"width\":3},
-            {\"coordinateX\":540,\"coordinateY\":540,\"material\":\"TREE\",\"viewId\":36,\"width\":3},
-            {\"coordinateX\":540,\"coordinateY\":360,\"material\":\"BAMBOO\",\"viewId\":37,\"width\":3}]</item>
+            [{\"coordinateX\":720,\"coordinateY\":900,\"material\":\"PANDA\",\"viewId\":25,\"width\":3},
+            {\"coordinateX\":720,\"coordinateY\":720,\"material\":\"TREE\",\"viewId\":26,\"width\":3},
+            {\"coordinateX\":540,\"coordinateY\":720,\"material\":\"STONE\",\"viewId\":27,\"width\":3},
+            {\"coordinateX\":540,\"coordinateY\":540,\"material\":\"TREE\",\"viewId\":28,\"width\":3},
+            {\"coordinateX\":540,\"coordinateY\":360,\"material\":\"BAMBOO\",\"viewId\":29,\"width\":3}]</item>
 
         <item>
-            [{\"coordinateX\":540,\"coordinateY\":360,\"material\":\"PANDA\",\"viewId\":39,\"width\":3},
-            {\"coordinateX\":540,\"coordinateY\":540,\"material\":\"TREE\",\"viewId\":40,\"width\":3},
-            {\"coordinateX\":540,\"coordinateY\":720,\"material\":\"STONE\",\"viewId\":41,\"width\":3},
-            {\"coordinateX\":720,\"coordinateY\":720,\"material\":\"TREE\",\"viewId\":42,\"width\":3},
-            {\"coordinateX\":900,\"coordinateY\":720,\"material\":\"BAMBOO\",\"viewId\":43,\"width\":3}]</item>
+            [{\"coordinateX\":540,\"coordinateY\":360,\"material\":\"PANDA\",\"viewId\":30,\"width\":3},
+            {\"coordinateX\":540,\"coordinateY\":540,\"material\":\"TREE\",\"viewId\":31,\"width\":3},
+            {\"coordinateX\":540,\"coordinateY\":720,\"material\":\"STONE\",\"viewId\":32,\"width\":3},
+            {\"coordinateX\":720,\"coordinateY\":720,\"material\":\"TREE\",\"viewId\":33,\"width\":3},
+            {\"coordinateX\":900,\"coordinateY\":720,\"material\":\"BAMBOO\",\"viewId\":34,\"width\":3}]</item>
     </string-array>
 </resources>

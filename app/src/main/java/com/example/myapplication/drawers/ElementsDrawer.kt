@@ -23,7 +23,7 @@ class ElementsDrawer(private val container: FrameLayout){
         val topMargin = y.toInt() - (y.toInt()% (CELL_SIZE * sizeElements))
         val leftMargin = x.toInt() - (x.toInt()% (CELL_SIZE * sizeElements))
         val coordinate = Coordinate(topMargin, leftMargin)
-        if(currentMaterial == Material.EMPTY){
+        if(currentMaterial == EMPTY){
             eraseView(topMargin, leftMargin)
         }else{
             drawOrReplaceView(topMargin, leftMargin)
@@ -87,6 +87,7 @@ class ElementsDrawer(private val container: FrameLayout){
         }
         container.addView(view)
         elementsOnContainer.add(Elements(viewId, currentMaterial, coordinateX, coordinateY, sizeElements))
+
     }
 
 

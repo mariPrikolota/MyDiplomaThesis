@@ -45,7 +45,7 @@ class GameOver(listener: OnGameOverDialogButtonClickListener): DialogFragment() 
 
     private fun restartOrHome(){
         if (numberBamboo == 0){
-            happy.text = "Вы выйграли"
+            happy.text = "Вы выиграли"
             finishGameImage.setImageResource(R.drawable.game_over)
         }else{
             happy.text = "Вы не прошли"

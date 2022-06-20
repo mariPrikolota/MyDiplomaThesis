@@ -69,7 +69,6 @@ class GamePlayer: AppCompatActivity(), OnGameOverDialogButtonClickListener, OnSt
         soundManager.soundStart()
         switchEditMode()
         studyLevelGame()
-        LevelStudyGame()
         levelDrawer.stepStudyLevel(intent.getStringExtra("idStudyLevel"))
         functionClick()
         onKeyButton()
